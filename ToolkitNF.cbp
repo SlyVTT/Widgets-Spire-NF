@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Toolkit" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Toolkit" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="Managers/" />
+					<Add directory="Managers" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Toolkit" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="Managers/" />
+					<Add directory="Managers" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Makefile" />
+		<Unit filename="ToolkitNF/Engines/FontEngine.cpp" />
+		<Unit filename="ToolkitNF/Engines/FontEngine.hpp" />
+		<Unit filename="ToolkitNF/GUIToolkitNF.hpp" />
+		<Unit filename="ToolkitNF/Globals/GUIToolkitNFGlobals.hpp" />
+		<Unit filename="ToolkitNF/Managers/KeyManager.cpp" />
+		<Unit filename="ToolkitNF/Managers/KeyManager.hpp" />
+		<Unit filename="ToolkitNF/Managers/MouseManager.cpp" />
+		<Unit filename="ToolkitNF/Managers/MouseManager.hpp" />
+		<Unit filename="ToolkitNF/Renderers/Renderer.cpp" />
+		<Unit filename="ToolkitNF/Renderers/Renderer.hpp" />
+		<Unit filename="main.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
