@@ -40,12 +40,17 @@
 		<Unit filename="ToolkitNF/Engines/FontEngine.hpp" />
 		<Unit filename="ToolkitNF/GUIToolkitNF.hpp" />
 		<Unit filename="ToolkitNF/Globals/GUIToolkitNFGlobals.hpp" />
+		<Unit filename="ToolkitNF/Globals/GlobalFunctions.cpp" />
+		<Unit filename="ToolkitNF/Globals/GlobalFunctions.hpp" />
+		<Unit filename="ToolkitNF/Managers/CursorsDesigns.hpp" />
 		<Unit filename="ToolkitNF/Managers/KeyManager.cpp" />
 		<Unit filename="ToolkitNF/Managers/KeyManager.hpp" />
 		<Unit filename="ToolkitNF/Managers/MouseManager.cpp" />
 		<Unit filename="ToolkitNF/Managers/MouseManager.hpp" />
-		<Unit filename="ToolkitNF/Renderers/Renderer.cpp" />
-		<Unit filename="ToolkitNF/Renderers/Renderer.hpp" />
+		<Unit filename="ToolkitNF/Renderers/DepthBufferRenderer.cpp" />
+		<Unit filename="ToolkitNF/Renderers/DepthBufferRenderer.hpp" />
+		<Unit filename="ToolkitNF/Renderers/ScreenRenderer.cpp" />
+		<Unit filename="ToolkitNF/Renderers/ScreenRenderer.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

@@ -43,10 +43,10 @@ int main( void )
 
 
 
-//       MouseManager::Initialize();
+       MouseManager::Initialize();
        KeyManager::Initialize();
 
-/*       MouseManager::SetSensibility( 8.0f );
+       MouseManager::SetSensibility( 2.0f );
 
        while (!(KeyManager::kbESC_Release_Event()  && KeyManager::kbCTRL() ))
        {
@@ -54,63 +54,111 @@ int main( void )
               KeyManager::Logic();
               printf("Mouse position : X=%d - Y=%d - B=%d \n", MouseManager::GetX(), MouseManager::GetY(), MouseManager::GetB() );
        }
-*/
 
-       Renderer::Initialize();
+
+       ScreenRenderer::Initialize();
+       DepthBufferRenderer::Initialize();
 
        FontEngine *font = new FontEngine();
 
-       Renderer::DrawFilledRoundedRectangle( 20, 20, 300, 220, 10, 255, 0, 0, 255 );
-       Renderer::DrawFilledRoundedRectangle( 40, 40, 280, 200, 10, 0, 255, 0, 255 );
-       Renderer::DrawFilledRoundedRectangle( 60, 60, 260, 180, 10, 0, 0, 255, 255 );
+       ScreenRenderer::DrawFilledRoundedRectangle( 20, 20, 300, 220, 10, 255, 0, 0, 255 );
+       ScreenRenderer::DrawFilledRoundedRectangle( 40, 40, 280, 200, 10, 0, 255, 0, 255 );
+       ScreenRenderer::DrawFilledRoundedRectangle( 60, 60, 260, 180, 10, 0, 0, 255, 255 );
 
-//       Renderer::DrawCircle( 30, 30, 10, 255, 255, 0, 255);
-//       Renderer::DrawFilledCircle( 30, 210, 10, 255, 255, 0, 255);
-//       Renderer::DrawCircle( 290, 30, 10, 255, 0, 255, 255);
-//       Renderer::DrawFilledCircle( 290, 210, 10, 255, 0, 255, 255);
+       DepthBufferRenderer::DrawFilledCircle( 160, 120, 100, 255, 255, 255, 255 );
 
-        font->SetSpacing(1,0);
-        font->DrawStringLeft( "Hello World" ,10, 10, 0,0,0,255);
+       //       ScreenRenderer::DrawCircle( 30, 30, 10, 255, 255, 0, 255);
+       //       ScreenRenderer::DrawFilledCircle( 30, 210, 10, 255, 255, 0, 255);
+       //       ScreenRenderer::DrawCircle( 290, 30, 10, 255, 0, 255, 255);
+       //       ScreenRenderer::DrawFilledCircle( 290, 210, 10, 255, 0, 255, 255);
 
-        Renderer::FlipScreen();
+       ScreenRenderer::FlipScreen();
 
-               while (!KeyManager::kbMENU())
+       MouseManager::SetCursorType( MouseManager::Cursor_Handfinger );
+
+       while (!(KeyManager::kbESC()  && KeyManager::kbCTRL() && KeyManager::kbSHIFT() ))
+       {
+              MouseManager::Logic();
+              KeyManager::Logic();
+
+              {
+                     // this is here to simulate the GUI rendering process
+
+                     ScreenRenderer::DrawFilledRectangle( 0, 0, 320, 240, 255, 255, 255, 255 );
+
+                     ScreenRenderer::DrawFilledRoundedRectangle( 20, 20, 300, 220, 10, 255, 0, 0, 255 );
+                     ScreenRenderer::DrawFilledRoundedRectangle( 40, 40, 280, 200, 10, 0, 255, 0, 255 );
+                     ScreenRenderer::DrawFilledRoundedRectangle( 60, 60, 260, 180, 10, 0, 0, 255, 255 );
+
+                     DepthBufferRenderer::DrawFilledCircle( 160, 120, 100, 255, 255, 255, 255 );
+              }
+
+
+              MouseManager::Render();
+
+              ScreenRenderer::FlipScreen();
+
+       }
+
+       ScreenRenderer::TakeScreenShot();
+       DepthBufferRenderer::TakeScreenShot();
+
+
+       font->SetSpacing(1,0);
+       font->DrawStringLeft( "Hello World",10, 10, 0,0,0,255);
+
+       ScreenRenderer::FlipScreen();
+
+       DepthBufferRenderer::ClearScreen( 0, 0, 0, 0 );
+
+       ScreenRenderer::TakeScreenShot();
+       DepthBufferRenderer::TakeScreenShot();
+
+
+       while (!KeyManager::kbMENU())
        {
               KeyManager::Logic();
        }
 
-/*               while (!KeyManager::kbMENU())
+       while (!KeyManager::kbMENU())
        {
               KeyManager::Logic();
        }
 
-        printf("RGB=%d - R=%d - G=%d - B=%d \n", Renderer::GetPixel(10,10), Renderer::GetPixelR(10,10), Renderer::GetPixelG(10,10), Renderer::GetPixelB(10,10) );
-        printf("RGB=%d - R=%d - G=%d - B=%d \n", Renderer::GetPixel(20,20), Renderer::GetPixelR(20,20), Renderer::GetPixelG(20,20), Renderer::GetPixelB(20,20) );
-        printf("RGB=%d - R=%d - G=%d - B=%d \n", Renderer::GetPixel(40,40), Renderer::GetPixelR(40,40), Renderer::GetPixelG(40,40), Renderer::GetPixelB(40,40) );
-        printf("RGB=%d - R=%d - G=%d - B=%d \n", Renderer::GetPixel(60,60), Renderer::GetPixelR(60,60), Renderer::GetPixelG(60,60), Renderer::GetPixelB(60,60) );
+       printf("RGB=%d - R=%d - G=%d - B=%d \n", ScreenRenderer::GetPixel(10,10), ScreenRenderer::GetPixelR(10,10), ScreenRenderer::GetPixelG(10,10), ScreenRenderer::GetPixelB(10,10) );
+       printf("RGB=%d - R=%d - G=%d - B=%d \n", ScreenRenderer::GetPixel(20,20), ScreenRenderer::GetPixelR(20,20), ScreenRenderer::GetPixelG(20,20), ScreenRenderer::GetPixelB(20,20) );
+       printf("RGB=%d - R=%d - G=%d - B=%d \n", ScreenRenderer::GetPixel(40,40), ScreenRenderer::GetPixelR(40,40), ScreenRenderer::GetPixelG(40,40), ScreenRenderer::GetPixelB(40,40) );
+       printf("RGB=%d - R=%d - G=%d - B=%d \n", ScreenRenderer::GetPixel(60,60), ScreenRenderer::GetPixelR(60,60), ScreenRenderer::GetPixelG(60,60), ScreenRenderer::GetPixelB(60,60) );
 
 
        while (!KeyManager::kbSCRATCH())
        {
               KeyManager::Logic();
        }
-*/
+
+
+
        while (!(KeyManager::kbESC()  && KeyManager::kbCTRL() ))
        {
               KeyManager::Logic();
+
        }
 
 
-           Renderer::ClearScreen( 0, 0, 0, 0 );
+       ScreenRenderer::ClearScreen( 0, 0, 0, 0 );
+       DepthBufferRenderer::ClearScreen( 0, 0, 0, 0 );
 
-/*
-       while (!KeyManager::kbMENU())
-       {
-              KeyManager::Logic();
-       }
-*/
 
-       Renderer::Close();
+       ScreenRenderer::TakeScreenShot();
+       DepthBufferRenderer::TakeScreenShot();
+
+
+
+
+
+
+       MouseManager::Close();
+       ScreenRenderer::Close();
 
 
 

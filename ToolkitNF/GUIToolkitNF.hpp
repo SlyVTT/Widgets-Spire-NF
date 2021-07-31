@@ -5,10 +5,12 @@
 
 #include "Globals/GUIToolkitNFGlobals.hpp"
 
+
 #include "Managers/KeyManager.hpp"
 #include "Managers/MouseManager.hpp"
 
-#include "Renderers/Renderer.hpp"
+#include "Renderers/ScreenRenderer.hpp"
+#include "Renderers/DepthBufferRenderer.hpp"
 
 #include "Engines/FontEngine.hpp"
 

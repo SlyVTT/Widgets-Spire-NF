@@ -1,6 +1,16 @@
 #ifndef MOUSEMANAGER_H
 #define MOUSEMANAGER_H
 
+#include "../Globals/GlobalFunctions.hpp"
+
+#if RENDER_WITH_SDL == 1
+    #include <SDL/SDL.h>
+#else
+    #include <ngc.h>
+#endif
+
+
+
 
 /// MouseManager class is a Singleton devoted to manage the touchpad hardware of the TI nSpire CX and CX-II
 
@@ -11,11 +21,24 @@ public:
 	MouseManager(MouseManager&) = delete;
 	MouseManager& operator= (const MouseManager&) = delete;
 
+    enum CursorType
+    {
+        Cursor_Pointer = 0,
+        Cursor_Triangle = 1,
+        Cursor_Roundclock = 2,
+        Cursor_Hourglass = 3,
+        Cursor_Leftrightresize = 4,
+        Cursor_Topbottomresize = 5,
+        Cursor_Handfinger = 6
+    };
+
 	static MouseManager& Get( void );
 
 	static void Initialize( void ) { Get().InternalInitialize(); };
     static void Logic( void ) { Get().InternalLogic(); };
     static void ResetState( void ) { Get().InternalResetState(); };
+    static void Render( void ) { Get().InternalRender(); };
+    static void Close( void ) { Get().InternalClose(); };
 
     static void SetSensibility( float factor ) { Get().InternalSetSensibility( factor ); };
     static void SetDefaultSensibility( void ) { Get().InternalSetDefaultSensibility( ); };
@@ -55,12 +78,26 @@ public:
     virtual bool IsKeyArrowPressEvent( void );
     virtual bool IsKeyArrowReleaseEvent( void );
 
+
+    static void ShowMouse() { Get().InternalShowMouse(); };
+    static void HideMouse() { Get().InternalHideMouse(); };
+    static bool IsMouseVisible() { return Get().InternalIsMouseVisible(); };
+    static bool IsMouseEvent() { return Get().InternalIsMouseEvent(); };
+    static bool IsMouseMoveEvent() { return Get().InternalIsMouseMoveEvent(); };
+    static bool IsMouseClickEvent() { return Get().InternalIsMouseClickEvent(); };
+    static bool IsMouseReleaseEvent() { return Get().InternalIsMouseReleaseEvent(); };
+    static void SetCursorType( CursorType type ) { Get().InternalSetCursorType( type ); };
+
+
+
 private:
 	MouseManager();
 
 	void InternalInitialize( void );
 	void InternalLogic( void );
     void InternalResetState( void );
+	void InternalRender( void );
+	void InternalClose( void );
 
     void  InternalSetSensibility( float factor );
     void  InternalSetDefaultSensibility( void );
@@ -68,6 +105,16 @@ private:
     unsigned int InternalGetX( void );
     unsigned int InternalGetY( void );
     bool InternalGetB( void );
+
+    void InternalShowMouse();
+    void InternalHideMouse();
+    bool InternalIsMouseVisible();
+    bool InternalIsMouseEvent();
+    bool InternalIsMouseMoveEvent();
+    bool InternalIsMouseClickEvent();
+    bool InternalIsMouseReleaseEvent();
+    void InternalSetCursorType( CursorType type );
+
 
 	static MouseManager m_mouse;
 
@@ -126,6 +173,41 @@ private:
        bool keyevent_arrow;
        bool keypressevent_arrow;
        bool keyreleaseevent_arrow;
+
+
+
+    bool show ;
+
+    bool mouseevent ;
+    bool mousemoveevent ;
+    bool mouseclickevent ;
+    bool mousereleaseevent ;
+
+    CursorType cursor;
+
+
+#if RENDER_WITH_SDL == 1
+
+    SDL_Surface *cursor_pointer;
+    SDL_Surface *cursor_triangle;
+    SDL_Surface *cursor_roundclock;
+    SDL_Surface *cursor_hourglass;
+    SDL_Surface *cursor_topbottom;
+    SDL_Surface *cursor_leftright;
+    SDL_Surface *cursor_handfinger;
+
+#else
+
+    spritegc *cursor_pointer;
+    spritegc *cursor_triangle;
+    spritegc *cursor_roundclock;
+    spritegc *cursor_hourglass;
+    spritegc *cursor_topbottom;
+    spritegc *cursor_leftright;
+    spritegc *cursor_handfinger;
+
+#endif
+
 };
 
 #endif // MOUSEMANAGER_H

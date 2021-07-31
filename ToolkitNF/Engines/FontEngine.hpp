@@ -4,61 +4,7 @@
 #include <vector>
 #include <string>
 
-/*
-struct FontChar
-{
-    int CharWidth;
-    int CharHeight;
-    unsigned short *CharData;       // Should allow 4bytes coding (i.e. font up to 32x32 with only minimum changes in loading procedure
-};
 
-struct FontData
-{
-    char FontName[25];
-    int NumberChar;
-    std::vector <FontChar*> Font;
-};
-
-enum FontName
-{
-    THIN_FONT = 0,
-    VGA_FONT = 1,
-    SPAC_FONT = 2,
-    TINY_FONT = 3,
-    STAN_FONT = 4,
-    FANT_FONT = 5,
-};
-
-enum FontModifierTypo
-{
-    Normal = 1,
-    Italic = 2,
-    Bold = 4,
-    ItalicBold = 8,
-};
-
-enum FontModifierUnder
-{
-    NoUnder = 1,
-    UnderSimple = 2,
-    UnderDouble = 4,
-};
-
-enum FontModifierStrike
-{
-    NoStrike = 1,
-    StrikeSimple = 2,
-    StrikeDouble = 4,
-};
-
-struct FontSet
-{
-    FontName name;
-    FontModifierTypo typo;
-    FontModifierUnder under;
-    FontModifierStrike strike;
-};
-*/
 
 class FontEngine
 {

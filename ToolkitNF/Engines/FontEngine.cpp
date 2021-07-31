@@ -1,6 +1,6 @@
 #include "FontEngine.hpp"
 
-#include "../Renderers/Renderer.hpp"
+#include "../Renderers/ScreenRenderer.hpp"
 
 #include <vector>
 #include <stdio.h>
@@ -570,26 +570,26 @@ void FontEngine::DrawCharLeft( char str, unsigned int x, unsigned int y, unsigne
                 if ((currentmodifiertypo & Normal) !=0 )
                 {
                     // text is Normal
-                    Renderer::DrawPixel( x+temp->CharWidth-i-1, y+j, R, G, B, A);
+                    ScreenRenderer::DrawPixel( x+temp->CharWidth-i-1, y+j, R, G, B, A);
                 }
                 if ((currentmodifiertypo & Italic) !=0 )
                 {
                     // text is Italic but not Bold
                     int shift = (int) ((temp->CharHeight-1-j)/4);
-                    Renderer::DrawPixel(  x+temp->CharWidth-i-1+shift, y+j, R, G, B, A);
+                    ScreenRenderer::DrawPixel(  x+temp->CharWidth-i-1+shift, y+j, R, G, B, A);
                 }
                 if ((currentmodifiertypo & Bold) !=0 )
                 {
                     // text is Bold but not Italic
-                    Renderer::DrawPixel(  x+temp->CharWidth-i-1, y+j, R, G, B, A);
-                    Renderer::DrawPixel(  x+temp->CharWidth-i, y+j, R, G, B, A);
+                    ScreenRenderer::DrawPixel(  x+temp->CharWidth-i-1, y+j, R, G, B, A);
+                    ScreenRenderer::DrawPixel(  x+temp->CharWidth-i, y+j, R, G, B, A);
                 }
                 if ((currentmodifiertypo & ItalicBold) !=0 )
                 {
                     // text is Italic and Bold
                     int shift = (int) ((temp->CharHeight-1-j)/4);
-                    Renderer::DrawPixel( x+temp->CharWidth-i-1+shift, y+j, R, G, B, A);
-                    Renderer::DrawPixel( x+temp->CharWidth-i+shift, y+j, R, G, B, A);
+                    ScreenRenderer::DrawPixel( x+temp->CharWidth-i-1+shift, y+j, R, G, B, A);
+                    ScreenRenderer::DrawPixel( x+temp->CharWidth-i+shift, y+j, R, G, B, A);
                 }
 
             }
@@ -603,13 +603,13 @@ void FontEngine::DrawCharLeft( char str, unsigned int x, unsigned int y, unsigne
     if ((currentmodifierunder & UnderSimple) !=0 )
     {
         // text is underlined with one single line
-       Renderer::DrawLine( x-1, y+temp->CharHeight+2, x+temp->CharWidth+1, y+temp->CharHeight+2, R, G, B, A );
+       ScreenRenderer::DrawLine( x-1, y+temp->CharHeight+2, x+temp->CharWidth+1, y+temp->CharHeight+2, R, G, B, A );
     }
     if ((currentmodifierunder & UnderDouble) !=0 )
     {
         // text is underlined with two lines
-       Renderer::DrawLine(  x-1, y+temp->CharHeight+2, x+temp->CharWidth+1, y+temp->CharHeight+2, R, G, B, A );
-       Renderer::DrawLine( x-1, y+temp->CharHeight+4, x+temp->CharWidth+1, y+temp->CharHeight+4, R, G, B, A );
+       ScreenRenderer::DrawLine(  x-1, y+temp->CharHeight+2, x+temp->CharWidth+1, y+temp->CharHeight+2, R, G, B, A );
+       ScreenRenderer::DrawLine( x-1, y+temp->CharHeight+4, x+temp->CharWidth+1, y+temp->CharHeight+4, R, G, B, A );
     }
 
 
@@ -622,13 +622,13 @@ void FontEngine::DrawCharLeft( char str, unsigned int x, unsigned int y, unsigne
     if ((currentmodifierstrike & StrikeSimple) !=0 )
     {
         // text is underlined with one single line
-        Renderer::DrawLine( x-1, (int) (y+temp->CharHeight/2), x+temp->CharWidth+1, (int) (y+temp->CharHeight/2), R, G, B, A );
+        ScreenRenderer::DrawLine( x-1, (int) (y+temp->CharHeight/2), x+temp->CharWidth+1, (int) (y+temp->CharHeight/2), R, G, B, A );
     }
     if ((currentmodifierstrike & StrikeDouble) !=0 )
     {
         // text is underlined with two lines
-        Renderer::DrawLine( x-1, (int) (y+temp->CharHeight/2)-1, x+temp->CharWidth+1, (int) (y+temp->CharHeight/2)-1, R, G, B, A );
-        Renderer::DrawLine( x-1, (int) (y+temp->CharHeight/2)+1, x+temp->CharWidth+1, (int) (y+temp->CharHeight/2)+1, R, G, B, A );
+        ScreenRenderer::DrawLine( x-1, (int) (y+temp->CharHeight/2)-1, x+temp->CharWidth+1, (int) (y+temp->CharHeight/2)-1, R, G, B, A );
+        ScreenRenderer::DrawLine( x-1, (int) (y+temp->CharHeight/2)+1, x+temp->CharWidth+1, (int) (y+temp->CharHeight/2)+1, R, G, B, A );
     }
 
 
