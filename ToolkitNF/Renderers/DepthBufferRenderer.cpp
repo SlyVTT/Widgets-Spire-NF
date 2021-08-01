@@ -398,7 +398,7 @@ unsigned char DepthBufferRenderer::InternalGetPixelR( unsigned int x, unsigned i
 
 #else
 
-       if ((x>=0) && (x<=SCREEN_WIDTH) && (y>=0) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
               int res = *(unsigned short *) (off_buff[y] + 2*x);
@@ -420,7 +420,7 @@ unsigned char DepthBufferRenderer::InternalGetPixelG( unsigned int x, unsigned i
 
 #else
 
-       if ((x>=0) && (x<=SCREEN_WIDTH) && (y>=0) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
               int res = *(unsigned short *) (off_buff[y] + 2*x);
@@ -445,7 +445,7 @@ unsigned char DepthBufferRenderer::InternalGetPixelB( unsigned int x, unsigned i
 
 #else
 
-       if ((x>=0) && (x<=SCREEN_WIDTH) && (y>=0) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
               int res = *(unsigned short *) (off_buff[y] + 2*x);
@@ -465,7 +465,7 @@ unsigned int DepthBufferRenderer::InternalGetPixel( unsigned int x, unsigned int
 
 #else
 
-       if ((x>=0) && (x<=SCREEN_WIDTH) && (y>=0) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
               return *(unsigned short *) (off_buff[y] + 2*x);

@@ -59,7 +59,9 @@ int main( void )
        ScreenRenderer::Initialize();
        DepthBufferRenderer::Initialize();
 
-       FontEngine *font = new FontEngine();
+       //FontEngine *font = new FontEngine();
+
+       FontEngine::Initialize();
 
        ScreenRenderer::DrawFilledRoundedRectangle( 20, 20, 300, 220, 10, 255, 0, 0, 255 );
        ScreenRenderer::DrawFilledRoundedRectangle( 40, 40, 280, 200, 10, 0, 255, 0, 255 );
@@ -104,8 +106,8 @@ int main( void )
        DepthBufferRenderer::TakeScreenShot();
 
 
-       font->SetSpacing(1,0);
-       font->DrawStringLeft( "Hello World",10, 10, 0,0,0,255);
+       FontEngine::SetCurrentSpacing(1,0);
+       FontEngine::DrawStringLeft( "Hello World",10, 10, 0,0,0,255);
 
        ScreenRenderer::FlipScreen();
 

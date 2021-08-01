@@ -36,8 +36,12 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="Makefile" />
+		<Unit filename="ToolkitNF/Engines/ColorEngine.cpp" />
+		<Unit filename="ToolkitNF/Engines/ColorEngine.hpp" />
 		<Unit filename="ToolkitNF/Engines/FontEngine.cpp" />
 		<Unit filename="ToolkitNF/Engines/FontEngine.hpp" />
+		<Unit filename="ToolkitNF/Engines/ThemeEngine.cpp" />
+		<Unit filename="ToolkitNF/Engines/ThemeEngine.hpp" />
 		<Unit filename="ToolkitNF/GUIToolkitNF.hpp" />
 		<Unit filename="ToolkitNF/Globals/GUIToolkitNFGlobals.hpp" />
 		<Unit filename="ToolkitNF/Globals/GlobalFunctions.cpp" />

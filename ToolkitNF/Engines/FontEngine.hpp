@@ -9,8 +9,6 @@
 class FontEngine
 {
 public:
-    FontEngine();
-    virtual ~FontEngine();
 
     struct FontChar
     {
@@ -24,6 +22,16 @@ public:
         char FontName[25];
         int NumberChar;
         std::vector <FontChar*> Font;
+    };
+
+    enum FontEnum
+    {
+        Widget_Text_Enable = 1,
+        Widget_Text_Disable = 2,
+        Widget_Text_Selected = 3,
+
+        Window_Titlebartext_Enable = 4,
+        Window_Titlebartext_Disable = 5
     };
 
     enum FontName
@@ -67,64 +75,69 @@ public:
     };
 
 
-    virtual void LoadFontFromFile( std::string filename );
-    static FontData* LoadFontFromFilePointer( std::string filename );
+    FontEngine(FontEngine&) = delete;
+    FontEngine& operator= (const FontEngine&) = delete;
 
-    virtual unsigned int AssertStringLength( char *str, unsigned int width );
-    virtual unsigned int AssertStringLength( std::string str, unsigned int width );
-    virtual unsigned int AssertStringLength( std::string str, unsigned int width, FontName name, FontModifierTypo typo, FontModifierUnder under, FontModifierStrike strike );
+    static FontEngine& Get( void );
 
-    virtual std::string ReduceStringToVisible( std::string str, unsigned int width );
-    virtual std::string ReduceStringToVisible( std::string str, unsigned int width, FontName name, FontModifierTypo typo, FontModifierUnder under, FontModifierStrike strike );
-
-    virtual void SetCurrentFont( FontName curfont ); // To be checked for internam parameters
-    virtual void SetSpacing( int hspace, int vspace );
-    virtual void SetModifierTypo( FontModifierTypo mod );
-    virtual void SetModifierUnder( FontModifierUnder mod );
-    virtual void SetModifierStrike( FontModifierStrike mod );
-
-    virtual unsigned int GetStringWidth( char *str );
-    virtual unsigned int GetStringHeight( char *str );
-    virtual unsigned int GetCharWidth( char str );
-    virtual unsigned int GetCharHeight( char str );
-
-    virtual int GetHSpacing();
-    virtual int GetVSpacing();
-
-    virtual void DrawStringLeft( char *str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
-    virtual void DrawCharLeft( char str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
-    virtual void DrawStringCenter(  char *str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
-    virtual void DrawCharCenter(  char str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
-    virtual void DrawStringRight(  char *str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
-    virtual void DrawCharRight(  char str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
-
-    virtual unsigned int GetStringWidth( std::string str );
-    virtual unsigned int GetStringHeight( std::string str );
-    virtual void DrawStringLeft(  std::string str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
-    virtual void DrawStringCenter(  std::string str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
-    virtual void DrawStringRight( std::string str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
+    static FontSet GetFontSet( FontEnum forwhat ) { return Get().InternalGetFontSet( forwhat ); };
+    static void SetFontSet( FontEnum forwhat, FontSet fontset ) { Get().InternalSetFontSet( forwhat, fontset ); };
 
 
-    /// Method for assigning default font shemes to the FontEngine.
-    ///
-    /// To be used to assign the default font scheme the FontEngine.
-    virtual void SetDefaultFontPreset( );
+    static void Initialize( void ) { Get().InternalInitialize(); };
+    static void Close( void ) { Get().InternalClose(); };
+
+    static void LoadFontFromFile( std::string filename ) { Get().InternalLoadFontFromFile( filename ); };
+    static FontData* LoadFontFromFilePointer( std::string filename ) { return Get().InternalLoadFontFromFilePointer( filename ); };
+
+    static unsigned int AssertStringLength( char *str, unsigned int width ) { return Get().InternalAssertStringLength( str, width ); };
+    static unsigned int AssertStringLength( std::string str, unsigned int width ) { return Get().InternalAssertStringLength( str, width ); };
+    static unsigned int AssertStringLength( std::string str, unsigned int width, FontName name, FontModifierTypo typo, FontModifierUnder under, FontModifierStrike strike ) { return Get().InternalAssertStringLength( str, width, name, typo, under, strike ); };
+
+    static std::string ReduceStringToVisible( std::string str, unsigned int width ) { return Get().InternalReduceStringToVisible( str, width ); };
+    static std::string ReduceStringToVisible( std::string str, unsigned int width, FontName name, FontModifierTypo typo, FontModifierUnder under, FontModifierStrike strike )  { return Get().InternalReduceStringToVisible( str, width, name, typo, under, strike ); };
+
+    static void SetCurrentFont( FontName curfont ) { Get().InternalSetCurrentFont( curfont ); };
+    static void SetCurrentSpacing( int hspace, int vspace ) { Get().InternalSetCurrentSpacing( hspace, vspace ); };
+    static void SetCurrentModifierTypo( FontModifierTypo mod ) { Get().InternalSetCurrentModifierTypo( mod ); };
+    static void SetCurrentModifierUnder( FontModifierUnder mod ) { Get().InternalSetCurrentModifierUnder( mod ); };
+    static void SetCurrentModifierStrike( FontModifierStrike mod ) { Get().InternalSetCurrentModifierStrike( mod ); };
+
+    static unsigned int GetStringWidth( char *str ) { return Get().InternalGetStringWidth( str ); };
+    static unsigned int GetStringHeight( char *str ) { return Get().InternalGetStringHeight( str ); };
+    static unsigned int GetStringWidth( std::string str ) { return Get().InternalGetStringWidth( str ); };
+    static unsigned int GetStringHeight( std::string str ) { return Get().InternalGetStringHeight( str ); };
+    static unsigned int GetCharWidth( char str ) { return Get().InternalGetCharWidth( str ); };
+    static unsigned int GetCharHeight( char str ) { return Get().InternalGetCharHeight( str ); };
+
+    static int GetCurrentHSpacing( void)  { return Get().InternalGetCurrentHSpacing(); };
+    static int GetCurrentVSpacing(void)  { return Get().InternalGetCurrentVSpacing(); };
+
+    static void DrawStringLeft( char *str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A )  { Get().InternalDrawStringLeft( str, x, y, R, G, B, A ); };
+    static void DrawStringLeft(  std::string str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawStringLeft( str, x, y, R, G, B, A ); };
+    static void DrawCharLeft( char str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawCharLeft( str, x, y, R, G, B, A ); };
+
+    static void DrawStringCenter(  char *str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawStringCenter( str, x, y, R, G, B, A ); };
+    static void DrawStringCenter(  std::string str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawStringCenter( str, x, y, R, G, B, A ); };
+    static void DrawCharCenter(  char str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawCharCenter( str, x, y, R, G, B, A ); };
+
+    static void DrawStringRight(  char *str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawStringRight( str, x, y, R, G, B, A ); };
+    static void DrawStringRight( std::string str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawStringRight( str, x, y, R, G, B, A ); };
+    static void DrawCharRight(  char str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawCharRight( str, x, y, R, G, B, A ); };
+
+    static void SetDefaultFontPreset( void )  { Get().InternalSetDefaultFontPreset(); };
+
+    static void ResetState( void )  { Get().InternalResetState( ); };
 
 
-    /// Default font names used by the widgets to be rendered.
-    ///
-    /// To be used only for developping new Widget and keeping a coherency with the look and feel of the other widgets.
-    /// Using these default name permits to have a global theming for an application.
-    FontSet widget_text_enable;
-    FontSet widget_text_disable;
-    FontSet widget_text_selected;
 
-    FontSet window_titlebartext_enable;
-    FontSet window_titlebartext_disable;
+private:
+
+    FontEngine();
+
+    static FontEngine m_font;
 
 
-
-protected:
     FontData *currentfont = nullptr;
     FontModifierTypo currentmodifiertypo;
     FontModifierUnder currentmodifierunder;
@@ -134,7 +147,61 @@ protected:
     int vspacing = 0;
     int hspacing = 0;
 
-private:
+
+    void InternalInitialize( void );
+    void InternalClose( void );
+
+    void InternalLoadFontFromFile( std::string filename );
+    FontData* InternalLoadFontFromFilePointer( std::string filename );
+
+    unsigned int InternalAssertStringLength( char *str, unsigned int width );
+    unsigned int InternalAssertStringLength( std::string str, unsigned int width );
+    unsigned int InternalAssertStringLength( std::string str, unsigned int width, FontName name, FontModifierTypo typo, FontModifierUnder under, FontModifierStrike strike );
+
+    std::string InternalReduceStringToVisible( std::string str, unsigned int width );
+    std::string InternalReduceStringToVisible( std::string str, unsigned int width, FontName name, FontModifierTypo typo, FontModifierUnder under, FontModifierStrike strike );
+
+    void InternalSetCurrentFont( FontName curfont );
+    void InternalSetCurrentSpacing( int hspace, int vspace );
+    void InternalSetCurrentModifierTypo( FontModifierTypo mod );
+    void InternalSetCurrentModifierUnder( FontModifierUnder mod );
+    void InternalSetCurrentModifierStrike( FontModifierStrike mod );
+
+    unsigned int InternalGetStringWidth( char *str );
+    unsigned int InternalGetStringHeight( char *str );
+    unsigned int InternalGetStringWidth( std::string str );
+    unsigned int InternalGetStringHeight( std::string str );
+    unsigned int InternalGetCharWidth( char str );
+    unsigned int InternalGetCharHeight( char str );
+
+    int InternalGetCurrentHSpacing( void );
+    int InternalGetCurrentVSpacing( void );
+
+    void InternalDrawStringLeft( char *str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
+    void InternalDrawStringLeft(  std::string str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
+    void InternalDrawCharLeft( char str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
+
+    void InternalDrawStringCenter(  char *str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
+    void InternalDrawStringCenter(  std::string str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
+    void InternalDrawCharCenter(  char str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
+
+    void InternalDrawStringRight(  char *str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
+    void InternalDrawStringRight( std::string str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
+    void InternalDrawCharRight(  char str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
+
+    void InternalSetDefaultFontPreset( void );
+    void InternalResetState( void );
+
+    FontSet InternalGetFontSet( FontEnum forwhat );
+    void InternalSetFontSet( FontEnum forwhat, FontSet fontset );
+
+
+    FontSet widget_text_enable;
+    FontSet widget_text_disable;
+    FontSet widget_text_selected;
+
+    FontSet window_titlebartext_enable;
+    FontSet window_titlebartext_disable;
 };
 
 #endif // FONTENGINE_H
