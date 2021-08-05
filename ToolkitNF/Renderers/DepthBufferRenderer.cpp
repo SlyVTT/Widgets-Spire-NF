@@ -2,10 +2,42 @@
 
 
 
+#if RENDER_WITH_SDL == 1
+uint32_t DepthBufferRenderer::_getpixel(SDL_Surface *surface, int x, int y)
+{
+       int bpp = surface->format->BytesPerPixel;
+       /* Here p is the address to the pixel we want to retrieve */
+       uint8_t *p = (uint8_t *)surface->pixels + y * surface->pitch + x * bpp;
+
+       switch(bpp)
+       {
+       case 1:
+              return *p;
+
+       case 2:
+              return *(uint16_t *)p;
+
+       case 3:
+              if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+                     return p[0] << 16 | p[1] << 8 | p[2];
+              else
+                     return p[0] | p[1] << 8 | p[2] << 16;
+
+       case 4:
+              return *(uint32_t *)p;
+
+       default:
+              return 0;       /* shouldn't happen, but avoids warnings */
+       }
+}
+#endif
+
+
 DepthBufferRenderer::DepthBufferRenderer()
 {
 
 }
+
 void DepthBufferRenderer::TakeScreenShot( void )
 {
        std::string namebegin = "/documents/Widget/Screenshots/dpbuf";
@@ -393,7 +425,7 @@ unsigned char DepthBufferRenderer::InternalGetPixelR( unsigned int x, unsigned i
 
        Uint8 r,g,b;
        SDL_LockSurface( depthbuffer);
-       SDL_GetRGB(getpixel(depthbuffer, x, y), depthbuffer->format, &r, &g, &b);
+       SDL_GetRGB(_getpixel(depthbuffer, x, y), depthbuffer->format, &r, &g, &b);
        return (unsigned char) r;
 
 #else
@@ -415,7 +447,7 @@ unsigned char DepthBufferRenderer::InternalGetPixelG( unsigned int x, unsigned i
 
        Uint8 r,g,b;
        SDL_LockSurface( depthbuffer);
-       SDL_GetRGB(getpixel(depthbuffer, x, y), depthbuffer->format, &r, &g, &b);
+       SDL_GetRGB(_getpixel(depthbuffer, x, y), depthbuffer->format, &r, &g, &b);
        return (unsigned char) g;
 
 #else
@@ -440,7 +472,7 @@ unsigned char DepthBufferRenderer::InternalGetPixelB( unsigned int x, unsigned i
 
        Uint8 r,g,b;
        SDL_LockSurface( depthbuffer);
-       SDL_GetRGB(getpixel(depthbuffer, x, y), depthbuffer->format, &r, &g, &b);
+       SDL_GetRGB(_getpixel(depthbuffer, x, y), depthbuffer->format, &r, &g, &b);
        return (unsigned char) b;
 
 #else
@@ -461,7 +493,7 @@ unsigned int DepthBufferRenderer::InternalGetPixel( unsigned int x, unsigned int
 {
 #if RENDER_WITH_SDL == 1
 
-       return ((unsigned int) getpixel(depthbuffer, x, y));
+       return ((unsigned int) _getpixel(depthbuffer, x, y));
 
 #else
 

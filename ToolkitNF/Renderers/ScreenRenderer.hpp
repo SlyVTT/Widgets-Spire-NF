@@ -16,7 +16,7 @@
 
 
 #include "../Globals/GlobalFunctions.hpp"
-
+#include "../Engines/ColorEngine.hpp"
 
 
 class ScreenRenderer
@@ -41,9 +41,17 @@ public:
     static void DrawFilledRectangle( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawFilledRectangle( x1, y1, x2, y2, R, G, B, A ); };
     static void DrawCircle( unsigned int x, unsigned int y, unsigned int radius, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawCircle( x, y, radius, R, G, B, A ); };
     static void DrawFilledCircle( unsigned int x, unsigned int y, unsigned int radius, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawFilledCircle( x, y, radius, R, G, B, A ); };
-
     static void DrawRoundedRectangle( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int radius, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawRoundedRectangle( x1, y1, x2, y2, radius, R, G, B, A ); };
     static void DrawFilledRoundedRectangle( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int radius, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawFilledRoundedRectangle( x1, y1, x2, y2, radius, R, G, B, A ); };
+
+    static void DrawPixel(unsigned int x, unsigned int y, ColorEngine::ColorRGBA color ) { Get().InternalDrawPixel( x, y, color.R, color.G, color.B, color.A ); };
+    static void DrawLine( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, ColorEngine::ColorRGBA color ) { Get().InternalDrawLine( x1, y1, x2, y2, color.R, color.G, color.B, color.A ); };
+    static void DrawRectangle( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, ColorEngine::ColorRGBA color ) { Get().InternalDrawRectangle( x1, y1, x2, y2, color.R, color.G, color.B, color.A ); };
+    static void DrawFilledRectangle( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, ColorEngine::ColorRGBA color ) { Get().InternalDrawFilledRectangle( x1, y1, x2, y2, color.R, color.G, color.B, color.A ); };
+    static void DrawCircle( unsigned int x, unsigned int y, unsigned int radius, ColorEngine::ColorRGBA color ) { Get().InternalDrawCircle( x, y, radius, color.R, color.G, color.B, color.A ); };
+    static void DrawFilledCircle( unsigned int x, unsigned int y, unsigned int radius, ColorEngine::ColorRGBA color ) { Get().InternalDrawFilledCircle( x, y, radius, color.R, color.G, color.B, color.A ); };
+    static void DrawRoundedRectangle( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int radius, ColorEngine::ColorRGBA color ) { Get().InternalDrawRoundedRectangle( x1, y1, x2, y2, radius, color.R, color.G, color.B, color.A ); };
+    static void DrawFilledRoundedRectangle( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int radius, ColorEngine::ColorRGBA color ) { Get().InternalDrawFilledRoundedRectangle( x1, y1, x2, y2, radius, color.R, color.G, color.B, color.A ); };
 
     static void TakeScreenShot( void );
 
@@ -55,10 +63,13 @@ public:
 #if RENDER_WITH_SDL == 1
 
      static void DrawSprite( SDL_Surface* sprite, Rect src, Rect pos ) { Get().InternalDrawSprite( sprite, src, pos ); };
-
+     static void DrawImageBackground( SDL_Surface* image ) { Get().InternalDrawImageBackground( image ); };
+     static void DrawImage( SDL_Surface* image, Rect src, Rect pos ) { Get().InternalDrawImage( image, src, pos ); };
 #else
 
     static void DrawSprite( spritegc* sprite, Rect src, Rect pos ) { Get().InternalDrawSprite( sprite, src, pos ); };
+    static void DrawImageBackground( imagegc* image ) { Get().InternalDrawImageBackground( image ); };
+    static void DrawImage( imagegc* image, Rect src, Rect pos ) { Get().InternalDrawImage( image, src, pos ); };
 
 #endif
 
@@ -69,6 +80,9 @@ private:
 	void InternalInitialize( void );
 	void InternalClose( void );
 
+    #if RENDER_WITH_SDL == 1
+        uint32_t _getpixel(SDL_Surface *surface, int x, int y);
+    #endif
 
     void InternalFlipScreen( void );
 
@@ -80,7 +94,6 @@ private:
     void InternalDrawFilledRectangle( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
     void InternalDrawCircle( unsigned int x, unsigned int y, unsigned int radius, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
     void InternalDrawFilledCircle( unsigned int x, unsigned int y, unsigned int radius, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
-
     void InternalDrawRoundedRectangle( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int radius, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
     void InternalDrawFilledRoundedRectangle( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int radius, unsigned short R, unsigned short G, unsigned short B, unsigned short A );
 
@@ -93,10 +106,14 @@ private:
 #if RENDER_WITH_SDL == 1
 
      void InternalDrawSprite( SDL_Surface* sprite, Rect src, Rect pos );
+     void InternalDrawImageBackground( SDL_Surface* image );
+     void InternalDrawImage( SDL_Surface* image, Rect src, Rect pos );
 
 #else
 
     void InternalDrawSprite( spritegc* sprite, Rect src, Rect pos );
+    void InternalDrawImageBackground( imagegc* image );
+    void InternalDrawImage( imagegc* image, Rect src, Rect pos );
 
 #endif
 

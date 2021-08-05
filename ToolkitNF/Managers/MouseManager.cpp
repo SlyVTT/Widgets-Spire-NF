@@ -310,13 +310,13 @@ void MouseManager::InternalLogic( void )
        {
               y=0;
        };
-       if (x>=320)
+       if (x>=SCREEN_WIDTH_GUI)
        {
-              x=320;
+              x=SCREEN_WIDTH_GUI;
        };
-       if (y>=240)
+       if (y>=SCREEN_HEIGHT_GUI)
        {
-              y=240;
+              y=SCREEN_HEIGHT_GUI;
        };
 
 

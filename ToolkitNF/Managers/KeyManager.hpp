@@ -236,13 +236,13 @@ public:
        static void ResetState( void ) { Get().InternalResetState(); };
 
        //This is a recode of LibNDLS nio_ascii_get() to correctly map the nSpire CX/CX-II keyboard
-       virtual char AsciiGet( void );
+       static char AsciiGet( void ) {return Get().InternalAsciiGet(); };
 
-       virtual bool IsAnyKeyPressed( void );
-       virtual bool IsAnyKeyEvent( void );
+       static bool IsAnyKeyPressed( void ) { return Get().InternalIsAnyKeyPressed(); };
+       static bool IsAnyKeyEvent( void ) { return Get().InternalIsAnyKeyEvent(); };
 
-       virtual bool IsKeyPressEvent( void );
-       virtual bool IsKeyReleaseEvent( void );
+       static bool IsKeyPressEvent( void ) { return Get().InternalIsKeyPressEvent(); };
+       static bool IsKeyReleaseEvent( void ) { return Get().InternalIsKeyReleaseEvent(); };
 
 
 //       virtual void SetSelection( std::string select );
@@ -593,6 +593,12 @@ private:
        void InternalLogic( void );
        void InternalResetState( void );
        void InternalInitialize( void );
+
+       char InternalAsciiGet( void );
+       bool InternalIsAnyKeyEvent( void );
+       bool InternalIsAnyKeyPressed( void );
+       bool InternalIsKeyPressEvent( void );
+       bool InternalIsKeyReleaseEvent( void );
 
 };
 

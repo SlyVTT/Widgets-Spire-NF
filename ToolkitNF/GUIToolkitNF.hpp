@@ -16,11 +16,15 @@
 #include "Engines/ThemeEngine.hpp"
 
 
-
 #include "Renderers/ScreenRenderer.hpp"
 #include "Renderers/DepthBufferRenderer.hpp"
 
 
+#include "Widgets/WidgetApplication.hpp"
 
-//#include "temporary/widget.hpp"
-//#include "temporary/renderer.hpp"
+#include "Widgets/Widget.hpp"
+
+#include "Widgets/DesktopWidget.hpp"
+
+#include "Widgets/ButtonWidget.hpp"
+

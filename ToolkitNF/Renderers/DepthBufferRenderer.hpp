@@ -4,6 +4,7 @@
 
 #include "../Globals/GUIToolkitNFGlobals.hpp"
 
+#include <string>
 
 #if RENDER_WITH_SDL == 1
     #include <SDL/SDL.h>
@@ -67,6 +68,9 @@ private:
 	void InternalInitialize( void );
 	void InternalClose( void );
 
+	#if RENDER_WITH_SDL == 1
+        uint32_t _getpixel(SDL_Surface *surface, int x, int y);
+    #endif
 
     void InternalFlipScreen( void );
 

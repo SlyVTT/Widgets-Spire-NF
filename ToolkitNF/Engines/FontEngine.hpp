@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 
+#include "ColorEngine.hpp"
 
 
 class FontEngine
@@ -102,6 +103,7 @@ public:
     static void SetCurrentModifierTypo( FontModifierTypo mod ) { Get().InternalSetCurrentModifierTypo( mod ); };
     static void SetCurrentModifierUnder( FontModifierUnder mod ) { Get().InternalSetCurrentModifierUnder( mod ); };
     static void SetCurrentModifierStrike( FontModifierStrike mod ) { Get().InternalSetCurrentModifierStrike( mod ); };
+    static void SetCurrentFontSet( FontEnum forwhat ) { Get().InternalSetCurrentFontSet( forwhat ); };
 
     static unsigned int GetStringWidth( char *str ) { return Get().InternalGetStringWidth( str ); };
     static unsigned int GetStringHeight( char *str ) { return Get().InternalGetStringHeight( str ); };
@@ -124,6 +126,19 @@ public:
     static void DrawStringRight(  char *str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawStringRight( str, x, y, R, G, B, A ); };
     static void DrawStringRight( std::string str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawStringRight( str, x, y, R, G, B, A ); };
     static void DrawCharRight(  char str, unsigned int x, unsigned int y, unsigned short R, unsigned short G, unsigned short B, unsigned short A ) { Get().InternalDrawCharRight( str, x, y, R, G, B, A ); };
+
+
+    static void DrawStringLeft( char *str, unsigned int x, unsigned int y, ColorEngine::ColorRGBA color )  { Get().InternalDrawStringLeft( str, x, y, color.R, color.G, color.B, color.A ); };
+    static void DrawStringLeft(  std::string str, unsigned int x, unsigned int y, ColorEngine::ColorRGBA color ) { Get().InternalDrawStringLeft( str, x, y, color.R, color.G, color.B, color.A ); };
+    static void DrawCharLeft( char str, unsigned int x, unsigned int y, ColorEngine::ColorRGBA color ) { Get().InternalDrawCharLeft( str, x, y, color.R, color.G, color.B, color.A ); };
+
+    static void DrawStringCenter(  char *str, unsigned int x, unsigned int y, ColorEngine::ColorRGBA color ) { Get().InternalDrawStringCenter( str, x, y, color.R, color.G, color.B, color.A ); };
+    static void DrawStringCenter(  std::string str, unsigned int x, unsigned int y, ColorEngine::ColorRGBA color ) { Get().InternalDrawStringCenter( str, x, y, color.R, color.G, color.B, color.A ); };
+    static void DrawCharCenter(  char str, unsigned int x, unsigned int y, ColorEngine::ColorRGBA color ) { Get().InternalDrawCharCenter( str, x, y, color.R, color.G, color.B, color.A ); };
+
+    static void DrawStringRight(  char *str, unsigned int x, unsigned int y, ColorEngine::ColorRGBA color ) { Get().InternalDrawStringRight( str, x, y, color.R, color.G, color.B, color.A ); };
+    static void DrawStringRight( std::string str, unsigned int x, unsigned int y, ColorEngine::ColorRGBA color ) { Get().InternalDrawStringRight( str, x, y, color.R, color.G, color.B, color.A ); };
+    static void DrawCharRight(  char str, unsigned int x, unsigned int y, ColorEngine::ColorRGBA color ) { Get().InternalDrawCharRight( str, x, y, color.R, color.G, color.B, color.A ); };
 
     static void SetDefaultFontPreset( void )  { Get().InternalSetDefaultFontPreset(); };
 
@@ -166,6 +181,7 @@ private:
     void InternalSetCurrentModifierTypo( FontModifierTypo mod );
     void InternalSetCurrentModifierUnder( FontModifierUnder mod );
     void InternalSetCurrentModifierStrike( FontModifierStrike mod );
+    void InternalSetCurrentFontSet( FontEnum forwhat );
 
     unsigned int InternalGetStringWidth( char *str );
     unsigned int InternalGetStringHeight( char *str );

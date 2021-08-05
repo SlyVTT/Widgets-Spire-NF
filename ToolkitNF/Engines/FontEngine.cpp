@@ -30,6 +30,7 @@ void FontEngine::InternalInitialize()
        LoadFontFromFile( "/documents/Widget/Fonts/TINY.WFE.tns" );
        LoadFontFromFile( "/documents/Widget/Fonts/STANDARD.WFE.tns" );
        LoadFontFromFile( "/documents/Widget/Fonts/FANTASY.WFE.tns" );
+       InternalSetDefaultFontPreset();
        InternalSetCurrentFont( THIN_FONT );
        vspacing = 3;
        hspacing = -1;
@@ -537,6 +538,47 @@ FontEngine::FontSet FontEngine::InternalGetFontSet( FontEngine::FontEnum forwhat
        }
 
       return widget_text_enable;
+}
+
+void FontEngine::InternalSetCurrentFontSet( FontEngine::FontEnum forwhat )
+{
+        switch (forwhat)
+       {
+       case Widget_Text_Enable:
+              InternalSetCurrentFont( widget_text_enable.name );
+              InternalSetCurrentModifierTypo( widget_text_enable.typo );
+              InternalSetCurrentModifierUnder( widget_text_enable.under );
+              InternalSetCurrentModifierStrike( widget_text_enable.strike );
+              break;
+
+       case Widget_Text_Disable:
+              InternalSetCurrentFont( widget_text_disable.name );
+              InternalSetCurrentModifierTypo( widget_text_disable.typo );
+              InternalSetCurrentModifierUnder( widget_text_disable.under );
+              InternalSetCurrentModifierStrike( widget_text_disable.strike );
+              break;
+
+       case Widget_Text_Selected:
+              InternalSetCurrentFont( widget_text_selected.name );
+              InternalSetCurrentModifierTypo( widget_text_selected.typo );
+              InternalSetCurrentModifierUnder( widget_text_selected.under );
+              InternalSetCurrentModifierStrike( widget_text_selected.strike );
+              break;
+
+       case Window_Titlebartext_Enable:
+              InternalSetCurrentFont( window_titlebartext_enable.name );
+              InternalSetCurrentModifierTypo( window_titlebartext_enable.typo );
+              InternalSetCurrentModifierUnder( window_titlebartext_enable.under );
+              InternalSetCurrentModifierStrike( window_titlebartext_enable.strike );
+              break;
+
+       case Window_Titlebartext_Disable:
+              InternalSetCurrentFont( window_titlebartext_disable.name );
+              InternalSetCurrentModifierTypo( window_titlebartext_disable.typo );
+              InternalSetCurrentModifierUnder( window_titlebartext_disable.under );
+              InternalSetCurrentModifierStrike( window_titlebartext_disable.strike );
+              break;
+       }
 }
 
 

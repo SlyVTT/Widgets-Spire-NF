@@ -510,19 +510,19 @@ void KeyManager::InternalLogic( void )
        }
 }
 
-bool KeyManager::IsAnyKeyEvent( void )
+bool KeyManager::InternalIsAnyKeyEvent( void )
 {
-       return Get().keyevent;
+       return keyevent;
 }
 
-bool KeyManager::IsKeyPressEvent( void )
+bool KeyManager::InternalIsKeyPressEvent( void )
 {
-       return Get().keypressevent;
+       return keypressevent;
 }
 
-bool KeyManager::IsKeyReleaseEvent( void )
+bool KeyManager::InternalIsKeyReleaseEvent( void )
 {
-       return Get(). keyreleaseevent;
+       return keyreleaseevent;
 }
 
 
@@ -867,7 +867,7 @@ void KeyManager::InternalResetState( void )
        m_kbCOMMA_Previous = false;
 }
 
-bool KeyManager::IsAnyKeyPressed()
+bool KeyManager::InternalIsAnyKeyPressed()
 {
        // We add all the bits corresponding to the key mapping in memory
        keysum = base[0] + base[1] + base[2] + base[3] + base[4] + base[5] + base[6] + base[7];
@@ -881,7 +881,7 @@ bool KeyManager::IsAnyKeyPressed()
        else return true;
 }
 
-char KeyManager::AsciiGet( void )
+char KeyManager::InternalAsciiGet( void )
 {
        InternalLogic();
 

@@ -55,6 +55,14 @@
 		<Unit filename="ToolkitNF/Renderers/DepthBufferRenderer.hpp" />
 		<Unit filename="ToolkitNF/Renderers/ScreenRenderer.cpp" />
 		<Unit filename="ToolkitNF/Renderers/ScreenRenderer.hpp" />
+		<Unit filename="ToolkitNF/Widgets/ButtonWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/ButtonWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/DesktopWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/DesktopWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/Widget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/Widget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/WidgetApplication.cpp" />
+		<Unit filename="ToolkitNF/Widgets/WidgetApplication.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

@@ -2,6 +2,37 @@
 
 
 
+#if RENDER_WITH_SDL == 1
+uint32_t ScreenRenderer::_getpixel(SDL_Surface *surface, int x, int y)
+{
+       int bpp = surface->format->BytesPerPixel;
+       /* Here p is the address to the pixel we want to retrieve */
+       uint8_t *p = (uint8_t *)surface->pixels + y * surface->pitch + x * bpp;
+
+       switch(bpp)
+       {
+       case 1:
+              return *p;
+
+       case 2:
+              return *(uint16_t *)p;
+
+       case 3:
+              if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+                     return p[0] << 16 | p[1] << 8 | p[2];
+              else
+                     return p[0] | p[1] << 8 | p[2] << 16;
+
+       case 4:
+              return *(uint32_t *)p;
+
+       default:
+              return 0;       /* shouldn't happen, but avoids warnings */
+       }
+}
+#endif
+
+
 ScreenRenderer::ScreenRenderer()
 {
 
@@ -171,7 +202,7 @@ void ScreenRenderer::InternalInitialize( void )
               exit(EXIT_FAILURE);
        }
 
-       screen = SDL_SetVideoMode(320, 240, 16, SDL_SWSURFACE);
+       screen = SDL_SetVideoMode(SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI, 16, SDL_SWSURFACE);
 
        if(screen == NULL)
        {
@@ -180,22 +211,14 @@ void ScreenRenderer::InternalInitialize( void )
               exit(EXIT_FAILURE);
        }
 
-       SDL_FillRect( screen, 0, 0xFFFF);
-       SDL_Flip(screen);
-
 #else
 
        screen = gui_gc_global_GC();
 
-       gui_gc_setRegion(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+       gui_gc_setRegion(screen, 0, 0, SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI, 0, 0, SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI);
        gui_gc_begin(screen);
 
        gui_gc_setAlpha(screen, GC_A_OFF);
-
-       gui_gc_setColorRGB(screen, 255, 255, 255);
-       gui_gc_fillRect(screen, 0, 0, 320, 240);
-
-       gui_gc_blit_to_screen(screen);
 
 #endif
 }
@@ -238,13 +261,11 @@ void ScreenRenderer::InternalClearScreen( unsigned short R, unsigned short G, un
 
        Uint32 rgb_code = SDL_MapRGB(screen->format, R, G, B);
        SDL_FillRect( screen, 0, rgb_code);
-       SDL_Flip(screen);
 
 #else
 
        gui_gc_setColorRGB(screen, R, G, B);
-       gui_gc_fillRect(screen, 0, 0, 320, 240);
-       gui_gc_blit_to_screen(screen);
+       gui_gc_fillRect(screen, 0, 0, SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI);
 
 #endif
 }
@@ -258,7 +279,7 @@ void ScreenRenderer::InternalDrawPixel( unsigned int x1, unsigned int y1, unsign
 
 #else
 
-       if ((x1>=0) && (x1<=SCREEN_WIDTH) && (y1>=0) && (y1<=SCREEN_HEIGHT))
+       if ((x1<=SCREEN_WIDTH) && (y1<=SCREEN_HEIGHT))
        {
               uint16_t b = (B >> 3) & 0x1f;
               uint16_t g = ((G >> 2) & 0x3f) << 5;
@@ -402,7 +423,7 @@ unsigned char ScreenRenderer::InternalGetPixelR( unsigned int x, unsigned int y 
 
        Uint8 r,g,b;
        SDL_LockSurface( screen);
-       SDL_GetRGB(getpixel(screen, x, y), screen->format, &r, &g, &b);
+       SDL_GetRGB(_getpixel(screen, x, y), screen->format, &r, &g, &b);
        return (unsigned char) r;
 
 #else
@@ -424,7 +445,7 @@ unsigned char ScreenRenderer::InternalGetPixelG( unsigned int x, unsigned int y 
 
        Uint8 r,g,b;
        SDL_LockSurface( screen);
-       SDL_GetRGB(getpixel(screen, x, y), screen->format, &r, &g, &b);
+       SDL_GetRGB(_getpixel(screen, x, y), screen->format, &r, &g, &b);
        return (unsigned char) g;
 
 #else
@@ -435,7 +456,7 @@ unsigned char ScreenRenderer::InternalGetPixelG( unsigned int x, unsigned int y 
               int res = *(unsigned short *) (off_buff[y] + 2*x);
               //uint8_t g=(unsigned char) ((res >> 6 ) & 0b11111);
               //return (unsigned char) (g<<3);
-             uint8_t g=(unsigned char) ((res >> 5 ) & 0b111111);
+              uint8_t g=(unsigned char) ((res >> 5 ) & 0b111111);
               return (unsigned char) (g<<2);
        }
 
@@ -449,7 +470,7 @@ unsigned char ScreenRenderer::InternalGetPixelB( unsigned int x, unsigned int y 
 
        Uint8 r,g,b;
        SDL_LockSurface( screen);
-       SDL_GetRGB(getpixel(screen, x, y), screen->format, &r, &g, &b);
+       SDL_GetRGB(_getpixel(screen, x, y), screen->format, &r, &g, &b);
        return (unsigned char) b;
 
 #else
@@ -470,7 +491,7 @@ unsigned int ScreenRenderer::InternalGetPixel( unsigned int x, unsigned int y )
 {
 #if RENDER_WITH_SDL == 1
 
-       return ((unsigned int) getpixel(screen, x, y));
+       return ((unsigned int) _getpixel(screen, x, y));
 
 #else
 
@@ -514,7 +535,7 @@ void ScreenRenderer::InternalDrawSprite( spritegc* sprite, Rect src, Rect pos )
        {
               for( int j=0; j<sprite->height; j++)
               {
-                     value = sprite->data[j*sprite->width+i];
+                    value = sprite->data[j*sprite->width+i];
 
                      if ( value != sprite->transparency)
                      {
@@ -524,8 +545,84 @@ void ScreenRenderer::InternalDrawSprite( spritegc* sprite, Rect src, Rect pos )
 
                             InternalDrawPixel(pos.x+i, pos.y+j, r<<3, g<<2, b<<3, 255 );
                      }
+
               }
        }
+
+}
+
+#endif
+
+
+
+#if RENDER_WITH_SDL == 1
+
+void ScreenRenderer::InternalDrawImageBackground( SDL_Surface* image )
+{
+       SDL_Rect src_rect, screen_pos;
+       src_rect.x = 0;
+       src_rect.y = 0;
+       src_rect.w = 320;
+       src_rect.h = 240;
+
+       screen_pos.x = 0;
+       screen_pos.y = 0;
+       screen_pos.w = 320;
+       screen_pos.h = 240;
+       SDL_BlitSurface( image, &src_rect, screen, &screen_pos);
+}
+
+#else
+
+void ScreenRenderer::InternalDrawImageBackground( imagegc* image )
+{
+       uint16_t value;
+       //unsigned char r,g,b;
+
+        uint16_t ** off_buff = ((((uint16_t *****)screen)[9])[0])[0x8];
+
+    memcpy( off_buff[0], image->data, image->height*image->width*sizeof(uint16_t) );
+/*
+       for( unsigned int i=0; i<image->width; i++)
+       {
+              for( unsigned int j=0; j<image->height; j++)
+              {
+                     value = (uint16_t) image->data[j*image->width+i];
+                     *(off_buff[j] + i) = value;
+              }
+       }
+*/
+}
+
+#endif
+
+
+
+#if RENDER_WITH_SDL == 1
+
+void ScreenRenderer::InternalDrawImage( SDL_Surface* image, Rect src, Rect pos )
+{
+       SDL_Rect src_rect, screen_pos;
+       src_rect.x = src.x;
+       src_rect.y = src.y;
+       src_rect.w = src.w;
+       src_rect.h = src.h;
+
+       screen_pos.x = pos.x;
+       screen_pos.y = pos.y;
+       screen_pos.w = pos.w;
+       screen_pos.h = pos.h;
+       SDL_BlitSurface( image, &src_rect, screen, &screen_pos);
+}
+
+#else
+
+void ScreenRenderer::InternalDrawImage( imagegc* image, Rect src, Rect pos )
+{
+       uint16_t ** off_buff = ((((uint16_t *****)screen)[9])[0])[0x8];
+
+
+
 }
 
 #endif

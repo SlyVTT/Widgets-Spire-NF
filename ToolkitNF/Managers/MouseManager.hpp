@@ -74,9 +74,9 @@ public:
     static bool kbLEFT_Release_Event( void ) { return Get().m_kbLEFT_Release_Event; };
     static bool kbLEFTUP_Release_Event( void ) { return Get().m_kbLEFTUP_Release_Event; };
 
-    virtual bool IsKeyArrowEvent( void );
-    virtual bool IsKeyArrowPressEvent( void );
-    virtual bool IsKeyArrowReleaseEvent( void );
+    static bool IsKeyArrowEvent( void );
+    static bool IsKeyArrowPressEvent( void );
+    static bool IsKeyArrowReleaseEvent( void );
 
 
     static void ShowMouse() { Get().InternalShowMouse(); };

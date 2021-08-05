@@ -83,8 +83,8 @@ public:
     static void SetDefaultColorPreset( void )  { Get().InternalSetDefaultColorPreset(); };
     static void ResetState( void )  { Get().InternalResetState( ); };
 
-    static ColorRGBA GetColor( ColorEnum forwhat );
-    static void SetColor( ColorEnum forwhat, ColorRGBA color );
+    static ColorRGBA GetColor( ColorEnum forwhat ) { return Get().InternalGetColor( forwhat); };
+    static void SetColor( ColorEnum forwhat, ColorRGBA color ) { Get().InternalSetColor( forwhat, color ); };
 
 
 
