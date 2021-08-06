@@ -70,6 +70,7 @@ public:
     static void DrawSprite( spritegc* sprite, Rect src, Rect pos ) { Get().InternalDrawSprite( sprite, src, pos ); };
     static void DrawImageBackground( imagegc* image ) { Get().InternalDrawImageBackground( image ); };
     static void DrawImage( imagegc* image, Rect src, Rect pos ) { Get().InternalDrawImage( image, src, pos ); };
+    static void DrawPixel(unsigned int x, unsigned int y, unsigned short valuecolor ) { Get().InternalDrawPixel( x, y, valuecolor ); };
 
 #endif
 
@@ -114,6 +115,7 @@ private:
     void InternalDrawSprite( spritegc* sprite, Rect src, Rect pos );
     void InternalDrawImageBackground( imagegc* image );
     void InternalDrawImage( imagegc* image, Rect src, Rect pos );
+    void InternalDrawPixel(unsigned int x2, unsigned int y2, unsigned short valuecolor );
 
 #endif
 

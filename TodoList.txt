@@ -1,0 +1,19 @@
+WidgetApplication Class :
+    - in the Logic() method, update the key shortcuts for Desktop selection
+    - in the LogicWithForcedRender() method, update the key shortcuts for Desktop selection
+
+ScreenRenderer Class :
+    - improve the visuals of the DrawFilledRoundedRectangle method
+    - Improve the visuals of the DrawRoundedRectangle method
+
+General :
+    - check if memory is properly freed when using images
+    - check if memory is properly freed when closing the application with WidgetApplication::Close()
+    - check if memory is properly freed while using FontEngine::Close()
+    - check if memory is properly freed while using ScreenRendered::Close()
+    - check if memory is properly freed while using DepthBufferRenderer::Close()
+    - check is themes are correctly supported while using the ThemeEngine methods
+
+Samples :
+    - try to recompile the different sample applications for use with the GUI Toolkit NF version
+    - check if the Link SDL example is still compatible with the GUI Toolkit NF (Screen handler share may not be possible anymore)

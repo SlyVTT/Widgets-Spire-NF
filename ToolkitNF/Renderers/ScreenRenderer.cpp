@@ -1,5 +1,11 @@
 #include "ScreenRenderer.hpp"
 
+#include "../Globals/GUIToolkitNFGlobals.hpp"
+
+
+#if DEBUG_MODE == 1
+#include "../Debugger/Debugger.hpp"
+#endif // DEBUG_MODE
 
 
 #if RENDER_WITH_SDL == 1
@@ -279,7 +285,7 @@ void ScreenRenderer::InternalDrawPixel( unsigned int x1, unsigned int y1, unsign
 
 #else
 
-       if ((x1<=SCREEN_WIDTH) && (y1<=SCREEN_HEIGHT))
+       if ((x1<SCREEN_WIDTH) && (y1<SCREEN_HEIGHT))
        {
               uint16_t b = (B >> 3) & 0x1f;
               uint16_t g = ((G >> 2) & 0x3f) << 5;
@@ -293,6 +299,19 @@ void ScreenRenderer::InternalDrawPixel( unsigned int x1, unsigned int y1, unsign
 
 #endif
 }
+
+
+#if RENDER_WITH_SDL == 0
+void ScreenRenderer::InternalDrawPixel( unsigned int x1, unsigned int y1, unsigned short valuecolor )
+{
+
+      if ((x1<SCREEN_WIDTH_GUI) && (y1<SCREEN_HEIGHT_GUI))
+       {
+              unsigned short ** off_buff = ((((unsigned short *****)screen)[9])[0])[0x8];
+              *(off_buff[y1] + x1) = valuecolor;
+       }
+}
+#endif
 
 
 void ScreenRenderer::InternalDrawLine( unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned short R, unsigned short G, unsigned short B, unsigned short A )
@@ -527,7 +546,6 @@ void ScreenRenderer::InternalDrawSprite( SDL_Surface* sprite, Rect src, Rect pos
 
 void ScreenRenderer::InternalDrawSprite( spritegc* sprite, Rect src, Rect pos )
 {
-
        unsigned short value;
        unsigned char r,g,b;
 
@@ -535,7 +553,7 @@ void ScreenRenderer::InternalDrawSprite( spritegc* sprite, Rect src, Rect pos )
        {
               for( int j=0; j<sprite->height; j++)
               {
-                    value = sprite->data[j*sprite->width+i];
+                     value = sprite->data[j*sprite->width+i];
 
                      if ( value != sprite->transparency)
                      {
@@ -576,22 +594,9 @@ void ScreenRenderer::InternalDrawImageBackground( SDL_Surface* image )
 
 void ScreenRenderer::InternalDrawImageBackground( imagegc* image )
 {
-       uint16_t value;
-       //unsigned char r,g,b;
+       uint16_t ** off_buff = ((((uint16_t *****)screen)[9])[0])[0x8];
 
-        uint16_t ** off_buff = ((((uint16_t *****)screen)[9])[0])[0x8];
-
-    memcpy( off_buff[0], image->data, image->height*image->width*sizeof(uint16_t) );
-/*
-       for( unsigned int i=0; i<image->width; i++)
-       {
-              for( unsigned int j=0; j<image->height; j++)
-              {
-                     value = (uint16_t) image->data[j*image->width+i];
-                     *(off_buff[j] + i) = value;
-              }
-       }
-*/
+       memcpy( off_buff[0], image->data, image->height*image->width*sizeof(uint16_t) );
 }
 
 #endif
@@ -619,10 +624,130 @@ void ScreenRenderer::InternalDrawImage( SDL_Surface* image, Rect src, Rect pos )
 
 void ScreenRenderer::InternalDrawImage( imagegc* image, Rect src, Rect pos )
 {
-       uint16_t ** off_buff = ((((uint16_t *****)screen)[9])[0])[0x8];
+
+       // We check if we want to copy a part of the image that is inside the image
+       if (src.x>image->width) return;
+       if (src.y>image->height) return;
+
+       // We check if we want to copy the image inside the screen
+       if (pos.x>SCREEN_WIDTH_GUI) return;
+       if (pos.y>SCREEN_HEIGHT_GUI) return;
+
+       // We will do a sanity check of the src and pos coordinates to have accurate data for image blit
+       // Note : As the Rect struct is using unsigned short, there is no need for checking negative values
+
+       Rect src_cor, pos_cor;
+       src_cor.x = src.x;
+       src_cor.y = src.y;
+
+       if (src_cor.x+src.w>image->width)
+              src_cor.w = image->width - src_cor.x;
+       else
+              src_cor.w = src.w;
+
+       if (src_cor.y+src.h>image->height)
+              src_cor.h = image->height - src_cor.y;
+       else
+              src_cor.h = src.h;
+
+       pos_cor.x = pos.x;
+       pos_cor.y = pos.y;
+
+       if (pos_cor.x+src_cor.w>SCREEN_WIDTH_GUI)
+              pos_cor.w = SCREEN_WIDTH_GUI - pos_cor.x;
+       else
+              pos_cor.w = src_cor.w;
+
+       if (pos_cor.y+src_cor.h>SCREEN_HEIGHT_GUI)
+              pos_cor.h = SCREEN_HEIGHT_GUI - pos_cor.y;
+       else
+              pos_cor.h = src_cor.h;
+
+       // Finally we check if the pos destination can copy the width and height of src, if not, we limit the copy to the destination capability
+
+       if (pos_cor.w>src_cor.w) pos_cor.w=src_cor.w;
+       if (pos_cor.h>src_cor.h) pos_cor.h=src_cor.h;
 
 
 
+
+       char ** off_buff = ((((char *****)screen)[9])[0])[0x8];
+       unsigned short* screenstart = (unsigned short*)&(*(off_buff[pos_cor.y] + pos_cor.x*2));
+       //unsigned short* imagestart = (unsigned short*)&(image->data[ src_cor.y*image->width + src_cor.x]);
+       unsigned short* imagestart = (unsigned short*) image->data ;
+       imagestart +=  src_cor.y*image->width + src_cor.x;
+
+              #if DEBUG_MODE == 1
+
+           char adresse[25];
+           sprintf( adresse, "%p", image->data );
+
+            Debugger::Log( "Image Data : \n" );
+            Debugger::Log( " width = " );
+            Debugger::Log( image->width );
+            Debugger::Log( "\t" );
+            Debugger::Log( " Height = " );
+            Debugger::Log( image->height );
+            Debugger::Log( "\t" );
+            Debugger::Log( " Adresse = " );
+            Debugger::Log( adresse );
+            Debugger::Log( "\n" );
+
+            Debugger::Log( "Src_Cor Data : \n" );
+            Debugger::Log( " x= " );
+            Debugger::Log( src_cor.x );
+            Debugger::Log( "\t" );
+            Debugger::Log( " y= " );
+            Debugger::Log( src_cor.y );
+            Debugger::Log( "\t" );
+            Debugger::Log( " w= " );
+            Debugger::Log( src_cor.w );
+            Debugger::Log( "\t" );
+            Debugger::Log( " h= " );
+            Debugger::Log( src_cor.h );
+            Debugger::Log( "\n" );
+
+            Debugger::Log( "Pos_Cor Data : \n" );
+            Debugger::Log( " x= " );
+            Debugger::Log( pos_cor.x );
+            Debugger::Log( "\t" );
+            Debugger::Log( " y= " );
+            Debugger::Log( pos_cor.y );
+            Debugger::Log( "\t" );
+            Debugger::Log( " w= " );
+            Debugger::Log( pos_cor.w );
+            Debugger::Log( "\t" );
+            Debugger::Log( " h= " );
+            Debugger::Log( pos_cor.h );
+            Debugger::Log( "\n" );
+
+            sprintf( adresse, "%p", &image->data[0] );
+            Debugger::Log( " Adresse image->data = " );
+            Debugger::Log( adresse );
+            Debugger::Log( "\n" );
+
+            sprintf( adresse, "%p", imagestart );
+            Debugger::Log( " Adresse imagestart = " );
+            Debugger::Log( adresse );
+            Debugger::Log( "\n" );
+
+            sprintf( adresse, "%p", screenstart );
+            Debugger::Log( " Adresse screenstart = " );
+            Debugger::Log( adresse );
+            Debugger::Log( "\n\n" );
+
+       #endif // DEBUG_MODE
+
+
+       // Now we can do the image blit
+       // for each validated line (given by pos_cor.h value)
+
+       for (char u=0; u<pos_cor.h; u++)
+       {
+              memcpy( screenstart, imagestart, pos_cor.w*2 );
+              screenstart += SCREEN_WIDTH_GUI;
+              imagestart += image->width;
+       }
 }
 
 #endif

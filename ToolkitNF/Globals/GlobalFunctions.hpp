@@ -24,7 +24,7 @@ struct imagegc
 {
        unsigned short width;
        unsigned short height;
-       uint16_t* data;
+       unsigned short* data;
 };
 #endif
 
