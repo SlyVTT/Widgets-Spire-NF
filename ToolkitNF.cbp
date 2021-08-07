@@ -76,12 +76,30 @@
 		<Unit filename="ToolkitNF/Widgets/ContainerVWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/DesktopWidget.cpp" />
 		<Unit filename="ToolkitNF/Widgets/DesktopWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/DialogBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/DialogBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/DropBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/DropBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/FileDialogBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/FileDialogBoxWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/FrameWidget.cpp" />
 		<Unit filename="ToolkitNF/Widgets/FrameWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/IconBarWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/IconBarWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/IconItemWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/IconItemWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/InputWidget.cpp" />
 		<Unit filename="ToolkitNF/Widgets/InputWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/LabelWidget.cpp" />
 		<Unit filename="ToolkitNF/Widgets/LabelWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/ListBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/ListBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuBarWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuBarWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuItemWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuItemWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuPaneWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuPaneWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/MiniButtonWidget.cpp" />
 		<Unit filename="ToolkitNF/Widgets/MiniButtonWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/ProgressBarWidget.cpp" />
@@ -92,10 +110,14 @@
 		<Unit filename="ToolkitNF/Widgets/SliderWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/SpacerWidget.cpp" />
 		<Unit filename="ToolkitNF/Widgets/SpacerWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/SplashScreenWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/SplashScreenWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/Widget.cpp" />
 		<Unit filename="ToolkitNF/Widgets/Widget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/WidgetApplication.cpp" />
 		<Unit filename="ToolkitNF/Widgets/WidgetApplication.hpp" />
+		<Unit filename="ToolkitNF/Widgets/WindowWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/WindowWidget.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

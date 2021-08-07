@@ -1,5 +1,19 @@
 #include "TimeManager.hpp"
 
+#include "../Globals/GUIToolkitNFGlobals.hpp"
+#include "../Globals/GlobalFunctions.hpp"
+
+#if RENDER_WITH_SDL == 1
+      #include <SDL/SDL_timer.h>
+#endif // RENDER_WITH_SDL
+
+#include <libndls.h>
+
+
+static volatile unsigned *value;
+static volatile unsigned *control;
+
+
 TimeManager::TimeManager()
 {
        //ctor
@@ -18,10 +32,11 @@ void TimeManager::InternalInitialize( void )
        start = 0;
        tick_sum = 0;
 
+       InternalStartTicks();
 }
 
 
-void InternalClose( void )
+void TimeManager::InternalClose( void )
 {
 
 }
@@ -29,6 +44,8 @@ void InternalClose( void )
 
 void TimeManager::InternalStartTicks(void)
 {
+    #if RENDER_WITH_SDL == 0
+
        *(volatile unsigned *)0x900B0018 &= ~(1 << 11); /* Enable bus access */
        if ( has_colors )
        {
@@ -46,11 +63,20 @@ void TimeManager::InternalStartTicks(void)
               *control = 0b00001111; /* Run infinitely; increasing; start */
               *value = 0;
        }
+
+    #endif // RENDER_WITH_SDL
+
 }
 
 
 uint32_t TimeManager::InternalGetTicks(void)
 {
+    #if RENDER_WITH_SDL == 1
+
+        return (uint32_t) SDL_GetTicks( );
+
+    #else
+
        if ( has_colors )
               return((start - *value) / 33);
        else
@@ -59,11 +85,21 @@ uint32_t TimeManager::InternalGetTicks(void)
               *value = 0;
               return(tick_sum);
        }
+
+       #endif // RENDER_WITH_SDL
 }
 
 
 void TimeManager::InternalDelay(uint32_t ms)
 {
-       sleep(ms);
+    #if RENDER_WITH_SDL == 1
+
+        SDL_Delay( ms );
+
+    #else
+
+       msleep(ms);
+
+    #endif // RENDER_WITH_SDL
 }
 

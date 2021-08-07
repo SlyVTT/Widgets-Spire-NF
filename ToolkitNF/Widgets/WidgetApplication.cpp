@@ -13,6 +13,7 @@
 
 #include "../Managers/KeyManager.hpp"
 #include "../Managers/MouseManager.hpp"
+#include "../Managers/TimeManager.hpp"
 
 #include "../Renderers/ScreenRenderer.hpp"
 #include "../Renderers/DepthBufferRenderer.hpp"
@@ -75,6 +76,8 @@ void WidgetApplication::InternalInitialize( void )
        MouseManager::SetSensibility( 2.0f );
        MouseManager::SetCursorType( MouseManager::Cursor_Pointer );
 
+       TimeManager::Initialize();
+
        ColorEngine::Initialize();
        ColorEngine::SetDefaultColorPreset();
 
@@ -112,8 +115,8 @@ void WidgetApplication::InternalClose()
 #else
               if (c->background_image != nullptr)
               {
-                  free( c->background_image->data );
-                  free( c->background_image );
+                     free( c->background_image->data );
+                     free( c->background_image );
               }
 #endif
 
@@ -131,8 +134,12 @@ void WidgetApplication::InternalClose()
        }
 
        MouseManager::Close();
+       KeyManager::Close();
+       TimeManager::Close();
+
        ScreenRenderer::Close();
        DepthBufferRenderer::Close();
+
        ColorEngine::Close();
        FontEngine::Close();
        ThemeEngine::Close();
@@ -278,6 +285,7 @@ void WidgetApplication::InternalRender( void )
               {
                      ScreenRenderer::ClearScreen( 0, 0, 0, 0 );
               }
+
               if (currentdesktop->uniform_background && !currentdesktop->background_wallpaper)
               {
                      ScreenRenderer::ClearScreen( currentdesktop->r_background, currentdesktop->g_background, currentdesktop->b_background, 255 );
@@ -285,10 +293,6 @@ void WidgetApplication::InternalRender( void )
 
               if (!currentdesktop->uniform_background && currentdesktop->background_wallpaper)
               {
-                     // TODO : Create a SDL_BlitSurface wrapper
-
-                     //SDL_BlitSurface( currentdesktop->background_image, NULL, currentdesktop->screen, &currentdesktop->position_background);
-
                      ScreenRenderer::DrawImageBackground(currentdesktop->background_image );
               }
        }
@@ -330,27 +334,22 @@ void WidgetApplication::InternalLogic( void )
               AskForClose = true;
        };
 
-// TODO : Create Shortcuts that will not create conflicts with other Logic routines (by instance CTRL+SHIFT + 7/9
+       if (KeyManager::kbCTRL()  && KeyManager::kbSHIFT() && KeyManager::kb7())
+       {
+              InternalSetPreviousDesktop();
+              TimeManager::Delay( 250 );
+       };
 
-       /*
-              if (keyboard->kbCTRL && keyboard->kbLEFT)
-              {
-                     setpreviousdesktop();
-                     SDL_Delay( 250 );
-              };
+       if (KeyManager::kbCTRL()  && KeyManager::kbSHIFT() && KeyManager::kb9())
+       {
+              InternalSetNextDesktop();
+              TimeManager::Delay( 250 );
+       };
 
-              if (keyboard->kbCTRL && keyboard->kbRIGHT)
-              {
-                     setnextdesktop();
-                     SDL_Delay( 250 );
-              };
-
-              if (keyboard->kbCTRL && keyboard->kbUP)
-              {
-                     //To be coded : shortcut for listing all the desktops and show a thumbnail
-              };
-       */
-
+       if (KeyManager::kbCTRL()  && KeyManager::kbSHIFT() && KeyManager::kb8())
+       {
+              //To be coded : shortcut for listing all the desktops and show a thumbnail
+       };
 }
 
 
@@ -379,26 +378,23 @@ void WidgetApplication::InternalLogicWithForcedRender( void )
               AskForClose = true;
        };
 
-// TODO : Create Shortcuts that will not create conflicts with other Logic routines (by instance CTRL+SHIFT + 7/9
 
-       /*
-              if (keyboard->kbCTRL && keyboard->kbLEFT)
-              {
-                     setpreviousdesktop();
-                     SDL_Delay( 250 );
-              };
+       if (KeyManager::kbCTRL()  && KeyManager::kbSHIFT() && KeyManager::kb7())
+       {
+              InternalSetPreviousDesktop();
+              TimeManager::Delay( 250 );
+       };
 
-              if (keyboard->kbCTRL && keyboard->kbRIGHT)
-              {
-                     setnextdesktop();
-                     SDL_Delay( 250 );
-              };
+       if (KeyManager::kbCTRL()  && KeyManager::kbSHIFT() && KeyManager::kb9())
+       {
+              InternalSetNextDesktop();
+              TimeManager::Delay( 250 );
+       };
 
-              if (keyboard->kbCTRL && keyboard->kbUP)
-              {
-                     //To be coded : shortcut for listing all the desktops and show a thumbnail
-              };
-       */
+       if (KeyManager::kbCTRL()  && KeyManager::kbSHIFT() && KeyManager::kb8())
+       {
+              //To be coded : shortcut for listing all the desktops and show a thumbnail
+       };
 }
 
 bool WidgetApplication::InternalAskForClosure( void )

@@ -34,8 +34,9 @@ class TimeManager
         void InternalInitialize( void );
         void InternalClose( void );
 
-        static volatile unsigned *value;
-        static volatile unsigned *control;
+//        static volatile unsigned *value;
+//        static volatile unsigned *control;
+
         uint32_t tick_sum;
         uint32_t start;
 };

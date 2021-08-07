@@ -26,6 +26,12 @@ void KeyManager::InternalInitialize( void )
     InternalResetState();
 }
 
+
+void KeyManager::InternalClose( void )
+{
+
+}
+
 void KeyManager::InternalLogic( void )
 {
        unsigned short temp;

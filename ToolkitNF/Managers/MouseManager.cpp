@@ -4,7 +4,6 @@
 #include "MouseManager.hpp"
 #include "CursorsDesigns.hpp"
 
-
 #include <libndls.h>
 
 #include "../Renderers/ScreenRenderer.hpp"

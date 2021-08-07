@@ -38,6 +38,11 @@ int main( void )
        input2->SetContent( "Hello, I am an INPUTWidget (Disabled) " );
        input2->Disable();
 
+       ProgressBarWidget* progress = new ProgressBarWidget( "Progress 1", 150, 75, 150, 15, desktop );
+       progress->SetStyle( ProgressBarWidget::Rainbow );
+       //progress->SetNumberBricks( 10 );
+       progress->SetCurrentPercentage( 0.0f );
+
        /*
        #if DEBUG_MODE == 1
               Debugger::Initialize();
@@ -78,10 +83,23 @@ int main( void )
 
        WidgetApplication::PrepareForRun();
 
+       float percentage = 0.0f;
 
        while (!WidgetApplication::AskForClosure() && !button->IsPressed()  )
        {
               WidgetApplication::Run( WidgetApplication::Normal );
+
+              if (KeyManager::kb4() && (percentage > 0.0f))
+              {
+                     percentage -= 1.0f;
+                     progress->SetCurrentPercentage( percentage );
+              }
+
+              if (KeyManager::kb6() && (percentage < 100.0f))
+              {
+                     percentage += 1.0f;
+                     progress->SetCurrentPercentage( percentage );
+              }
 
               /*
               //ScreenRenderer::DrawImage( tigre, origine, destination );

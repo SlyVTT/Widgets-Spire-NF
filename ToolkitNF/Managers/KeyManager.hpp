@@ -234,6 +234,7 @@ public:
        static void Initialize( void ) { Get().InternalInitialize(); };
        static void Logic( void ) { Get().InternalLogic(); };
        static void ResetState( void ) { Get().InternalResetState(); };
+       static void Close( void ) { Get().InternalClose();  };
 
        //This is a recode of LibNDLS nio_ascii_get() to correctly map the nSpire CX/CX-II keyboard
        static char AsciiGet( void ) {return Get().InternalAsciiGet(); };
@@ -593,6 +594,8 @@ private:
        void InternalLogic( void );
        void InternalResetState( void );
        void InternalInitialize( void );
+       void InternalClose( void );
+
 
        char InternalAsciiGet( void );
        bool InternalIsAnyKeyEvent( void );

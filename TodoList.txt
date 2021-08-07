@@ -17,3 +17,10 @@ General :
 Samples :
     - try to recompile the different sample applications for use with the GUI Toolkit NF version
     - check if the Link SDL example is still compatible with the GUI Toolkit NF (Screen handler share may not be possible anymore)
+
+TimeManager Class :
+    - check if the methods are working properly
+    - check if the TimeManager is correcly initialized using the InternalStartTicks() method obtained from Hoffa's nSDL code
+    - check if it is possible to use both fast timer, rather than just the first one
+    - create some start markers and stop markets for delta time calculation
+    - create a method providing a timestamping string for debugging applications

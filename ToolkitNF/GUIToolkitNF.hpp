@@ -40,4 +40,25 @@
 #include "Widgets/CommuterWidget.hpp"
 #include "Widgets/ProgressBarWidget.hpp"
 
+#include "Widgets/DropBoxWidget.hpp"
+#include "Widgets/ListBoxWidget.hpp"
+
+#include "Widgets/MenuBarWidget.hpp"
+#include "Widgets/MenuItemWidget.hpp"
+#include "Widgets/MenuPaneWidget.hpp"
+
+#include "Widgets/WindowWidget.hpp"
+#include "Widgets/DialogBoxWidget.hpp"
+#include "Widgets/FileDialogBoxWidget.hpp"
+
+#include "Widgets/IconBarWidget.hpp"
+#include "Widgets/IconItemWidget.hpp"
+
+#include "Widgets/SplashScreenWidget.hpp"
+
+
+
+
+
+
 
