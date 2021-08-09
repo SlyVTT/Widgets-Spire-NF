@@ -1,5 +1,7 @@
 #include "GlobalFunctions.hpp"
 
+#include "../Debugger/Debugger.hpp"
+
 #include <sys/stat.h>
 
 bool is_existing( const std::string& file )
@@ -69,6 +71,18 @@ imagegc* ReadBMP( std::string filename)
     unsigned char* data = new unsigned char[row_padded];
     unsigned char tmp;
     char R,G,B;
+
+    //----------------------------
+    int offsetdata = *(int*)&info[10];
+    int delta;
+
+
+    if (offsetdata>54)
+    {
+        delta = offsetdata-54;
+        fread(data, sizeof(unsigned char), delta, f );
+    }
+    //-----------------------------
 
     for(int i = 0; i < height; i++)
     {

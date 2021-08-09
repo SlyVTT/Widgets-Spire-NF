@@ -111,7 +111,8 @@ void WidgetApplication::InternalClose()
 
 
 #if RENDER_WITH_SDL == 1
-              if (c->background_image != nullptr) SDL_FreeSurface( c->background_image );
+              if (c->background_image != nullptr)
+                    SDL_FreeSurface( c->background_image );
 #else
               if (c->background_image != nullptr)
               {
@@ -208,8 +209,10 @@ void WidgetApplication::InternalRun( RunMode mode )
 
        if (mode == ForcedRender)
               InternalLogicWithForcedRender();
-       if (mode == Normal)
+       else if (mode == Normal)
               InternalLogic();
+        else
+            InternalLogic();        // Can not happen, but this is here in case one would like to develop another run mechanism
 }
 
 

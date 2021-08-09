@@ -3,6 +3,7 @@
 #include "../Managers/KeyManager.hpp"
 #include "../Managers/MouseManager.hpp"
 #include "../Renderers/DepthBufferRenderer.hpp"
+#include "../Debugger/Debugger.hpp"
 
 
 unsigned int GlobalWidgetIDCounter;
@@ -273,10 +274,17 @@ Widget::Widget( )
 {
     WidgetID = GlobalWidgetIDCounter;
     GlobalWidgetIDCounter++;
+
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "Create Widget( ) : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
+#endif // DEBUG_MODE
+
 }
 
 Widget::Widget( std::string l, unsigned int x, unsigned int y, unsigned int w, unsigned int h, Widget *p )
 {
+
+
     label=l;
     xrel=x;
     yrel=y;
@@ -286,6 +294,11 @@ Widget::Widget( std::string l, unsigned int x, unsigned int y, unsigned int w, u
 
     WidgetID = GlobalWidgetIDCounter;
     GlobalWidgetIDCounter++;
+
+
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "Create Widget( ... ) : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
+#endif // DEBUG_MODE
 
 
     if (parent)
@@ -339,15 +352,63 @@ Widget::Widget( std::string l, unsigned int x, unsigned int y, unsigned int w, u
 
 Widget::~Widget()
 {
+
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "Delete ~Widget() : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
+#endif // DEBUG_MODE
+
+
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t Will start killing the children of Widget() : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
+#endif // DEBUG_MODE
+
     for(auto& c : children)
+    {
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t\t Child : ID : %ld \t - Type : %s \t - Label :  %s \n", c->WidgetID, c->GetWidgetType().c_str(), c->GetLabel().c_str() );
+#endif // DEBUG_MODE
+
         delete c;
+
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t\t OK Done ...\n\n");
+#endif // DEBUG_MODE
+    }
+
+
 
     children.clear();
 
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t List of Children CLEARED for Widget() : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
+#endif // DEBUG_MODE
+
+
+
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t Will start killing the popup children of Widget() : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
+#endif // DEBUG_MODE
+
     for (auto& d : popupchildren )
+        {
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t\t PopupChild : ID : %ld \t - Type : %s \t - Label :  %s \n", d->WidgetID, d->GetWidgetType().c_str(), d->GetLabel().c_str() );
+#endif // DEBUG_MODE
+
         delete d;
 
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t\t OK Done ... \n\n");
+#endif // DEBUG_MODE
+        }
+
     popupchildren.clear();
+
+
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t List of Popup Children CLEARED for Widget() : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
+#endif // DEBUG_MODE
+
 }
 
 
@@ -359,7 +420,6 @@ void Widget::Adjust()
 
 void Widget::Logic(  )
 {
-
     for (auto& c : children )
         c->Logic(  );
 }
@@ -541,8 +601,8 @@ void Widget::SetParent( Widget *p )
 
 bool Widget::CursorOn( void )
 {
-    return ((unsigned int) MouseManager::GetX() >= xpos)
+    return (((unsigned int) MouseManager::GetX() >= xpos)
            && ((unsigned int) MouseManager::GetY() >= ypos)
            && ((unsigned int) MouseManager::GetX() <= xpos+width)
-           && ((unsigned int) MouseManager::GetY() <= ypos+height);
+           && ((unsigned int) MouseManager::GetY() <= ypos+height));
 }

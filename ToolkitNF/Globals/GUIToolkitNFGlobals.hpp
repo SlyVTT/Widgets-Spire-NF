@@ -1,6 +1,6 @@
 
 //RENDER_MODE To be set to 1 if SDL is used as the renderer, and to 0 otherwise
-#define RENDER_WITH_SDL 1
+#define RENDER_WITH_SDL 0
 
 #define DEBUG_MODE  0
 

@@ -56,6 +56,9 @@
 
 #include "Widgets/SplashScreenWidget.hpp"
 
+#include "Widgets/MultiLineTextBoxWidget.hpp"
+#include "Widgets/MultiLineRichTextBoxWidget.hpp"
+
 
 
 

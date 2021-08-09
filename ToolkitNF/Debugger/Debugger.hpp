@@ -2,6 +2,7 @@
 #define DEBUGGER_HPP
 
 #include <string>
+#include <stdarg.h>
 
 
 class Debugger
@@ -31,6 +32,12 @@ public:
 
         static void Log( const std::string& stringtolog ) { Get().InternalLog( stringtolog ); };
         static void Log( int value ) { Get().InternalLog( value ); };
+        static void Log( const char *fmt, ... ); // See CPP file as it needs a special code for variadic arguments forwarding
+
+        static void TimerLog( const std::string& stringtolog ) { Get().InternalTimerLog( stringtolog ); };
+        static void TimerLog( int value ) { Get().InternalTimerLog( value ); };
+        static void TimerLog( const char *fmt, ... ); // See CPP file as it needs a special code for variadic arguments forwarding
+
 
 private:
        Debugger();
@@ -47,9 +54,14 @@ private:
        void InternalLog( const std::string& stringtolog );
        void InternalLog( int value );
 
+       void InternalTimerLog( const std::string& stringtolog );
+       void InternalTimerLog( int value );
+
        static Debugger m_debug;
 
        DebugMode currentmode;
+
+       uint32_t timeinit;
 
        FILE* pFile;
 

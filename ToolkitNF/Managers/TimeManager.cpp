@@ -4,7 +4,7 @@
 #include "../Globals/GlobalFunctions.hpp"
 
 #if RENDER_WITH_SDL == 1
-      #include <SDL/SDL_timer.h>
+#include <SDL/SDL_timer.h>
 #endif // RENDER_WITH_SDL
 
 #include <libndls.h>
@@ -44,38 +44,28 @@ void TimeManager::InternalClose( void )
 
 void TimeManager::InternalStartTicks(void)
 {
-    #if RENDER_WITH_SDL == 0
+#if RENDER_WITH_SDL == 0
 
-       *(volatile unsigned *)0x900B0018 &= ~(1 << 11); /* Enable bus access */
-       if ( has_colors )
-       {
-              value = (unsigned *)0x900C0004;
-              control = (unsigned *)0x900C0008;
-              *(volatile unsigned *)0x900C0080 = 0xA; /* "[...] on the CX to specify the 32768Hz clock as the source for the First Timer" */
-              *control = 0b10000010; /* Wrapping; 32-bit; divider to 1; interrupt disabled; free-running; start */
-              start = *value;
-       }
-       else
-       {
-              value = (unsigned *)0x900C0000;
-              control = (unsigned *)0x900C0008;
-              *(volatile unsigned *)0x900C0004 = 33; /* Set time divider to 33; 32768/33=993Hz (approx. 1000Hz) */
-              *control = 0b00001111; /* Run infinitely; increasing; start */
-              *value = 0;
-       }
+       //*(volatile unsigned *)0x900B0018 &= ~(1 << 11); /* Enable bus access */
 
-    #endif // RENDER_WITH_SDL
+       value = (unsigned *)0x900C0004;
+       control = (unsigned *)0x900C0008;
+       *(volatile unsigned *)0x900C0080 = 0xA; /* "[...] on the CX to specify the 32768Hz clock as the source for the First Timer" */
+       *control = 0b10000010; /* Wrapping; 32-bit; divider to 1; interrupt disabled; free-running; start */
+       start = *value;
+
+#endif // RENDER_WITH_SDL
 
 }
 
 
 uint32_t TimeManager::InternalGetTicks(void)
 {
-    #if RENDER_WITH_SDL == 1
+#if RENDER_WITH_SDL == 1
 
-        return (uint32_t) SDL_GetTicks( );
+       return (uint32_t) SDL_GetTicks( );
 
-    #else
+#else
 
        if ( has_colors )
               return((start - *value) / 33);
@@ -86,20 +76,20 @@ uint32_t TimeManager::InternalGetTicks(void)
               return(tick_sum);
        }
 
-       #endif // RENDER_WITH_SDL
+#endif // RENDER_WITH_SDL
 }
 
 
 void TimeManager::InternalDelay(uint32_t ms)
 {
-    #if RENDER_WITH_SDL == 1
+#if RENDER_WITH_SDL == 1
 
-        SDL_Delay( ms );
+       SDL_Delay( ms );
 
-    #else
+#else
 
        msleep(ms);
 
-    #endif // RENDER_WITH_SDL
+#endif // RENDER_WITH_SDL
 }
 

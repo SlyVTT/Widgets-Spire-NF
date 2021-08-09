@@ -40,6 +40,7 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="Makefile" />
+		<Unit filename="SimpleCodeEditor.cpp" />
 		<Unit filename="TodoList.txt" />
 		<Unit filename="ToolkitNF/Debugger/Debugger.cpp" />
 		<Unit filename="ToolkitNF/Debugger/Debugger.hpp" />
@@ -102,6 +103,10 @@
 		<Unit filename="ToolkitNF/Widgets/MenuPaneWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/MiniButtonWidget.cpp" />
 		<Unit filename="ToolkitNF/Widgets/MiniButtonWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MultiLineRichTextBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MultiLineRichTextBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MultiLineTextBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MultiLineTextBoxWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/ProgressBarWidget.cpp" />
 		<Unit filename="ToolkitNF/Widgets/ProgressBarWidget.hpp" />
 		<Unit filename="ToolkitNF/Widgets/RadioControlWidget.cpp" />

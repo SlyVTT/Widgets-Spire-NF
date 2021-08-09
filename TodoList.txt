@@ -1,10 +1,15 @@
 WidgetApplication Class :
     - in the Logic() method, update the key shortcuts for Desktop selection
     - in the LogicWithForcedRender() method, update the key shortcuts for Desktop selection
+    - debug the WidgetApplication::Close() call and track what creates a crash of the calculator when closure is asked
 
 ScreenRenderer Class :
     - improve the visuals of the DrawFilledRoundedRectangle method
     - Improve the visuals of the DrawRoundedRectangle method
+
+DepthBufferRenderer Class :
+    - Correct the buffer to correctly get the value of (R,G,B,A) components and then pick the right WidgetID
+    - Possibly convert it from uint16_t to uint24_t or uint32_t
 
 General :
     - check if memory is properly freed when using images

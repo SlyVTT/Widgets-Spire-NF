@@ -12,6 +12,26 @@ KeyManager& KeyManager::Get( void )
        return m_keyboard;
 }
 
+
+void KeyManager::InternalSetSelection( std::string select )
+{
+    selection = select;
+}
+
+
+std::string KeyManager::InternalGetSelection( void )
+{
+    return selection;
+}
+
+
+void KeyManager::InternalFlushSelection( void )
+{
+    selection.clear();
+}
+
+
+
 void KeyManager::InternalInitialize( void )
 {
        // The base adress is common for all the NSpire, CX and CX II

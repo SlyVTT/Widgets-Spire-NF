@@ -8,7 +8,7 @@
 
 
 #if RENDER_WITH_SDL == 1
-    #include <SDL/SDL_image.h>
+#include <SDL/SDL_image.h>
 #else
 
 #endif
@@ -29,12 +29,16 @@ IconItemWidget::~IconItemWidget()
 {
 #if RENDER_WITH_SDL == 1
 
-       SDL_FreeSurface( this->icon );
+       if (icon)  SDL_FreeSurface( icon );
 
 #else
 
-        free( this->icon->data);
-        free( this->icon );
+       if (icon)
+       {
+              free( icon->data);
+              free( icon );
+              icon = nullptr;
+       }
 
 #endif
 
@@ -55,15 +59,19 @@ void IconItemWidget::Disable( void )
        {
 #if RENDER_WITH_SDL == 1
 
-              SDL_FreeSurface( icon );
+              if (icon)  SDL_FreeSurface( icon );
               icon = IMG_Load( iconnamedisable.c_str() );
 
 #else
 
-        free( this->icon->data);
-        free( this->icon );
+              if (icon)
+              {
+                     free( icon->data);
+                     free( icon );
+                     icon = nullptr;
+              }
 
-        icon = ReadBMP(  iconnamedisable.c_str() );
+              icon = ReadBMP(  iconnamedisable.c_str() );
 
 #endif
 
@@ -82,15 +90,19 @@ void IconItemWidget::Enable( void )
 
 #if RENDER_WITH_SDL == 1
 
-              SDL_FreeSurface( icon );
+              if (icon)  SDL_FreeSurface( icon );
               icon = IMG_Load( iconnameenable.c_str() );
 
 #else
 
-        free( this->icon->data);
-        free( this->icon );
+              if (icon)
+              {
+                     free( icon->data);
+                     free( icon );
+                     icon = nullptr;
+              }
 
-        icon = ReadBMP(  iconnameenable.c_str() );
+              icon = ReadBMP(  iconnameenable.c_str() );
 
 #endif
 
@@ -107,14 +119,19 @@ void IconItemWidget::AssignIconEnable( std::string filename )
 
 #if RENDER_WITH_SDL == 1
 
+       if (icon)  SDL_FreeSurface( icon );
        icon = IMG_Load( iconnameenable.c_str() );
 
 #else
 
-        free( this->icon->data);
-        free( this->icon );
+       if (icon)
+       {
+              free( icon->data);
+              free( icon );
+              icon = nullptr;
+       }
 
-        icon = ReadBMP(  iconnameenable.c_str() );
+       icon = ReadBMP(  iconnameenable.c_str() );
 
 #endif
 
@@ -197,7 +214,7 @@ void IconItemWidget::Render(  )
                      screen_pos.w = 16;
                      screen_pos.h = 16;
 
-                    ScreenRenderer::DrawImage (icon, src_rect, screen_pos);
+                     ScreenRenderer::DrawImage (icon, src_rect, screen_pos);
               }
               else
               {

@@ -245,10 +245,9 @@ public:
        static bool IsKeyPressEvent( void ) { return Get().InternalIsKeyPressEvent(); };
        static bool IsKeyReleaseEvent( void ) { return Get().InternalIsKeyReleaseEvent(); };
 
-
-//       virtual void SetSelection( std::string select );
-//       virtual std::string GetSelection( void );
-//       virtual void FlushSelection( void );
+       static void SetSelection( std::string select ) { Get().InternalSetSelection( select ); };
+       static std::string GetSelection( void ) { return Get().InternalGetSelection(); };
+       static void FlushSelection( void ) { Get().InternalFlushSelection(); };
 
 
 private:
@@ -580,6 +579,10 @@ private:
 
        // This is the content of the Clipboard
        std::string selection;
+
+       void InternalSetSelection( std::string select );
+       std::string InternalGetSelection( void );
+       void InternalFlushSelection( void );
 
        // general state variables for regular keys event
        bool keyevent;

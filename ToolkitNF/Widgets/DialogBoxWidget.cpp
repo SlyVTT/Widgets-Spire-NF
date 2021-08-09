@@ -166,7 +166,7 @@ void DialogBoxWidget::Render( void )
               if (is_enabled)
               {
                      ScreenRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Filling_Enable) );
-                     ScreenRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+12, 3, ColorEngine::GetColor(ColorEngine::Window_Titlebartext_Enable) );
+                     ScreenRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+12, 3, ColorEngine::GetColor(ColorEngine::Window_Titlebar_Enable) );
 
                      if (!is_hovering)
                      {
@@ -193,7 +193,7 @@ void DialogBoxWidget::Render( void )
               else
               {
                      ScreenRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Filling_Disable) );
-                     ScreenRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+12, 3, ColorEngine::GetColor(ColorEngine::Window_Titlebartext_Disable) );
+                     ScreenRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+12, 3, ColorEngine::GetColor(ColorEngine::Window_Titlebar_Disable) );
                      ScreenRenderer::DrawRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
 
                      FontEngine::SetCurrentFontSet( FontEngine::Window_Titlebartext_Disable );

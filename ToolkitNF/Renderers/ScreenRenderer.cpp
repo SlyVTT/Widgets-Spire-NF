@@ -4,7 +4,7 @@
 
 
 #if DEBUG_MODE == 1
-#include "../Debugger/Debugger.hpp"
+    #include "../Debugger/Debugger.hpp"
 #endif // DEBUG_MODE
 
 
@@ -669,74 +669,11 @@ void ScreenRenderer::InternalDrawImage( imagegc* image, Rect src, Rect pos )
        if (pos_cor.h>src_cor.h) pos_cor.h=src_cor.h;
 
 
-
-
        char ** off_buff = ((((char *****)screen)[9])[0])[0x8];
        unsigned short* screenstart = (unsigned short*)&(*(off_buff[pos_cor.y] + pos_cor.x*2));
        //unsigned short* imagestart = (unsigned short*)&(image->data[ src_cor.y*image->width + src_cor.x]);
        unsigned short* imagestart = (unsigned short*) image->data ;
        imagestart +=  src_cor.y*image->width + src_cor.x;
-
-              #if DEBUG_MODE == 1
-
-           char adresse[25];
-           sprintf( adresse, "%p", image->data );
-
-            Debugger::Log( "Image Data : \n" );
-            Debugger::Log( " width = " );
-            Debugger::Log( image->width );
-            Debugger::Log( "\t" );
-            Debugger::Log( " Height = " );
-            Debugger::Log( image->height );
-            Debugger::Log( "\t" );
-            Debugger::Log( " Adresse = " );
-            Debugger::Log( adresse );
-            Debugger::Log( "\n" );
-
-            Debugger::Log( "Src_Cor Data : \n" );
-            Debugger::Log( " x= " );
-            Debugger::Log( src_cor.x );
-            Debugger::Log( "\t" );
-            Debugger::Log( " y= " );
-            Debugger::Log( src_cor.y );
-            Debugger::Log( "\t" );
-            Debugger::Log( " w= " );
-            Debugger::Log( src_cor.w );
-            Debugger::Log( "\t" );
-            Debugger::Log( " h= " );
-            Debugger::Log( src_cor.h );
-            Debugger::Log( "\n" );
-
-            Debugger::Log( "Pos_Cor Data : \n" );
-            Debugger::Log( " x= " );
-            Debugger::Log( pos_cor.x );
-            Debugger::Log( "\t" );
-            Debugger::Log( " y= " );
-            Debugger::Log( pos_cor.y );
-            Debugger::Log( "\t" );
-            Debugger::Log( " w= " );
-            Debugger::Log( pos_cor.w );
-            Debugger::Log( "\t" );
-            Debugger::Log( " h= " );
-            Debugger::Log( pos_cor.h );
-            Debugger::Log( "\n" );
-
-            sprintf( adresse, "%p", &image->data[0] );
-            Debugger::Log( " Adresse image->data = " );
-            Debugger::Log( adresse );
-            Debugger::Log( "\n" );
-
-            sprintf( adresse, "%p", imagestart );
-            Debugger::Log( " Adresse imagestart = " );
-            Debugger::Log( adresse );
-            Debugger::Log( "\n" );
-
-            sprintf( adresse, "%p", screenstart );
-            Debugger::Log( " Adresse screenstart = " );
-            Debugger::Log( adresse );
-            Debugger::Log( "\n\n" );
-
-       #endif // DEBUG_MODE
 
 
        // Now we can do the image blit

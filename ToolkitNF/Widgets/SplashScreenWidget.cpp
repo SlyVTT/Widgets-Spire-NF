@@ -7,11 +7,16 @@
 #include "../Engines/ColorEngine.hpp"
 #include "../Engines/FontEngine.hpp"
 
+#if DEBUG_MODE == 1
+    #include "../Debugger/Debugger.hpp"
+#endif // DEBUG_MODE
+
 #if RENDER_WITH_SDL == 1
-    #include <SDL/SDL_rotozoom.h>
-    #include <SDL/SDL_image.h>
-    #include <SDL/SDL.h>
+#include <SDL/SDL_rotozoom.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL.h>
 #endif // RENDER_WITH_SDL
+
 
 SplashScreenWidget::SplashScreenWidget() : Widget()
 {
@@ -29,14 +34,51 @@ SplashScreenWidget::SplashScreenWidget( std::string l, unsigned int x, unsigned 
 
 SplashScreenWidget::~SplashScreenWidget()
 {
+
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "!!! Entering Splash Screen Destructor \n");
+#endif // DEBUG_MODE
+
+
 #if RENDER_WITH_SDL == 1
 
-       SDL_FreeSurface( image );
+       if (image) SDL_FreeSurface( image );
 
 #else
 
-       free( image->data );
-       free( image );
+#if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t !!! Will free Data Memory if possible \n");
+#endif // DEBUG_MODE
+
+       if (image)
+       {
+           #if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t\t !!! OK, I need to clean everythinge \n");
+#endif // DEBUG_MODE
+
+              free( image->data );
+
+              #if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t\t\t !!! Data Memory freed OK \n");
+#endif // DEBUG_MODE
+
+              free( image );
+
+              #if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t\t\t !!! Image Structure Memory freed OK \n");
+#endif // DEBUG_MODE
+
+              image = nullptr;
+
+              #if DEBUG_MODE == 1
+    Debugger::TimerLog( "\t\t\t !!! Pointer Image set to NULLPTR OK \n");
+#endif // DEBUG_MODE
+
+       }
+
+       #if DEBUG_MODE == 1
+    Debugger::TimerLog( "!!! SplashScreen Destructor finished now");
+#endif // DEBUG_MODE
 
 #endif
 }
@@ -74,7 +116,9 @@ void SplashScreenWidget::AssignImage( std::string filename )
        {
               free( image->data );
               free( image );
+              image = nullptr;
        }
+
        image = ReadBMP( filename.c_str() );
 
        filereference = filename;
@@ -104,12 +148,16 @@ void SplashScreenWidget::Logic( void )
 
 #if RENDER_WITH_SDL == 1
 
-                     SDL_FreeSurface( image );
+                     if (image) SDL_FreeSurface( image );
 
 #else
 
-                     free( image->data );
-                     free( image );
+                     if (image)
+                     {
+                            free( image->data );
+                            free( image );
+                            image = nullptr;
+                     }
 
 #endif
               }
@@ -139,9 +187,9 @@ void SplashScreenWidget::Render( void )
                      screen_pos.w = image->w;
                      screen_pos.h = image->h;
 
-                     #else
+#else
 
-                    src_rect.x = 0;
+                     src_rect.x = 0;
                      src_rect.y = 0;
                      src_rect.w = image->width;
                      src_rect.h = image->height;
@@ -151,7 +199,7 @@ void SplashScreenWidget::Render( void )
                      screen_pos.w = image->width;
                      screen_pos.h = image->height;
 
-                     #endif
+#endif
 
 
                      ScreenRenderer::DrawFilledRoundedRectangle(  screen_pos.x-3, screen_pos.y-3, screen_pos.x+src_rect.w+3, screen_pos.y+ src_rect.h+3, 3, ColorEngine::GetColor(ColorEngine::Widget_Filling_Enable) );

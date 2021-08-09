@@ -195,12 +195,6 @@ void DepthBufferRenderer::InternalInitialize( void )
 {
 #if RENDER_WITH_SDL == 1
 
-       if(SDL_Init(SDL_INIT_VIDEO) == -1)
-       {
-              printf("Couldn't initialize SDL: %s\n", SDL_GetError());
-              exit(EXIT_FAILURE);
-       }
-
        depthbuffer = SDL_CreateRGBSurface(0, 320, 240, 24, 0, 0, 0, 0);
 
        if(depthbuffer == NULL)

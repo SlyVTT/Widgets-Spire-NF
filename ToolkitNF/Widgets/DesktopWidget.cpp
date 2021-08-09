@@ -123,20 +123,20 @@ void DesktopWidget::Logic( void )
 
             unsigned int widgetIDpicked = 100*c + 10*d + u;
 
-            /*
+            //-------------
                     // THIS IS FOR DEBUGGING THE DEPTH BUFFER PORTION OF THE CODE
 
                     char* tempID;
                     sprintf( tempID, "ID = %ld", widgetIDpicked );
-                    fonttemp->setcurrentfont( THIN_FONT );
-                    fonttemp->setmodifiertypo( Bold );
-                    unsigned int length=fonttemp->getstringwidth( tempID );
-                    boxRGBA( screen, mouse->x, mouse->y, mouse->x+length, mouse->y+10, 0, 0, 0, 255 );
-                    fonttemp->drawstringleft( screen, tempID, mouse->x, mouse->y, 0, 255, 0, 255 );
+                    FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
+                    unsigned int length=FontEngine::GetStringWidth( tempID );
+                    ScreenRenderer::DrawFilledRectangle( MouseManager::GetX(), MouseManager::GetY(), MouseManager::GetX() +length, MouseManager::GetY() +10, 0, 0, 0, 255 );
+                   FontEngine::DrawStringLeft( tempID, MouseManager::GetX(), MouseManager::GetY(), 0, 255, 0, 255 );
 
-                    SDL_Flip(screen);
-            */
+                    ScreenRenderer::FlipScreen();
+           //---------
 
+            //PutOnTop( 1 );
             PutOnTop( widgetIDpicked );
         }
 

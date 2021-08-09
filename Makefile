@@ -8,7 +8,7 @@ GENZEHN = genzehn
 
 GCCFLAGS = -Wall -W -marm -Wunused-variable -Wunused-parameter -ffunction-sections -fdata-sections  -fno-exceptions
 LDFLAGS = -Wl,--gc-sections,--nspireio
-ZEHNFLAGS = --name "Widget" --compress --uses-lcd-blit true
+ZEHNFLAGS = --name "Editor_GTNF_nGC" --compress --uses-lcd-blit true
 
 ifeq ($(DEBUG),FALSE)
 	GCCFLAGS += -Os
@@ -19,7 +19,7 @@ endif
 OBJS = $(patsubst %.c, %.o, $(shell find . -name \*.c))
 OBJS += $(patsubst %.cpp, %.o, $(shell find . -name \*.cpp))
 OBJS += $(patsubst %.S, %.o, $(shell find . -name \*.S))
-EXE = Widget
+EXE = Editor_GTNF_nGC
 DISTDIR = .
 vpath %.tns $(DISTDIR)
 vpath %.elf $(DISTDIR)
