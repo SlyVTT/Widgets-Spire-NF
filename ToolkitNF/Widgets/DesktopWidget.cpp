@@ -126,12 +126,12 @@ void DesktopWidget::Logic( void )
             //-------------
                     // THIS IS FOR DEBUGGING THE DEPTH BUFFER PORTION OF THE CODE
 
-                    char* tempID;
-                    sprintf( tempID, "ID = %ld", widgetIDpicked );
+                    char tempID[100];
+                    sprintf( tempID, "ID=%d / R=%d / G=%d / B=%d / c=%d / d=%d / u=%d", widgetIDpicked, r, g, b, c, d, u );
                     FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
                     unsigned int length=FontEngine::GetStringWidth( tempID );
                     ScreenRenderer::DrawFilledRectangle( MouseManager::GetX(), MouseManager::GetY(), MouseManager::GetX() +length, MouseManager::GetY() +10, 0, 0, 0, 255 );
-                   FontEngine::DrawStringLeft( tempID, MouseManager::GetX(), MouseManager::GetY(), 0, 255, 0, 255 );
+                    FontEngine::DrawStringLeft( tempID, MouseManager::GetX(), MouseManager::GetY(), 0, 255, 0, 255 );
 
                     ScreenRenderer::FlipScreen();
            //---------

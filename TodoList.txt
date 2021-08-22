@@ -1,15 +1,20 @@
 WidgetApplication Class :
-    - in the Logic() method, update the key shortcuts for Desktop selection
-    - in the LogicWithForcedRender() method, update the key shortcuts for Desktop selection
+    - [OK] in the Logic() method, update the key shortcuts for Desktop selection
+    - [OK] in the LogicWithForcedRender() method, update the key shortcuts for Desktop selection
     - debug the WidgetApplication::Close() call and track what creates a crash of the calculator when closure is asked
+    - create a <vector> collection of widgets to register all the Widgets at creation and track their existence all along the runtime
+    - use the above <vector> collection of widgets at Close() to delete them all
+
+Menus in general :
+    - MenuBarWidget / MenuPaneWidget / MenuItemWidget - check if in MenuPaneWidget we need the AddPopupChild at construction to work propertly
 
 ScreenRenderer Class :
     - improve the visuals of the DrawFilledRoundedRectangle method
-    - Improve the visuals of the DrawRoundedRectangle method
+    - improve the visuals of the DrawRoundedRectangle method
 
 DepthBufferRenderer Class :
-    - Correct the buffer to correctly get the value of (R,G,B,A) components and then pick the right WidgetID
-    - Possibly convert it from uint16_t to uint24_t or uint32_t
+    - correct the buffer to correctly get the value of (R,G,B,A) components and then pick the right WidgetID
+    - possibly convert it from uint16_t to uint24_t or uint32_t
 
 General :
     - check if memory is properly freed when using images
@@ -24,8 +29,8 @@ Samples :
     - check if the Link SDL example is still compatible with the GUI Toolkit NF (Screen handler share may not be possible anymore)
 
 TimeManager Class :
-    - check if the methods are working properly
-    - check if the TimeManager is correcly initialized using the InternalStartTicks() method obtained from Hoffa's nSDL code
+    - [OK] check if the methods are working properly
+    - [OK] check if the TimeManager is correcly initialized using the InternalStartTicks() method obtained from Hoffa's nSDL code
     - check if it is possible to use both fast timer, rather than just the first one
     - create some start markers and stop markets for delta time calculation
-    - create a method providing a timestamping string for debugging applications
+    - [OK] create a method providing a timestamping string for debugging applications

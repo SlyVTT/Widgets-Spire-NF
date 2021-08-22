@@ -4,6 +4,8 @@
 #include "../Managers/MouseManager.hpp"
 #include "../Renderers/DepthBufferRenderer.hpp"
 #include "../Debugger/Debugger.hpp"
+#include "../Engines/FontEngine.hpp"
+#include "../Renderers/ScreenRenderer.hpp"
 
 
 unsigned int GlobalWidgetIDCounter;
@@ -509,11 +511,20 @@ void Widget::RenderDepth( void )
 
             //The number of hundreds codes the RR component
             unsigned int R=0;
-            unsigned int c=(WidgetID-u-10*d) / 100;
+            unsigned int c=((WidgetID-u-10*d) / 100) % 10;
             R = c*25;
 
+                    char tempID[100];
+                    sprintf( tempID, "ID=%d / R=%d / G=%d / B=%d / c=%d / d=%d / u=%d", WidgetID, R, G, B, c, d, u );
+                    FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
+                    unsigned int length=FontEngine::GetStringWidth( tempID );
+                    ScreenRenderer::DrawFilledRectangle( 5, 5, 5+length, 5 +10, 0, 0, 0, 255 );
+                    FontEngine::DrawStringLeft( tempID, 5, 5, 0, 255, 0, 255 );
+
+                    ScreenRenderer::FlipScreen();
+
             //Draw the corresponding shape in the Depth Buffer Image
-            DepthBufferRenderer::DrawRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, R, G, B, 255 );
+            DepthBufferRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, R, G, B, 255 );
         }
         else if (((GetWidgetType() == "MenuBar") || (GetWidgetType() == "MenuPane") || (GetWidgetType() == "IconBar")) && (GetClosestMainParent()->GetWidgetType() == "Desktop" ))
         {
@@ -532,11 +543,11 @@ void Widget::RenderDepth( void )
 
             //The number of hundreds codes the RR component
             unsigned int R=0;
-            unsigned int c=(WidgetID-u-10*d) / 100;
+            unsigned int c=((WidgetID-u-10*d) / 100) % 10 ;
             R = c*25;
 
             //Draw the corresponding shape in the Depth Buffer Image
-            DepthBufferRenderer::DrawRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, R, G, B, 255 );
+            DepthBufferRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, R, G, B, 255 );
         }
 
         for (auto& c : children )
