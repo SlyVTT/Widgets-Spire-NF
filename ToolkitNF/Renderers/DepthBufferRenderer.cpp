@@ -427,8 +427,9 @@ unsigned char DepthBufferRenderer::InternalGetPixelR( unsigned int x, unsigned i
        if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
-              int res = *(unsigned short *) (off_buff[y] + 2*x);
-              uint8_t r=(unsigned char) ((res >> 11 ) & 0b111111);
+              unsigned int res = *(unsigned int *) (off_buff[y] + 2*x);
+
+              uint8_t r=(unsigned char) ((res >> 11 ) & 0b11111);
               return (unsigned char) (r<<3);
        }
 #endif
@@ -449,10 +450,9 @@ unsigned char DepthBufferRenderer::InternalGetPixelG( unsigned int x, unsigned i
        if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
-              int res = *(unsigned short *) (off_buff[y] + 2*x);
-              //uint8_t g=(unsigned char) ((res >> 6 ) & 0b11111);
-              //return (unsigned char) (g<<3);
-             uint8_t g=(unsigned char) ((res >> 5 ) & 0b111111);
+              unsigned int res = *(unsigned int *) (off_buff[y] + 2*x);
+
+              uint8_t g=(unsigned char) ((res >> 5 ) & 0b111111);
               return (unsigned char) (g<<2);
        }
 
@@ -474,7 +474,8 @@ unsigned char DepthBufferRenderer::InternalGetPixelB( unsigned int x, unsigned i
        if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
-              int res = *(unsigned short *) (off_buff[y] + 2*x);
+              unsigned int res = *(unsigned int *) (off_buff[y] + 2*x);
+
               uint8_t b=(unsigned char) (res & 0b11111);
               return (unsigned char) (b<<3);
        }
@@ -494,7 +495,7 @@ unsigned int DepthBufferRenderer::InternalGetPixel( unsigned int x, unsigned int
        if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
-              return *(unsigned short *) (off_buff[y] + 2*x);
+              return *(unsigned int *) (off_buff[y] + 2*x);
        }
 
 #endif

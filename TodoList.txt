@@ -13,8 +13,9 @@ ScreenRenderer Class :
     - improve the visuals of the DrawRoundedRectangle method
 
 DepthBufferRenderer Class :
-    - correct the buffer to correctly get the value of (R,G,B,A) components and then pick the right WidgetID
-    - possibly convert it from uint16_t to uint24_t or uint32_t
+    - [OK] correct the buffer to correctly get the value of (R,G,B,A) components and then pick the right WidgetID for SDL version
+    - [OK ?] correct the buffer to correctly get the value of (R,G,B,A) components and then pick the right WidgetID for nGC version
+    - [No Need] possibly convert it from uint16_t to uint24_t or uint32_t
 
 General :
     - check if memory is properly freed when using images

@@ -107,36 +107,43 @@ void DesktopWidget::Logic( void )
         {
 
             uint8_t r,g,b;
+            uint8_t x, y;
 
             //SDL_LockSurface( depthbuffer);
             //SDL_GetRGB(getpixel(depthbuffer, mouse->x, mouse->y), depthbuffer->format, &r, &g, &b);
             //SDL_UnlockSurface( depthbuffer );
 
-            r = DepthBufferRenderer::GetPixelR( MouseManager::GetX(), MouseManager::GetY() );
-            g = DepthBufferRenderer::GetPixelG( MouseManager::GetX(), MouseManager::GetY() );
-            b = DepthBufferRenderer::GetPixelB( MouseManager::GetX(), MouseManager::GetY() );
+            x = MouseManager::GetX();
+            y = MouseManager::GetY();
 
 
-            unsigned int c = (r-(r%25))/25;
-            unsigned int d = (g-(g%25))/25;
-            unsigned int u = (b-(b%25))/25;
+            r = DepthBufferRenderer::GetPixelR( x, y );
+            g = DepthBufferRenderer::GetPixelG( x, y );
+            b = DepthBufferRenderer::GetPixelB( x, y );
+
+            unsigned int c = lround(((double) r )/25.0);
+            unsigned int d = lround(((double) g )/25.0);
+            unsigned int u = lround(((double) b )/25.0);
 
             unsigned int widgetIDpicked = 100*c + 10*d + u;
 
+            /*
             //-------------
                     // THIS IS FOR DEBUGGING THE DEPTH BUFFER PORTION OF THE CODE
 
                     char tempID[100];
-                    sprintf( tempID, "ID=%d / R=%d / G=%d / B=%d / c=%d / d=%d / u=%d", widgetIDpicked, r, g, b, c, d, u );
+                    sprintf( tempID, "ID=%d / Color=%d / RGB=%d-%d-%d / c=%d / d=%d / u=%d", widgetIDpicked, DepthBufferRenderer::GetPixel( x, y ), r, g, b, c, d, u );
                     FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
                     unsigned int length=FontEngine::GetStringWidth( tempID );
-                    ScreenRenderer::DrawFilledRectangle( MouseManager::GetX(), MouseManager::GetY(), MouseManager::GetX() +length, MouseManager::GetY() +10, 0, 0, 0, 255 );
-                    FontEngine::DrawStringLeft( tempID, MouseManager::GetX(), MouseManager::GetY(), 0, 255, 0, 255 );
+                    ScreenRenderer::DrawFilledRectangle( x, y , x+length, y+10, 0, 0, 0, 255 );
+                    FontEngine::DrawStringLeft( tempID, x, y, 0, 255, 0, 255 );
 
                     ScreenRenderer::FlipScreen();
            //---------
 
             //PutOnTop( 1 );
+            */
+
             PutOnTop( widgetIDpicked );
         }
 

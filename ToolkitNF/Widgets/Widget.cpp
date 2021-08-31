@@ -496,8 +496,8 @@ void Widget::RenderDepth( void )
 
         if ((GetWidgetType() == "Desktop") || (GetWidgetType() == "Window") || (GetWidgetType() == "DialogBox") || (GetWidgetType() == "FileDialogBox")) // || (strcmp( GetWidgetType(),(char*) "MenuBar" )==0) || (strcmp( GetWidgetType(),(char*) "MenuPane" )==0) )
         {
-            //This part of the routine convert the Wedgit ID into a color code 0xRRGGBBAA (with AA always equal to 0XFF)
-            //It assumes a maximum number of widget limited to 249 per desktop
+            //This part of the routine convert the Wedgit ID into a color code
+            //It assumes a maximum number of widget limited to 999 per desktop
 
             //The number of units codes the BB component
             unsigned int B=0;
@@ -514,6 +514,7 @@ void Widget::RenderDepth( void )
             unsigned int c=((WidgetID-u-10*d) / 100) % 10;
             R = c*25;
 
+/*
                     char tempID[100];
                     sprintf( tempID, "ID=%d / R=%d / G=%d / B=%d / c=%d / d=%d / u=%d", WidgetID, R, G, B, c, d, u );
                     FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
@@ -522,14 +523,15 @@ void Widget::RenderDepth( void )
                     FontEngine::DrawStringLeft( tempID, 5, 5, 0, 255, 0, 255 );
 
                     ScreenRenderer::FlipScreen();
+*/
 
             //Draw the corresponding shape in the Depth Buffer Image
             DepthBufferRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, R, G, B, 255 );
         }
         else if (((GetWidgetType() == "MenuBar") || (GetWidgetType() == "MenuPane") || (GetWidgetType() == "IconBar")) && (GetClosestMainParent()->GetWidgetType() == "Desktop" ))
         {
-            //This part of the routine convert the Wedgit ID into a color code 0xRRGGBBAA (with AA always equal to 0XFF)
-            //It assumes a maximum number of widget limited to 249 per desktop
+            //This part of the routine convert the Wedgit ID into a color code
+            //It assumes a maximum number of widget limited to 999 per desktop
 
             //The number of units codes the BB component
             unsigned int B=0;
