@@ -1,0 +1,126 @@
+# depslib dependency file v1.0
+1630416846 source:/home/sylvain/NSpire/ToolkitNF/ToolkitNF/Engines/ColorEngine.cpp
+	"ColorEngine.hpp"
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Engines/ColorEngine.hpp
+	<vector>
+	<string>
+
+1630416846 source:/home/sylvain/NSpire/ToolkitNF/ToolkitNF/Engines/FontEngine.cpp
+	"FontEngine.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	<vector>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<SDL/SDL.h>
+	<SDL/SDL_gfxPrimitives.h>
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Engines/FontEngine.hpp
+	<vector>
+	<string>
+	"ColorEngine.hpp"
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Renderers/ScreenRenderer.hpp
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	<string>
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	<SDL/SDL_gfxPrimitives.h>
+	<ngc.h>
+	"../Globals/GlobalFunctions.hpp"
+	"../Engines/ColorEngine.hpp"
+
+1630519676 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Globals/GUIToolkitNFGlobals.hpp
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Globals/GlobalFunctions.hpp
+	<string>
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	<SDL/SDL.h>
+
+1630416846 source:/home/sylvain/NSpire/ToolkitNF/ToolkitNF/Engines/ThemeEngine.cpp
+	"ThemeEngine.hpp"
+	<stdio.h>
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Engines/ThemeEngine.hpp
+	"ColorEngine.hpp"
+	"FontEngine.hpp"
+
+1630416846 source:/home/sylvain/NSpire/ToolkitNF/ToolkitNF/Globals/GlobalFunctions.cpp
+	"GlobalFunctions.hpp"
+	"../Debugger/Debugger.hpp"
+	<sys/stat.h>
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Debugger/Debugger.hpp
+	<string>
+	<stdarg.h>
+
+1630500072 source:/home/sylvain/NSpire/ToolkitNF/ToolkitNF/Renderers/DepthBufferRenderer.cpp
+	"DepthBufferRenderer.hpp"
+
+1630519797 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Renderers/DepthBufferRenderer.hpp
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	<string>
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	<SDL/SDL_gfxPrimitives.h>
+	<ngc.h>
+	"../Globals/GlobalFunctions.hpp"
+
+1630500075 source:/home/sylvain/NSpire/ToolkitNF/ToolkitNF/Renderers/ScreenRenderer.cpp
+	"ScreenRenderer.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	"../Debugger/Debugger.hpp"
+
+1630416846 source:/home/sylvain/NSpire/ToolkitNF/ToolkitNF/Widgets/ButtonWidget.cpp
+	"ButtonWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Widgets/ButtonWidget.hpp
+	"Widget.hpp"
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Widgets/Widget.hpp
+	<list>
+	<string>
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Managers/KeyManager.hpp
+	<string>
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Managers/MouseManager.hpp
+	"../Globals/GlobalFunctions.hpp"
+	<SDL/SDL.h>
+	<ngc.h>
+
+1630416846 source:/home/sylvain/NSpire/ToolkitNF/ToolkitNF/Widgets/CheckBoxWidget.cpp
+	"CheckBoxWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Widgets/CheckBoxWidget.hpp
+	"ButtonWidget.hpp"
+
+1630416846 source:/home/sylvain/NSpire/ToolkitNF/ToolkitNF/Widgets/CommuterWidget.cpp
+	"CommuterWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Widgets/CommuterWidget.hpp
+	"ButtonWidget.hpp"
+
+1630416846 source:/home/sylvain/NSpire/ToolkitNF/ToolkitNF/Widgets/ContainerHWidget.cpp
+	"ContainerHWidget.hpp"
+	<iterator>
+
+1630416846 /home/sylvain/NSpire/ToolkitNF/ToolkitNF/Widgets/ContainerHWidget.hpp
+	"Widget.hpp"
+

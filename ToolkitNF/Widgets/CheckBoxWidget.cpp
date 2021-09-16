@@ -111,7 +111,6 @@ void CheckBoxWidget::Render( void )
                      {
                             drawablelabel =  FontEngine::ReduceStringToVisible( label, width-2 -2  );
 
-                            int sl =  FontEngine::GetStringWidth( drawablelabel );
                             int sh =  FontEngine::GetStringHeight( drawablelabel );
 
                             FontEngine::DrawStringLeft( drawablelabel, xpos+15, ypos+(height-sh)/2, ColorEngine::GetColor(ColorEngine::Widget_Text_Enable) );
@@ -150,7 +149,6 @@ void CheckBoxWidget::Render( void )
                      {
                             drawablelabel =  FontEngine::ReduceStringToVisible( label, width-2 -2  );
 
-                            int sl =  FontEngine::GetStringWidth( drawablelabel );
                             int sh =  FontEngine::GetStringHeight( drawablelabel );
 
                             FontEngine::DrawStringLeft( drawablelabel, xpos+15, ypos+(height-sh)/2, ColorEngine::GetColor(ColorEngine::Widget_Text_Disable) );

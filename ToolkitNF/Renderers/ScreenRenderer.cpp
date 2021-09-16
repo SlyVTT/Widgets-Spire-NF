@@ -235,7 +235,7 @@ void ScreenRenderer::InternalClose( void )
 #if RENDER_WITH_SDL == 1
 
        SDL_FreeSurface( screen );
-       SDL_Quit();
+       //SDL_Quit();
 
 #else
 
@@ -447,7 +447,7 @@ unsigned char ScreenRenderer::InternalGetPixelR( unsigned int x, unsigned int y 
 
 #else
 
-       if ((x>=0) && (x<=SCREEN_WIDTH) && (y>=0) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH_GUI) && (y<=SCREEN_HEIGHT_GUI))
        {
               char ** off_buff = ((((char *****)screen)[9])[0])[0x8];
               int res = *(unsigned short *) (off_buff[y] + 2*x);
@@ -469,7 +469,7 @@ unsigned char ScreenRenderer::InternalGetPixelG( unsigned int x, unsigned int y 
 
 #else
 
-       if ((x>=0) && (x<=SCREEN_WIDTH) && (y>=0) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH_GUI) && (y<=SCREEN_HEIGHT_GUI))
        {
               char ** off_buff = ((((char *****)screen)[9])[0])[0x8];
               int res = *(unsigned short *) (off_buff[y] + 2*x);
@@ -494,7 +494,7 @@ unsigned char ScreenRenderer::InternalGetPixelB( unsigned int x, unsigned int y 
 
 #else
 
-       if ((x>=0) && (x<=SCREEN_WIDTH) && (y>=0) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH_GUI) && (y<=SCREEN_HEIGHT_GUI))
        {
               char ** off_buff = ((((char *****)screen)[9])[0])[0x8];
               int res = *(unsigned short *) (off_buff[y] + 2*x);
@@ -514,7 +514,7 @@ unsigned int ScreenRenderer::InternalGetPixel( unsigned int x, unsigned int y )
 
 #else
 
-       if ((x>=0) && (x<=SCREEN_WIDTH) && (y>=0) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH_GUI) && (y<=SCREEN_HEIGHT_GUI))
        {
               char ** off_buff = ((((char *****)screen)[9])[0])[0x8];
               return *(unsigned short *) (off_buff[y] + 2*x);

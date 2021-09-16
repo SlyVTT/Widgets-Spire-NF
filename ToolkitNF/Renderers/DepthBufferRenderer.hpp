@@ -1,7 +1,6 @@
 #ifndef DEPTHBUFFERRENDERER_HPP
 #define DEPTHBUFFERRENDERER_HPP
 
-
 #include "../Globals/GUIToolkitNFGlobals.hpp"
 
 #include <string>

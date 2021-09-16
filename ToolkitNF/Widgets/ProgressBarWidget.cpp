@@ -126,10 +126,8 @@ void ProgressBarWidget::Render(  )
                             else if (style == Rainbow)
                             {
                                    unsigned short R, G, B, A;
-                                   ColorEngine::ColorRGBA colorempty, colorfull;
-
-                                   colorempty = ColorEngine::GetColor(ColorEngine::Widget_Progressbar_Rainbow_Empty);
-                                   colorfull = ColorEngine::GetColor(ColorEngine::Widget_Progressbar_Rainbow_Full);
+                                   ColorEngine::ColorRGBA colorempty = ColorEngine::GetColor(ColorEngine::Widget_Progressbar_Rainbow_Empty);
+                                   ColorEngine::ColorRGBA colorfull = ColorEngine::GetColor(ColorEngine::Widget_Progressbar_Rainbow_Full);
 
                                    R = (unsigned int) (colorempty.R + percentfilled/100 * (colorfull.R - colorempty.R));
                                    G = (unsigned int) (colorempty.G + percentfilled/100 * (colorfull.G - colorempty.G));

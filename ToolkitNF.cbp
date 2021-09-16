@@ -39,7 +39,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Makefile" />
+		<Unit filename="LICENSE" />
+		<Unit filename="Makefile.SDL" />
+		<Unit filename="Makefile.nGC" />
+		<Unit filename="README.md" />
 		<Unit filename="SimpleCodeEditor.cpp" />
 		<Unit filename="TodoList.txt" />
 		<Unit filename="ToolkitNF/Debugger/Debugger.cpp" />
@@ -123,7 +126,6 @@
 		<Unit filename="ToolkitNF/Widgets/WidgetApplication.hpp" />
 		<Unit filename="ToolkitNF/Widgets/WindowWidget.cpp" />
 		<Unit filename="ToolkitNF/Widgets/WindowWidget.hpp" />
-		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

@@ -227,7 +227,7 @@ void DepthBufferRenderer::InternalClose( void )
 #if RENDER_WITH_SDL == 1
 
        SDL_FreeSurface( depthbuffer );
-       SDL_Quit();
+       //SDL_Quit();
 
 #else
 

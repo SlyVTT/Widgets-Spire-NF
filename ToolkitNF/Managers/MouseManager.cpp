@@ -4,7 +4,11 @@
 #include "MouseManager.hpp"
 #include "CursorsDesigns.hpp"
 
-#include <libndls.h>
+#if TARGET_NSPIRE == 1
+    #include <libndls.h>
+#else
+    #include <stdlib.h>
+#endif // TARGET_NSPIRE
 
 #include "../Renderers/ScreenRenderer.hpp"
 

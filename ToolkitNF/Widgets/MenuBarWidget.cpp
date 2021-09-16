@@ -74,7 +74,6 @@ MenuBarWidget::MenuBarWidget(std::string l, unsigned int x, unsigned int y, unsi
               height=heirel;
        }
 
-       int i=0;
        nbchildren = children.size();
 
        unsigned int currentpositionX = xpos+1;
@@ -152,7 +151,6 @@ void MenuBarWidget::Adjust( void )
               height=heirel;
        }
 
-       int i=0;
        nbchildren = children.size();
 
        unsigned int currentpositionX = xpos+1;

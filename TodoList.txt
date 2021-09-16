@@ -1,9 +1,10 @@
 WidgetApplication Class :
     - [OK] in the Logic() method, update the key shortcuts for Desktop selection
     - [OK] in the LogicWithForcedRender() method, update the key shortcuts for Desktop selection
-    - debug the WidgetApplication::Close() call and track what creates a crash of the calculator when closure is asked
+    - [OK] debug the WidgetApplication::Close() call and track what creates a crash of the calculator when closure is asked
     - create a <vector> collection of widgets to register all the Widgets at creation and track their existence all along the runtime
     - use the above <vector> collection of widgets at Close() to delete them all
+    - [OK] debug the application at exit
 
 Menus in general :
     - MenuBarWidget / MenuPaneWidget / MenuItemWidget - check if in MenuPaneWidget we need the AddPopupChild at construction to work propertly
@@ -35,3 +36,8 @@ TimeManager Class :
     - check if it is possible to use both fast timer, rather than just the first one
     - create some start markers and stop markets for delta time calculation
     - [OK] create a method providing a timestamping string for debugging applications
+
+Evolutions :
+    - create a set of function to be able to use the GUI Toolkit NF on a PC with ()SDL ?)
+    - create new widgets such as :
+            # MultiPagePanes

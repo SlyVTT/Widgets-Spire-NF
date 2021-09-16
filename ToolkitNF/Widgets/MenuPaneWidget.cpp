@@ -153,8 +153,8 @@ void MenuPaneWidget::Adjust( void )
 
             // This part may be subjected to optimisation
             // TODO
-            int tempw = 0;
-            int temph = 0;
+            unsigned int tempw = 0;
+            unsigned int temph = 0;
 
             for (auto& c : children )
             {

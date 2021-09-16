@@ -1,7 +1,10 @@
-#include <libndls.h>
-
 #include "Globals/GUIToolkitNFGlobals.hpp"
 
+#if TARGET_NSPIRE == 1
+    #include <libndls.h>
+#else
+    #include <stdlib.h>
+#endif
 
 #if DEBUG_MODE == 1
     #include "Debugger/Debugger.hpp"

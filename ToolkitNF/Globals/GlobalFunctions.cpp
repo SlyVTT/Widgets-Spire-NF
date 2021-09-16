@@ -48,7 +48,6 @@ uint32_t getpixel(SDL_Surface *surface, int x, int y)
 
 imagegc* ReadBMP( std::string filename)
 {
-    int i;
     FILE* f = fopen(filename.c_str(), "rb");
 
     if(f == NULL)
@@ -69,7 +68,6 @@ imagegc* ReadBMP( std::string filename)
 
     int row_padded = (width*3 + 3) & (~3);
     unsigned char* data = new unsigned char[row_padded];
-    unsigned char tmp;
     char R,G,B;
 
     //----------------------------
@@ -89,10 +87,6 @@ imagegc* ReadBMP( std::string filename)
         fread(data, sizeof(unsigned char), row_padded, f);
         for(int j = 0; j < width*3; j += 3)
         {
-            // Convert (B, G, R) to (R, G, B)
-            //tmp = data[j];
-            //data[j] = data[j+2];
-            //data[j+2] = tmp;
             B=data[j];
             G=data[j+1];
             R=data[j+2];
@@ -102,7 +96,6 @@ imagegc* ReadBMP( std::string filename)
              uint16_t r = ((R >> 3) & 0x1f) << 11;
 
              imagedata[(height-1-i)*width+j/3] = (uint16_t) (r | g | b);
-
         }
     }
     delete[] data;

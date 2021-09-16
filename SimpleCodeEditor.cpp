@@ -9,6 +9,8 @@ int main ( void )
 
 #if DEBUG_MODE == 1
        Debugger::Initialize();
+       Debugger::SetDebuggerFile( "/documents/Widget/DebugOut/Crash.txt.tns" );
+       Debugger::TimerLog( "WidgetApplication Initialized \n");
 #endif // DEBUG_MODE
 
 
@@ -23,6 +25,7 @@ int main ( void )
        WindowWidget *window = new WindowWidget(  "Simple Text Editor for TI nSpire v1.0", 20, 20, 280, 200, desktop );
        //window->Maximize();
        //window->SetMinimalDimensions( 320, 240 );    // This prevent resizing of the window
+
 
        MenuBarWidget *bardesk = new MenuBarWidget(  "Main Menu", 1,1,1,1, window );
        MenuItemWidget *mainmenufile = new MenuItemWidget(  "File", 1,1,1,1, bardesk );
@@ -76,7 +79,9 @@ int main ( void )
        //multiline2->LoadContentFromFile(  "/documents/Widget/Texts/longtext.txt.tns" );
        //multiline2->SetNonEditable();
 
+
        desktop->Adjust();
+
 
        SplashScreenWidget *splash = new SplashScreenWidget("Splash", 1, 1, 1, 1, nullptr );
        splash->AssignImage( "/documents/Widget/Logos/Logo Simple Text Editor.bmp.tns" );
@@ -170,14 +175,14 @@ int main ( void )
        splash->Start();
 
 
-       unsigned int imageKeybtoshow = 1;
+ //      unsigned int imageKeybtoshow = 1;
 //        SDL_Surface *image = nullptr;
+
 
        while (!WidgetApplication::AskForClosure() && !FileClose->IsPressed()  )
        {
 
               WidgetApplication::Run( WidgetApplication::ForcedRender );
-
 
               if (EditCopy->IsPressed() || iconCopy->IsPressed())
               {
@@ -200,6 +205,7 @@ int main ( void )
               {
                      multiline->Flush();
               }
+
               /*
                       if (HelpKeyb->IsPressed())
                       {
@@ -227,18 +233,20 @@ int main ( void )
               */
        }
 
-       WidgetApplication::Close();
-
-
-
-       //delete MyApp;
-
-       /*
-            SDL_FreeSurface( image );
-            SDL_FreeSurface( image2 );
-       */
 
 #if DEBUG_MODE == 1
+       Debugger::TimerLog( "WidgetApplication Ready to ShutDown ...\n");
+#endif // DEBUG_MODE
+
+       WidgetApplication::Close();
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "WidgetApplication Closed \n");
+#endif // DEBUG_MODE
+
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "Will close debugger and exit.\n");
        Debugger::Close();
 #endif // DEBUG_MODE
 

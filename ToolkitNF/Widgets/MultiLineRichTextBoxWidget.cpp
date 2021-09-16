@@ -247,6 +247,7 @@ void MultiLineRichTextBoxWidget::Logic( void )
                      if (c>=0x80)
                             return;
               }
+              else return;
 
               if (key_hold_down)
               {
@@ -567,7 +568,7 @@ void MultiLineRichTextBoxWidget::Render( void )
               nbcharvisibleperline = (width - 10) / (FontEngine::GetCharWidth( 'O' )+ FontEngine::GetCurrentHSpacing()) - 1 ;
        }
 
-       int currentnblinetotal = 0;
+       unsigned int currentnblinetotal = 0;
 
 
        if (is_visible)

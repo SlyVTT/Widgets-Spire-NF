@@ -1,5 +1,13 @@
 #include "KeyManager.hpp"
-#include <libndls.h>
+
+#include "../Globals/GUIToolkitNFGlobals.hpp"
+
+#if TARGET_NSPIRE == 1
+    #include <libndls.h>
+#else
+    #include <stdlib.h>
+#endif // TARGET_NSPIRE
+
 
 KeyManager::KeyManager()
 {

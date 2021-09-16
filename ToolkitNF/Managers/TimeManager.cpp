@@ -7,7 +7,11 @@
 #include <SDL/SDL_timer.h>
 #endif // RENDER_WITH_SDL
 
-#include <libndls.h>
+#if TARGET_NSPIRE == 1
+    #include <libndls.h>
+#else
+    #include <stdlib.h>
+#endif // TARGET_NSPIRE
 
 
 static volatile unsigned *value;
@@ -45,15 +49,11 @@ void TimeManager::InternalClose( void )
 void TimeManager::InternalStartTicks(void)
 {
 #if RENDER_WITH_SDL == 0
-
-       //*(volatile unsigned *)0x900B0018 &= ~(1 << 11); /* Enable bus access */
-
        value = (unsigned *)0x900C0004;
        control = (unsigned *)0x900C0008;
        *(volatile unsigned *)0x900C0080 = 0xA; /* "[...] on the CX to specify the 32768Hz clock as the source for the First Timer" */
        *control = 0b10000010; /* Wrapping; 32-bit; divider to 1; interrupt disabled; free-running; start */
        start = *value;
-
 #endif // RENDER_WITH_SDL
 
 }

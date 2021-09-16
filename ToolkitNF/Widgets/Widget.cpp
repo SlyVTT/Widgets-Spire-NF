@@ -1,9 +1,15 @@
 #include "Widget.hpp"
 
+#include "../Globals/GlobalFunctions.hpp"
+#include "../Globals/GUIToolkitNFGlobals.hpp"
+#if DEBUG_MODE == 1
+    #include "../Debugger/Debugger.hpp"
+#endif // DEBUG_MODE
+
+
 #include "../Managers/KeyManager.hpp"
 #include "../Managers/MouseManager.hpp"
 #include "../Renderers/DepthBufferRenderer.hpp"
-#include "../Debugger/Debugger.hpp"
 #include "../Engines/FontEngine.hpp"
 #include "../Renderers/ScreenRenderer.hpp"
 
@@ -391,6 +397,7 @@ Widget::~Widget()
     Debugger::TimerLog( "\t Will start killing the popup children of Widget() : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
 #endif // DEBUG_MODE
 
+/*
     for (auto& d : popupchildren )
         {
 #if DEBUG_MODE == 1
@@ -410,6 +417,7 @@ Widget::~Widget()
 #if DEBUG_MODE == 1
     Debugger::TimerLog( "\t List of Popup Children CLEARED for Widget() : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
 #endif // DEBUG_MODE
+*/
 
 }
 

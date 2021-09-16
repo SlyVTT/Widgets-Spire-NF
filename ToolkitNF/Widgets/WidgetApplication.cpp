@@ -3,7 +3,9 @@
 
 #include "../Globals/GlobalFunctions.hpp"
 #include "../Globals/GUIToolkitNFGlobals.hpp"
-
+#if DEBUG_MODE == 1
+    #include "../Debugger/Debugger.hpp"
+#endif // DEBUG_MODE
 
 #if RENDER_WITH_SDL == 1
 #include <SDL/SDL.h>
@@ -21,6 +23,8 @@
 #include "../Engines/ColorEngine.hpp"
 #include "../Engines/FontEngine.hpp"
 #include "../Engines/ThemeEngine.hpp"
+
+
 
 #include "Widget.hpp"
 #include "DesktopWidget.hpp"
@@ -104,6 +108,11 @@ void WidgetApplication::InternalPrepareForRun( void )
 void WidgetApplication::InternalClose()
 {
 
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t Entering WidgetAppplication::InternalClose() \n");
+       Debugger::TimerLog( "\t \t Start Killing All Widgets in the Desktop ... \n");
+#endif // DEBUG_MODE
+
        // for each desktopfeature class
        for (auto& c : desktops)
        {
@@ -134,16 +143,77 @@ void WidgetApplication::InternalClose()
               delete c;
        }
 
-       MouseManager::Close();
-       KeyManager::Close();
-       TimeManager::Close();
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t ... All Widgets in the Desktop Killed [OK] \n \n");
+#endif // DEBUG_MODE
 
-       ScreenRenderer::Close();
-       DepthBufferRenderer::Close();
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t Start Closing All Singletons ... \n");
+#endif // DEBUG_MODE
+
+       // Now we clean all the Singleton by calling their Close() method (no destructor available)
+       MouseManager::Close();
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t ... 1/8 Mouse Manager Killed [OK] \n");
+#endif // DEBUG_MODE
+
+       KeyManager::Close();
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t ... 2/8 Keyboard Manager Killed [OK] \n");
+#endif // DEBUG_MODE
 
        ColorEngine::Close();
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t ... 3/8 Color Engine Killed [OK] \n");
+#endif // DEBUG_MODE
+
        FontEngine::Close();
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t ... 4/8 Font Engine Killed [OK] \n");
+#endif // DEBUG_MODE
+
        ThemeEngine::Close();
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t ... 5/8 Theme Engine Killed [OK] \n");
+#endif // DEBUG_MODE
+
+       DepthBufferRenderer::Close();
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t ... 6/8 DepthBuffer Renderer Killed [OK] \n");
+#endif // DEBUG_MODE
+
+
+       ScreenRenderer::Close();
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t ... 7/8 Screen Renderer Killed [OK] \n");
+#endif // DEBUG_MODE
+
+
+       TimeManager::Close();
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t ... 8/8 Timer Manager Killed [OK] \n");
+#endif // DEBUG_MODE
+
+#if RENDER_WITH_SDL == 1
+            SDL_Quit();
+            #if DEBUG_MODE == 1
+                   Debugger::TimerLog( "\t \t ... Extra : SDL_Library Killed [OK] \n");
+            #endif // DEBUG_MODE
+#endif
+
+#if DEBUG_MODE == 1
+       Debugger::TimerLog( "\t \t ... All Singletons Killed [OK] \n");
+#endif // DEBUG_MODE
+
 }
 
 

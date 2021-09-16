@@ -75,12 +75,12 @@ SplashScreenWidget::~SplashScreenWidget()
 #endif // DEBUG_MODE
 
        }
+ #endif
 
-       #if DEBUG_MODE == 1
+#if DEBUG_MODE == 1
     Debugger::TimerLog( "!!! SplashScreen Destructor finished now");
 #endif // DEBUG_MODE
 
-#endif
 }
 
 void SplashScreenWidget::SetDuration( uint32_t duration )
