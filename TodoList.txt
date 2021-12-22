@@ -38,6 +38,6 @@ TimeManager Class :
     - [OK] create a method providing a timestamping string for debugging applications
 
 Evolutions :
-    - create a set of function to be able to use the GUI Toolkit NF on a PC with ()SDL ?)
+    - create a set of function to be able to use the GUI Toolkit NF on a PC with (SDL ?)
     - create new widgets such as :
             # MultiPagePanes
