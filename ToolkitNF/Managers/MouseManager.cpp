@@ -1,13 +1,14 @@
-#include "../Globals/GUIToolkitNFGlobals.hpp"
-#include "../Globals/GlobalFunctions.hpp"
-
 #include "MouseManager.hpp"
 #include "CursorsDesigns.hpp"
+
+#include "../Globals/GUIToolkitNFGlobals.hpp"
+#include "../Globals/GlobalFunctions.hpp"
 
 #if TARGET_NSPIRE == 1
     #include <libndls.h>
 #else
     #include <stdlib.h>
+    #include <SDL/SDL.h>
 #endif // TARGET_NSPIRE
 
 #include "../Renderers/ScreenRenderer.hpp"
@@ -57,6 +58,84 @@ void MouseManager::InternalSetDefaultSensibility( void )
 {
        m_sensibility = 1.0f;
 }
+
+#if FOR_PC == 1
+
+#define NSP_RMASK16 0xF800
+#define NSP_GMASK16 0x07E0
+#define NSP_BMASK16 0x001F
+
+#define NSP_PIXEL_ADDR(origin, x, y, pitch, bpp) ((Uint8 *)origin + ((x) * (bpp)) + ((y) * (pitch)))
+
+#define PXL(bpp) NSP_PIXEL_ADDR(surface->pixels, x, y, surface->pitch, bpp)
+
+static __inline__ __attribute__((always_inline))
+Uint32 nSDL_GetPixel(SDL_Surface *surface, int x, int y)
+{
+	switch ( surface->format->BytesPerPixel ) {
+		case 2: return(*(Uint16 *)PXL(2));
+		case 1: return(*PXL(1));
+		case 4: return(*(Uint32 *)PXL(4));
+		case 3: SDL_Unsupported();
+		default: return(0);
+	}
+}
+
+static __inline__ __attribute__((always_inline))
+void nSDL_SetPixel(SDL_Surface *surface, int x, int y, Uint32 color)
+{
+	switch ( surface->format->BytesPerPixel ) {
+		case 2: *(Uint16 *)PXL(2) = (Uint16)color; return;
+		case 1: *PXL(1) = (Uint8)color; return;
+		case 4: *(Uint32 *)PXL(4) = (Uint32)color; return;
+		case 3: SDL_Unsupported();
+		default: return;
+	}
+}
+
+typedef struct nti_info_t {
+	Uint8 magic;
+	Uint8 version;
+	Uint16 width, height;
+	Uint16 reserved;
+} nti_info_t;
+
+static void nti_get_info(nti_info_t *nti_info, Uint16 *data)
+{
+	nti_info->magic = data[0] >> 8;
+	nti_info->version = data[0] & 0x00ff;
+	nti_info->width = data[1];
+	nti_info->height = data[2];
+	nti_info->reserved = data[3];
+}
+
+SDL_Surface *nSDL_LoadImage(Uint16 *data)
+{
+	SDL_Surface *image;
+	nti_info_t nti_info;
+	int i, j;
+	nti_get_info(&nti_info, data);
+	if ( nti_info.magic != 42 ) {
+		SDL_SetError("[NSP] Invalid NTI image");
+		return(NULL);
+	}
+	image = SDL_CreateRGBSurface(SDL_SWSURFACE, nti_info.width, nti_info.height,
+				     16, NSP_RMASK16, NSP_GMASK16, NSP_BMASK16, 0);
+	if ( image == NULL ) {
+		SDL_OutOfMemory();
+		return(NULL);
+	}
+	data = (Uint16 *)(data + 4);
+	SDL_LockSurface(image);
+	for ( i = 0; i < nti_info.height; ++i )
+		for( j = 0; j < nti_info.width; ++j)
+			nSDL_SetPixel(image, j, i, data[j + (nti_info.width * i)]);
+	SDL_UnlockSurface(image);
+	return(image);
+}
+
+#endif // FOR_PC
+
 
 void MouseManager::InternalInitialize( void )
 {
@@ -150,6 +229,19 @@ void MouseManager::InternalInitialize( void )
 
 #endif
 
+
+#if TARGET_NSPIRE == 1
+
+       m_sensibility = 2.0f;
+
+#else
+
+       keys = SDL_GetKeyState(NULL);
+       m_sensibility = 0.5f;
+       SDL_ShowCursor(SDL_DISABLE);
+
+#endif // TARGET_NSPIRE
+
 }
 
 void MouseManager::InternalClose( void )
@@ -198,6 +290,9 @@ bool MouseManager::IsKeyArrowReleaseEvent( void )
 
 void MouseManager::InternalLogic( void )
 {
+
+ #if  TARGET_NSPIRE == 1
+
        touchpad_report_t touchpad;
        touchpad_scan(&touchpad);
 
@@ -340,12 +435,144 @@ void MouseManager::InternalLogic( void )
        }
        else
        {
-              mousemoveevent = false;
+              mouseevent = false;
        }
 
        m_x = (unsigned int) x;
        m_y = (unsigned int) y;
        m_b = m_kbCLICK;
+
+#else
+
+        SDL_PumpEvents();
+
+       m_kbNONE_Previous = m_kbNONE;
+       m_kbNONE = false;
+       keypressevent_arrow = (!m_kbNONE_Previous && m_kbNONE) ? true : false;
+       keyreleaseevent_arrow= (m_kbNONE_Previous && !m_kbNONE) ? true : false;
+
+       // We check if there are some event to be updated for the CLICK button of the touchpad
+       m_kbCLICK_Previous = m_kbCLICK;
+       m_kbCLICK = SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1);
+       m_kbCLICK_Press_Event = (!m_kbCLICK_Previous && m_kbCLICK) ? true : false;
+       m_kbCLICK_Release_Event = (m_kbCLICK_Previous && !m_kbCLICK) ? true : false;
+
+       // As well as for all the direction arrows
+       m_kbUP_Previous = m_kbUP;
+       m_kbUP = keys[ SDLK_UP ];
+       m_kbUP_Press_Event = (!m_kbUP_Previous && m_kbUP) ? true : false;
+       m_kbUP_Release_Event = (m_kbUP_Previous && !m_kbUP) ? true : false;
+
+       m_kbUPRIGHT_Previous = m_kbUPRIGHT;
+       m_kbUPRIGHT = false;
+       m_kbUPRIGHT_Press_Event = (!m_kbUPRIGHT_Previous && m_kbUPRIGHT) ? true : false;
+       m_kbUPRIGHT_Release_Event = (m_kbUPRIGHT_Previous && !m_kbUPRIGHT) ? true : false;
+
+       m_kbRIGHT_Previous = m_kbRIGHT;
+       m_kbRIGHT = keys[ SDLK_RIGHT ];
+       m_kbRIGHT_Press_Event = (!m_kbRIGHT_Previous && m_kbRIGHT) ? true : false;
+       m_kbRIGHT_Release_Event = (m_kbRIGHT_Previous && !m_kbRIGHT) ? true : false;
+
+       m_kbRIGHTDOWN_Previous = m_kbRIGHTDOWN;
+       m_kbRIGHTDOWN = false;
+       m_kbRIGHTDOWN_Press_Event = (!m_kbRIGHTDOWN_Previous && m_kbRIGHTDOWN) ? true : false;
+       m_kbRIGHTDOWN_Release_Event = (m_kbRIGHTDOWN_Previous && !m_kbRIGHTDOWN) ? true : false;
+
+       m_kbDOWN_Previous = m_kbDOWN;
+       m_kbDOWN = keys[ SDLK_DOWN ];
+       m_kbDOWN_Press_Event = (!m_kbDOWN_Previous && m_kbDOWN) ? true : false;
+       m_kbDOWN_Release_Event = (m_kbDOWN_Previous && !m_kbDOWN) ? true : false;
+
+       m_kbDOWNLEFT_Previous = m_kbDOWNLEFT;
+       m_kbDOWNLEFT = false;
+       m_kbDOWNLEFT_Press_Event = (!m_kbDOWNLEFT_Previous && m_kbDOWNLEFT) ? true : false;
+       m_kbDOWNLEFT_Release_Event = (m_kbDOWNLEFT_Previous && !m_kbDOWNLEFT) ? true : false;
+
+       m_kbLEFT_Previous = m_kbLEFT;
+       m_kbLEFT = keys[ SDLK_LEFT ];
+       m_kbLEFT_Press_Event = (!m_kbLEFT_Previous && m_kbLEFT) ? true : false;
+       m_kbLEFT_Release_Event = (m_kbLEFT_Previous && !m_kbLEFT) ? true : false;
+
+       m_kbLEFTUP_Previous = m_kbLEFTUP;
+       m_kbLEFTUP = false;
+       m_kbLEFTUP_Press_Event = (!m_kbLEFTUP_Previous && m_kbLEFTUP) ? true : false;
+       m_kbLEFTUP_Release_Event = (m_kbLEFTUP_Previous && !m_kbLEFTUP) ? true : false;
+
+
+       if (!mouseclickevent && m_kbCLICK)
+       {
+              mouseclickevent = true;
+              mousereleaseevent = false;
+       }
+
+       if (mouseclickevent && !m_kbCLICK)
+       {
+              mouseclickevent = false;
+              mousereleaseevent = true;
+       }
+
+       if ((mouseclickevent && m_kbCLICK) || (mousereleaseevent && !m_kbCLICK))
+       {
+              mouseclickevent = false;
+              mousereleaseevent = false;
+       }
+
+       int dx = 0, dy = 0;
+       int x = (int) m_x;
+       int y = (int) m_y;
+
+
+        SDL_GetMouseState( &x,  &y);
+        //SDL_GetRelativeMouseState( &dx, &dy );
+
+       x+=(dx * m_sensibility) ;
+       y+=(dy * m_sensibility);
+
+       // this block the cursor at the side of the screen
+       if (x<0)
+       {
+              x=0;
+       };
+       if (y<0)
+       {
+              y=0;
+       };
+       if (x>=SCREEN_WIDTH_GUI)
+       {
+              x=SCREEN_WIDTH_GUI;
+       };
+       if (y>=SCREEN_HEIGHT_GUI)
+       {
+              y=SCREEN_HEIGHT_GUI;
+       };
+
+
+       // check for mouse move
+       if ((dx != 0) || (dy !=0))
+       {
+              mousemoveevent = true;
+       }
+       else
+       {
+              mousemoveevent = false;
+       }
+
+       // check if something new has happen with the mouse (either click/release or cursor move)
+       if (mouseclickevent || mousereleaseevent || mousemoveevent)
+       {
+              mouseevent = true;
+       }
+       else
+       {
+              mouseevent = false;
+       }
+
+       m_x = (unsigned int) x;
+       m_y = (unsigned int) y;
+       m_b = m_kbCLICK;
+
+#endif
+
 
 }
 

@@ -219,7 +219,7 @@ void MenuPaneWidget::Logic( void )
 
         bool clickoutof = (MouseManager::GetB() || KeyManager::kbSCRATCH() ) && !is_hovering;
 
-        if (clickoutof && !has_child_menu_open && MouseManager::IsMouseEvent &&  KeyManager::IsAnyKeyEvent() )
+        if (clickoutof && is_dropped && !has_child_menu_open && MouseManager::IsMouseEvent &&  (KeyManager::kbSCRATCH() || MouseManager::GetB()))
         {
             this->Undrop();
             if (parent)

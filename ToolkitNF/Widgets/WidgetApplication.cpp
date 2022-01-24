@@ -1,15 +1,15 @@
 #include "WidgetApplication.hpp"
 
-
 #include "../Globals/GlobalFunctions.hpp"
 #include "../Globals/GUIToolkitNFGlobals.hpp"
+
 #if DEBUG_MODE == 1
     #include "../Debugger/Debugger.hpp"
 #endif // DEBUG_MODE
 
 #if RENDER_WITH_SDL == 1
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+    #include <SDL/SDL.h>
+    #include <SDL/SDL_image.h>
 #endif // RENDER_WITH_SDL
 
 
@@ -24,19 +24,23 @@
 #include "../Engines/FontEngine.hpp"
 #include "../Engines/ThemeEngine.hpp"
 
-
+#include "../Garbage/GarbageCollector.hpp"
 
 #include "Widget.hpp"
 #include "DesktopWidget.hpp"
 
-#include <libndls.h>
+#if TARGET_NSPIRE == 1
+    #include <libndls.h>
+#else
+    #include <stdlib.h>
+#endif
 
 #include <sys/stat.h>
 
 #include <string>
 
 
-unsigned int GlobalWdidgetIDCounter;
+extern unsigned int GlobalWidgetIDCounter;
 
 
 
@@ -63,7 +67,7 @@ void WidgetApplication::InternalPutOnTop( Widget *widgetsearched )
 void WidgetApplication::InternalInitialize( void )
 {
 
-       GlobalWdidgetIDCounter = 0;
+       GlobalWidgetIDCounter = 0;
 
 
        DesktopFeatures *maindesktop = new DesktopFeatures;
@@ -374,6 +378,13 @@ void WidgetApplication::InternalRender( void )
               if (c->IsVisible()) c->Render( );
 
        MouseManager::Render();
+
+       char time_to_draw[50];
+       int h,m,s;
+       TimeManager::GetCurrentTime( &h, &m, &s );
+       sprintf( time_to_draw, "%02d:%02d:%02d", h, m, s);
+       FontEngine::DrawStringLeft( time_to_draw, 200, 18, {0,0,0,255} );
+
        ScreenRenderer::FlipScreen();
 }
 
@@ -396,7 +407,7 @@ void WidgetApplication::InternalLogic( void )
        }
 
        // This is to take a screenshot to be store in the Widget folder.
-       if (KeyManager::kbCTRL() && KeyManager::kbDOT() )
+       if (KeyManager::kbCTRL() && KeyManager::kbDOT_Press_Event() )
        {
               ScreenRenderer::TakeScreenShot();
               DepthBufferRenderer::TakeScreenShot();

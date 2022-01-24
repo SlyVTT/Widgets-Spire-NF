@@ -8,9 +8,12 @@
 #endif // RENDER_WITH_SDL
 
 #if TARGET_NSPIRE == 1
-    #include <libndls.h>
-#else
-    #include <stdlib.h>
+#include <libndls.h>
+#endif
+
+#if TARGET_PC == 1
+#include <stdlib.h>
+#include <time.h>
 #endif // TARGET_NSPIRE
 
 
@@ -20,23 +23,23 @@ static volatile unsigned *control;
 
 TimeManager::TimeManager()
 {
-       //ctor
+    //ctor
 }
 
 
 TimeManager& TimeManager::Get( void )
 {
-       static TimeManager m_timer;
-       return m_timer;
+    static TimeManager m_timer;
+    return m_timer;
 }
 
 
 void TimeManager::InternalInitialize( void )
 {
-       start = 0;
-       tick_sum = 0;
+    start = 0;
+    tick_sum = 0;
 
-       InternalStartTicks();
+    InternalStartTicks();
 }
 
 
@@ -46,15 +49,133 @@ void TimeManager::InternalClose( void )
 }
 
 
+int TimeManager::InternalGetCurrentHour( void )
+{
+    int HH = 0;
+    int MM = 0;
+    int SS = 0;
+
+    InternalUpdateTimer();
+
+#if TARGET_NSPIRE == 1
+    uint32_t DD=RTC_seconds/86400;
+
+    SS = RTC_seconds%86400;
+    HH = SS/3600;
+    MM = (SS-3600*HH)/60;
+    SS %= 60;
+#else
+    struct tm instant;
+    instant = *localtime( &RTC_seconds );
+
+    SS = instant.tm_sec;
+    MM = instant.tm_min;
+    HH = instant.tm_hour;
+#endif
+
+return HH;
+
+}
+
+
+int TimeManager::InternalGetCurrentMinute( void )
+{
+    int HH = 0;
+    int MM = 0;
+    int SS = 0;
+
+    InternalUpdateTimer();
+
+#if TARGET_NSPIRE == 1
+    uint32_t DD=RTC_seconds/86400;
+
+    SS = RTC_seconds%86400;
+    HH = SS/3600;
+    MM = (SS-3600*HH)/60;
+    SS %= 60;
+#else
+    struct tm instant;
+    instant = *localtime( &RTC_seconds );
+
+    SS = instant.tm_sec;
+    MM = instant.tm_min;
+    HH = instant.tm_hour;
+#endif
+
+return MM;
+}
+
+
+int TimeManager::InternalGetCurrentSecond( void )
+{
+    int HH = 0;
+    int MM = 0;
+    int SS = 0;
+
+    InternalUpdateTimer();
+
+#if TARGET_NSPIRE == 1
+    uint32_t DD=RTC_seconds/86400;
+
+    SS = RTC_seconds%86400;
+    HH = SS/3600;
+    MM = (SS-3600*HH)/60;
+    SS %= 60;
+#else
+    struct tm instant;
+    instant = *localtime( &RTC_seconds );
+
+    SS = instant.tm_sec;
+    MM = instant.tm_min;
+    HH = instant.tm_hour;
+#endif
+
+return SS;
+}
+
+
+void TimeManager::InternalGetCurrentTime( int* HH, int* MM, int*SS )
+{
+    InternalUpdateTimer();
+
+#if TARGET_NSPIRE == 1
+    uint32_t DD=RTC_seconds/86400;
+
+    *SS = RTC_seconds%86400;
+    *HH = *SS/3600;
+    *MM = (*SS-3600* *HH)/60;
+    *SS %= 60;
+#else
+    struct tm instant;
+    instant = *localtime( &RTC_seconds );
+
+    *SS = instant.tm_sec;
+    *MM = instant.tm_min;
+    *HH = instant.tm_hour;
+#endif
+
+}
+
+
+void TimeManager::InternalUpdateTimer( void )
+{
+#if TARGET_NSPIRE == 1
+    RTC_seconds = * (volatile unsigned *) 0x90090000;
+#else
+    RTC_seconds = time( &RTC_seconds );
+#endif // TARGET_NSPIRE
+}
+
+
 void TimeManager::InternalStartTicks(void)
 {
-#if RENDER_WITH_SDL == 0
-       value = (unsigned *)0x900C0004;
-       control = (unsigned *)0x900C0008;
-       *(volatile unsigned *)0x900C0080 = 0xA; /* "[...] on the CX to specify the 32768Hz clock as the source for the First Timer" */
-       *control = 0b10000010; /* Wrapping; 32-bit; divider to 1; interrupt disabled; free-running; start */
-       start = *value;
-#endif // RENDER_WITH_SDL
+#if TARGET_NSPIRE == 1
+    value = (unsigned *)0x900C0004;
+    control = (unsigned *)0x900C0008;
+    *(volatile unsigned *)0x900C0080 = 0xA; /* "[...] on the CX to specify the 32768Hz clock as the source for the First Timer" */
+    *control = 0b10000010; /* Wrapping; 32-bit; divider to 1; interrupt disabled; free-running; start */
+    start = *value;
+#endif
 
 }
 
@@ -63,18 +184,18 @@ uint32_t TimeManager::InternalGetTicks(void)
 {
 #if RENDER_WITH_SDL == 1
 
-       return (uint32_t) SDL_GetTicks( );
+    return (uint32_t) SDL_GetTicks( );
 
 #else
 
-       if ( has_colors )
-              return((start - *value) / 33);
-       else
-       {
-              tick_sum += *value;
-              *value = 0;
-              return(tick_sum);
-       }
+    if ( has_colors )
+        return((start - *value) / 33);
+    else
+    {
+        tick_sum += *value;
+        *value = 0;
+        return(tick_sum);
+    }
 
 #endif // RENDER_WITH_SDL
 }
@@ -84,11 +205,11 @@ void TimeManager::InternalDelay(uint32_t ms)
 {
 #if RENDER_WITH_SDL == 1
 
-       SDL_Delay( ms );
+    SDL_Delay( ms );
 
 #else
 
-       msleep(ms);
+    msleep(ms);
 
 #endif // RENDER_WITH_SDL
 }

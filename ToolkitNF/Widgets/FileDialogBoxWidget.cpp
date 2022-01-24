@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <dirent.h>
-#include <string.h>
+#include <string>
 
 
 std::string simplify(std::string path)

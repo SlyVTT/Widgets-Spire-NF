@@ -8,7 +8,7 @@
 
 
 #if RENDER_WITH_SDL == 1
-#include <SDL/SDL_image.h>
+    #include <SDL/SDL_image.h>
 #else
 
 #endif
@@ -176,6 +176,8 @@ void IconItemWidget::Logic(  )
                      if (hoverfunction)
                             hoverfunction( (char*) "test" );
               }
+
+              is_pressed = currently_pressed;
 
               for (auto& c : children ) c->Logic( );
        }

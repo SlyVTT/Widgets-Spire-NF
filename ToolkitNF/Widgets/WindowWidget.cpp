@@ -21,6 +21,11 @@ WindowWidget::WindowWidget( std::string l, unsigned int x, unsigned int y, unsig
        yposback = y;
        widthback = w;
        heightback = h;
+
+
+       // TODO (sylvain#1#): Need to fix this to avoid some crashes when the window is shrinked to extremely small size
+       minheight = 25;
+       minwidth = 30;
 };
 
 WindowWidget::~WindowWidget()
@@ -260,6 +265,7 @@ void WindowWidget::Restore()
 void WindowWidget::Logic( void )
 {
        unsigned int nbpopupvisible = 0;
+
        for (auto& d : popupchildren )
               if (d->IsVisible())
               {
@@ -280,59 +286,57 @@ void WindowWidget::Logic( void )
                                    hoverfunction( (char*) "test" );
                      }
 
-                     bool atborder = false;
-                     bool ontitle = false;
-                     bool onmax = false;
-                     bool onmin = false;
-                     bool onres = false;
 
-                     if (IsMouseAtLeftBorder(  ))
+                     // TODO : fix the resize logic that does not work
+                     // TODO : copy the value of IsAtXXXBorder into variable to reuse the value and same time
+
+                     bool atborder = false;
+                     bool atbottomborder = IsMouseAtBottomBorder(  );
+                     bool attopborder = IsMouseAtTopBorder(  );
+                     bool atleftborder = IsMouseAtLeftBorder(  );
+                     bool atrightborder = IsMouseAtRightBorder(  );
+
+                     bool ontitle = IsMouseOnTitleBar(  );
+                     bool onmax = IsMouseOnMaximiseButton(  );
+                     bool onmin = IsMouseOnMinimiseButton(  );
+                     bool onres = IsMouseOnRestoreButton(  );
+
+
+
+                     if ( onmax || onmin || onres )
                      {
-                            MouseManager::SetCursorType( MouseManager::Cursor_Leftrightresize );
-                            atborder = true;
+                            MouseManager::SetCursorType( MouseManager::Cursor_Triangle );
                      }
-                     else if (IsMouseAtRightBorder(  ))
-                     {
-                            MouseManager::SetCursorType( MouseManager::Cursor_Leftrightresize );
-                            atborder = true;
-                     }
-                     else if (IsMouseAtTopBorder(  ))
+                     else if (attopborder || atbottomborder)
                      {
                             MouseManager::SetCursorType( MouseManager::Cursor_Topbottomresize );
                             atborder = true;
+                            ontitle = false;
                      }
-                     else if (IsMouseAtBottomBorder(  ))
+                     else if (atleftborder || atrightborder)
                      {
-                            MouseManager::SetCursorType( MouseManager::Cursor_Topbottomresize );
+                            MouseManager::SetCursorType( MouseManager::Cursor_Leftrightresize );
                             atborder = true;
+                            ontitle = false;
                      }
-                     else if (IsMouseOnTitleBar(  ))
+                     else if (ontitle)
                      {
                             MouseManager::SetCursorType( MouseManager::Cursor_Handfinger );
                             ontitle = true;
-                     }
-                     else if (IsMouseOnMaximiseButton(  ))
-                     {
-                            MouseManager::SetCursorType( MouseManager::Cursor_Triangle );
-                            onmax = true;
-                     }
-                     else if (IsMouseOnMinimiseButton(  ))
-                     {
-                            MouseManager::SetCursorType( MouseManager::Cursor_Triangle );
-                            onmin = true;
-                     }
-                     else if (IsMouseOnRestoreButton(  ))
-                     {
-                            MouseManager::SetCursorType( MouseManager::Cursor_Triangle );
-                            onres = true;
+                            atborder = false;
                      }
                      else
                      {
                             MouseManager::SetCursorType( MouseManager::Cursor_Pointer );
+                            ontitle = false;
+                            atborder = false;
                      }
 
 
-                     if (atborder && KeyManager::kbSCRATCH())
+                     bool clickstatus = KeyManager::kbSCRATCH() || MouseManager::GetB();
+
+
+                     if (atborder && clickstatus)
                      {
                             resizemode = true;
                      }
@@ -341,32 +345,32 @@ void WindowWidget::Logic( void )
                             resizemode = false;
                      }
 
-                     if (onmax && KeyManager::kbSCRATCH())
+                     if (onmax && clickstatus)
                      {
                             Maximize();
                             onmax = false;
                      }
 
-                     if (onmin && KeyManager::kbSCRATCH())
+                     if (onmin && clickstatus)
                      {
                             Minimize();
                             onmin = false;
                      }
 
-                     if (onres && KeyManager::kbSCRATCH())
+                     if (onres && clickstatus)
                      {
                             Restore();
                             onres = false;
                      }
 
-                     if (ontitle && KeyManager::kbSCRATCH() && !startmove)
+                     if (ontitle && clickstatus && !startmove)
                      {
                             movemode = true;
                             startmove = true;
                             clickX = MouseManager::GetX();
                             clickY = MouseManager::GetY();
                      }
-                     else if (ontitle && KeyManager::kbSCRATCH() && startmove)
+                     else if (ontitle && clickstatus && startmove)
                      {
                             movemode = true;
                      }
@@ -377,7 +381,7 @@ void WindowWidget::Logic( void )
                      }
 
                      // Here comes the resize Logic
-                     if (resizemode && IsMouseAtLeftBorder( ))
+                     if (resizemode && atleftborder)
                      {
                             unsigned int xposold = xpos;
                             MouseManager::Logic();
@@ -387,7 +391,7 @@ void WindowWidget::Logic( void )
                             Adjust();
                      }
 
-                     if (resizemode && IsMouseAtRightBorder( ))
+                     if (resizemode && atrightborder)
                      {
                             MouseManager::Logic();
                             //if ((MouseManager::GetX() < SCREEN_WIDTH-2) && (MouseManager::GetX() - xpos >= minwidth)) width = MouseManager::GetX() - xpos;
@@ -395,7 +399,7 @@ void WindowWidget::Logic( void )
                             Adjust();
                      }
 
-                     if (resizemode && IsMouseAtTopBorder( ))
+                     if (resizemode && attopborder)
                      {
                             unsigned int yposold = ypos;
                             MouseManager::Logic();
@@ -405,7 +409,7 @@ void WindowWidget::Logic( void )
                             Adjust();
                      }
 
-                     if (resizemode && IsMouseAtBottomBorder( ))
+                     if (resizemode && atbottomborder)
                      {
                             MouseManager::Logic();
                             //if ((MouseManager::GetY() < SCREEN_HEIGHT-2) && (MouseManager::GetY() - ypos >= minheight)) height = MouseManager::GetY() - ypos;
@@ -525,14 +529,14 @@ void WindowWidget::Render( void )
                      }
               }
 
-              /*
+/*
               // THIS IS FOR DEBUGGING THE DEPTH BUFFER PORTION OF THE CODE
-              char* tempID;
+              char tempID[100];
               sprintf( tempID, "ID = %ld", WidgetID );
-              fonts->setcurrentfont( THIN_FONT );
-              fonts->setmodifiertypo( Bold );
-              fonts->drawstringleft( screen, tempID, xpos+2, ypos+4, 255, 0, 0, 255 );
-              */
+              FontEngine::SetCurrentFont( FontEngine::THIN_FONT );
+              FontEngine::SetCurrentModifierTypo( FontEngine::Bold );
+              FontEngine::DrawStringLeft( tempID, xpos+2, ypos+4, 255, 0, 0, 255 );
+*/
 
               for (auto& c : children )
               {

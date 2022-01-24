@@ -182,8 +182,8 @@ void SplashScreenWidget::Render( void )
                      src_rect.w = image->w;
                      src_rect.h = image->h;
 
-                     screen_pos.x = (SCREEN_WIDTH-image->w) /2;
-                     screen_pos.y = (SCREEN_HEIGHT-image->h)/2;
+                     screen_pos.x = (SCREEN_WIDTH_GUI-image->w) /2;
+                     screen_pos.y = (SCREEN_HEIGHT_GUI-image->h)/2;
                      screen_pos.w = image->w;
                      screen_pos.h = image->h;
 

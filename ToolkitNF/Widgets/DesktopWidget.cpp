@@ -84,7 +84,7 @@ unsigned int DesktopWidget::GetUseableHeight()
     if (hasmenubar && hasiconbar) return SCREEN_HEIGHT_GUI - 0 - 12 - 20;        // we remove 2px on top and bottom, of the menu bar and of the icon bar (4px + 12px + 20px)
     if (!hasmenubar && hasiconbar) return SCREEN_HEIGHT_GUI - 0 - 20;            // we remove 2px on top and bottom, of the menu bar and of the icon bar (4px + 12px + 20px)
 
-    // the following return is to avoir warning, all possible cases are given above
+    // the following return is to avoid warning, all possible cases are given above
     return 0;
 }
 
@@ -107,7 +107,7 @@ void DesktopWidget::Logic( void )
         {
 
             uint8_t r,g,b;
-            uint8_t x, y;
+            uint16_t x, y;
 
             //SDL_LockSurface( depthbuffer);
             //SDL_GetRGB(getpixel(depthbuffer, mouse->x, mouse->y), depthbuffer->format, &r, &g, &b);
@@ -127,7 +127,7 @@ void DesktopWidget::Logic( void )
 
             unsigned int widgetIDpicked = 100*c + 10*d + u;
 
-            /*
+/*
             //-------------
                     // THIS IS FOR DEBUGGING THE DEPTH BUFFER PORTION OF THE CODE
 
@@ -142,7 +142,7 @@ void DesktopWidget::Logic( void )
            //---------
 
             //PutOnTop( 1 );
-            */
+*/
 
             PutOnTop( widgetIDpicked );
         }
@@ -179,11 +179,11 @@ void DesktopWidget::PutOnTop( unsigned int widgetidsearched )
 
         if ((c->WidgetID==widgetidsearched) && (!c->IsLocked()))
         {
-            /*
-                        boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
-                        fonttemp->drawstringleft( screen, (char*) "Found children", 6, 231, 0, 0, 255, 255 );
-                        SDL_Flip(screen);
-            */
+
+           //             boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
+           //             fonttemp->drawstringleft( screen, (char*) "Found children", 6, 231, 0, 0, 255, 255 );
+           //             SDL_Flip(screen);
+
             c->Activate();
             Widget* temp = c;
 
@@ -195,20 +195,20 @@ void DesktopWidget::PutOnTop( unsigned int widgetidsearched )
         }
         else if ((c->WidgetID==widgetidsearched) && (c->IsLocked()))
         {
-            /*
-                        boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
-                        fonttemp->drawstringleft( screen, (char*) "Found lock", 6, 231, 0, 0, 255, 255 );
-                        SDL_Flip(screen);
-            */
+
+            //            boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
+            //            fonttemp->drawstringleft( screen, (char*) "Found lock", 6, 231, 0, 0, 255, 255 );
+            //            SDL_Flip(screen);
+
             c->Desactivate();
         }
         else
         {
-            /*
-                        boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
-                        fonttemp->drawstringleft( screen, (char*) "Not found children", 6, 231, 0, 0, 255, 255 );
-                        SDL_Flip(screen);
-            */
+
+            //            boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
+            //            fonttemp->drawstringleft( screen, (char*) "Not found children", 6, 231, 0, 0, 255, 255 );
+            //            SDL_Flip(screen);
+
             c->Desactivate();
         }
 
@@ -228,11 +228,11 @@ void DesktopWidget::PutOnTop( Widget *widgetsearched )
 
         if ((c==widgetsearched) && (!c->IsLocked()))
         {
-            /*
-                        boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
-                        fonttemp->drawstringleft( screen, (char*) "Found children", 6, 231, 0, 0, 255, 255 );
-                        SDL_Flip(screen);
-            */
+
+            //            boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
+            //            fonttemp->drawstringleft( screen, (char*) "Found children", 6, 231, 0, 0, 255, 255 );
+            //            SDL_Flip(screen);
+
             c->Activate();
             Widget* temp = c;
 
@@ -244,20 +244,20 @@ void DesktopWidget::PutOnTop( Widget *widgetsearched )
         }
         else if ((c==widgetsearched) && (c->IsLocked()))
         {
-            /*
-                        boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
-                        fonttemp->drawstringleft( screen, (char*) "Found lock", 6, 231, 0, 0, 255, 255 );
-                        SDL_Flip(screen);
-            */
+
+             //           boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
+             //           fonttemp->drawstringleft( screen, (char*) "Found lock", 6, 231, 0, 0, 255, 255 );
+             //           SDL_Flip(screen);
+
             c->Desactivate();
         }
         else
         {
-            /*
-                        boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
-                        fonttemp->drawstringleft( screen, (char*) "Not found children", 6, 231, 0, 0, 255, 255 );
-                        SDL_Flip(screen);
-            */
+
+              //          boxRGBA( screen, 5, 230, 150, 240, 0, 0, 0, 255 );
+              //          fonttemp->drawstringleft( screen, (char*) "Not found children", 6, 231, 0, 0, 255, 255 );
+              //          SDL_Flip(screen);
+
             c->Desactivate();
         }
 

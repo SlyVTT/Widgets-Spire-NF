@@ -1,7 +1,14 @@
 #ifndef KEYMANAGER_H
 #define KEYMANAGER_H
 
+#include "../Globals/GUIToolkitNFGlobals.hpp"
+
 #include <string>
+
+#if TARGET_NSPIRE == 0
+    #include <SDL/SDL.h>        // used to get access to SDL_Event
+#endif // TARGET_NSPIRE
+
 
 /// KeyManager class is a Singleton devoted to manage the keyboard hardware of the TI nSpire CX and CX-II
 
@@ -572,10 +579,16 @@ private:
        bool m_kbCTRL_Previous;
        bool m_kbCOMMA_Previous;
 
-
+#if TARGET_NSPIRE == 1
        // The physical adresses of key into the memory (model dependant)
        unsigned short *base;
        unsigned short *specialON;
+#else
+
+        SDL_Event event;
+        Uint8 *keys;
+
+#endif
 
        // This is the content of the Clipboard
        std::string selection;

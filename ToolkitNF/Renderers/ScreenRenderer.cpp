@@ -96,13 +96,13 @@ void ScreenRenderer::WriteToBMP( std::string filename )
        int n;
        unsigned char red, green, blue;
 
-       extrabytes = 4 - ((SCREEN_WIDTH * 3) % 4);                 // How many bytes of padding to add to each
+       extrabytes = 4 - ((SCREEN_WIDTH_GUI * 3) % 4);                 // How many bytes of padding to add to each
        // horizontal line - the size of which must
        // be a multiple of 4 bytes.
        if (extrabytes == 4)
               extrabytes = 0;
 
-       paddedsize = ((SCREEN_WIDTH * 3) + extrabytes) * SCREEN_HEIGHT;
+       paddedsize = ((SCREEN_WIDTH_GUI * 3) + extrabytes) * SCREEN_HEIGHT_GUI;
 
 // Headers...
 // Note that the "BM" identifier in bytes 0 and 1 is NOT included in these "headers".
@@ -111,8 +111,8 @@ void ScreenRenderer::WriteToBMP( std::string filename )
        headers[1]  = 0;                    // bfReserved (both)
        headers[2]  = 54;                   // bfOffbits
        headers[3]  = 40;                   // biSize
-       headers[4]  = SCREEN_WIDTH;  // biWidth
-       headers[5]  = SCREEN_HEIGHT; // biHeight
+       headers[4]  = SCREEN_WIDTH_GUI;  // biWidth
+       headers[5]  = SCREEN_HEIGHT_GUI; // biHeight
 
 // Would have biPlanes and biBitCount in position 6, but they're shorts.
 // It's easier to write them out separately (see below) than pretend
@@ -161,9 +161,9 @@ void ScreenRenderer::WriteToBMP( std::string filename )
 // Headers done, now write the data...
 //
 
-       for (y = SCREEN_HEIGHT - 1; y >= 0; y--)     // BMP image format is written from bottom to top...
+       for (y = SCREEN_HEIGHT_GUI - 1; y >= 0; y--)     // BMP image format is written from bottom to top...
        {
-              for (x = 0; x < SCREEN_WIDTH ; x++)
+              for (x = 0; x < SCREEN_WIDTH_GUI ; x++)
               {
 
                      red = InternalGetPixelR( x, y );
@@ -285,7 +285,7 @@ void ScreenRenderer::InternalDrawPixel( unsigned int x1, unsigned int y1, unsign
 
 #else
 
-       if ((x1<SCREEN_WIDTH) && (y1<SCREEN_HEIGHT))
+       if ((x1<SCREEN_WIDTH_GUI) && (y1<SCREEN_HEIGHT_GUI))
        {
               uint16_t b = (B >> 3) & 0x1f;
               uint16_t g = ((G >> 2) & 0x3f) << 5;
@@ -580,13 +580,13 @@ void ScreenRenderer::InternalDrawImageBackground( SDL_Surface* image )
        SDL_Rect src_rect, screen_pos;
        src_rect.x = 0;
        src_rect.y = 0;
-       src_rect.w = 320;
-       src_rect.h = 240;
+       src_rect.w = SCREEN_WIDTH_GUI;
+       src_rect.h = SCREEN_HEIGHT_GUI;
 
        screen_pos.x = 0;
        screen_pos.y = 0;
-       screen_pos.w = 320;
-       screen_pos.h = 240;
+       screen_pos.w = SCREEN_WIDTH_GUI;
+       screen_pos.h = SCREEN_HEIGHT_GUI;
        SDL_BlitSurface( image, &src_rect, screen, &screen_pos);
 }
 

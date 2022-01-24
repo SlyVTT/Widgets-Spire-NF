@@ -16,6 +16,8 @@ public:
         int CharWidth;
         int CharHeight;
         unsigned short *CharData;       // Should allow 4bytes coding (i.e. font up to 32x32 with only minimum changes in loading procedure
+        int FirstNonEmptyRow;           // First row actually containing pixels to be drawn in the current character
+        int LastNonEmptyRow;            // Last row actually containing pixels to be drawn in the current character
     };
 
     struct FontData

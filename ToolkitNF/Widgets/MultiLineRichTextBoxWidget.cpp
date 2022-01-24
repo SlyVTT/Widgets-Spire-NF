@@ -11,972 +11,972 @@
 
 MultiLineRichTextBoxWidget::MultiLineRichTextBoxWidget()
 {
-       widgettype =  "MultiLineRichTextBox";
-       content.push_back("");
-       cursor_posX = 0;
+    widgettype =  "MultiLineRichTextBox";
+    content.push_back("");
+    cursor_posX = 0;
 }
 
 
 MultiLineRichTextBoxWidget::MultiLineRichTextBoxWidget( std::string l, unsigned int x, unsigned int y, unsigned int w, unsigned int h, Widget *p ) : Widget( l, x, y, w, h, p )
 {
-       widgettype =  "MultiLineRichTextBox";
-       content.push_back("");
-       cursor_posX = 0;
+    widgettype =  "MultiLineRichTextBox";
+    content.push_back("");
+    cursor_posX = 0;
 }
 
 
 MultiLineRichTextBoxWidget::~MultiLineRichTextBoxWidget()
 {
-       content.clear();
-       selection.clear();
+    content.clear();
+    selection.clear();
 }
 
 
 void MultiLineRichTextBoxWidget::Flush()
 {
-       content.clear();
-       content.push_back("");
-       cursor_posX = 0;
+    content.clear();
+    content.push_back("");
+    cursor_posX = 0;
 }
 
 
 void MultiLineRichTextBoxWidget::SaveContentToFile( std::string filename )
 {
-       FILE* pFile;
+    FILE* pFile;
 
-       pFile = fopen (filename.c_str(), "w");
-       if (pFile!=NULL)
-       {
-              fprintf( pFile, "%s",  content[0].c_str());
-              fclose(pFile);
-       }
-       cursor_posX = 0;
+    pFile = fopen (filename.c_str(), "w");
+    if (pFile!=NULL)
+    {
+        fprintf( pFile, "%s",  content[0].c_str());
+        fclose(pFile);
+    }
+    cursor_posX = 0;
 }
 
 
 void MultiLineRichTextBoxWidget::LoadContentFromFile( std::string filename )
 {
-       Flush();
+    Flush();
 
-       FILE* pFile;
-       char c;
+    FILE* pFile;
+    char c;
 
-       std::string filecontent;
+    std::string filecontent;
 
-       pFile = fopen (filename.c_str(), "r");
-       if (pFile!=NULL)
-       {
-              while (!feof(pFile))
-              {
-                     fscanf( pFile, "%c",  &c);
-                     filecontent += c;
-              }
+    pFile = fopen (filename.c_str(), "r");
+    if (pFile!=NULL)
+    {
+        while (!feof(pFile))
+        {
+            fscanf( pFile, "%c",  &c);
+            filecontent += c;
+        }
 
-              fclose(pFile);
-       }
+        fclose(pFile);
+    }
 
-       SetContent( filecontent );
-       cursor_posX = 0;
+    SetContent( filecontent );
+    cursor_posX = 0;
 }
 
 
 void MultiLineRichTextBoxWidget::AppendContent(std::string str)
 {
-       //content.push_back(str);
-       content[0] += str;
+    //content.push_back(str);
+    content[0] += str;
 }
 
 
 void MultiLineRichTextBoxWidget::SetContent( std::string str )
 {
-       Flush();
-       //content.push_back(str);
-       content[0] += str;
+    Flush();
+    //content.push_back(str);
+    content[0] += str;
 }
 
 
 std::string MultiLineRichTextBoxWidget::GetContent()
 {
-       return content[0];
+    return content[0];
 }
 
 void MultiLineRichTextBoxWidget::SetNonEditable()
 {
-       iseditable = false;
+    iseditable = false;
 }
 
 void MultiLineRichTextBoxWidget::SetEditable()
 {
-       iseditable = true;
+    iseditable = true;
 }
 
 
 void MultiLineRichTextBoxWidget::CopySelection()
 {
-       if (selectstart==selectend)
-       {
-              //keybclip->Flushselection();
-       }
-       else if (selectstart<selectend)
-       {
-              KeyManager::SetSelection( content[0].substr(selectstart, selectend-selectstart) );
-       }
-       else if (selectstart>selectend)
-       {
-              KeyManager::SetSelection( content[0].substr(selectend, selectstart-selectend) );
-       }
-       //keybclip->resetstate();
-       isselected = false;
-       selectend = selectstart;
+    if (selectstart==selectend)
+    {
+        //keybclip->Flushselection();
+    }
+    else if (selectstart<selectend)
+    {
+        KeyManager::SetSelection( content[0].substr(selectstart, selectend-selectstart) );
+    }
+    else if (selectstart>selectend)
+    {
+        KeyManager::SetSelection( content[0].substr(selectend, selectstart-selectend) );
+    }
+    //keybclip->resetstate();
+    isselected = false;
+    selectend = selectstart;
 }
 
 void MultiLineRichTextBoxWidget::CutSelection()
 {
-       if (iseditable)
-       {
-              if (selectstart==selectend)
-              {
-                     //keybclip->Flushselection();
-              }
-              else if (selectstart<selectend)
-              {
-                     KeyManager::SetSelection( content[0].substr(selectstart, selectend-selectstart) );
+    if (iseditable)
+    {
+        if (selectstart==selectend)
+        {
+            //keybclip->Flushselection();
+        }
+        else if (selectstart<selectend)
+        {
+            KeyManager::SetSelection( content[0].substr(selectstart, selectend-selectstart) );
 
-                     content[0].erase(selectstart, selectend-selectstart );
-              }
-              else if (selectstart>selectend)
-              {
-                     KeyManager::SetSelection( content[0].substr(selectend, selectstart-selectend) );
+            content[0].erase(selectstart, selectend-selectstart );
+        }
+        else if (selectstart>selectend)
+        {
+            KeyManager::SetSelection( content[0].substr(selectend, selectstart-selectend) );
 
-                     content[0].erase(selectend, selectstart-selectend );
-              }
-              //keybclip->resetstate();
-              isselected = false;
-              selectend = selectstart;
-       }
+            content[0].erase(selectend, selectstart-selectend );
+        }
+        //keybclip->resetstate();
+        isselected = false;
+        selectend = selectstart;
+    }
 }
 
 void MultiLineRichTextBoxWidget::PasteSelection()
 {
-       if (iseditable)
-       {
-              if (KeyManager::GetSelection().size()!=0)
-              {
-                     content[0].insert(cursor_posX, KeyManager::GetSelection() );
-              }
-              //keybclip->resetstate();
-              isselected = false;
-              selectend = selectstart;
-       }
+    if (iseditable)
+    {
+        if (KeyManager::GetSelection().size()!=0)
+        {
+            content[0].insert(cursor_posX, KeyManager::GetSelection() );
+        }
+        //keybclip->resetstate();
+        isselected = false;
+        selectend = selectstart;
+    }
 }
 
 void MultiLineRichTextBoxWidget::EraseSelection()
 {
-       if (iseditable)
-       {
-              if (selectstart==selectend)
-              {
-                     // not selection to be erased
-              }
-              else if (selectstart<selectend)
-              {
-                     content[0].erase(selectstart, selectend-selectstart );
-              }
-              else if (selectstart>selectend)
-              {
-                     content[0].erase(selectend, selectstart-selectend );
-              }
-              //keybclip->resetstate();
-              isselected = false;
-              selectend = selectstart;
-       }
+    if (iseditable)
+    {
+        if (selectstart==selectend)
+        {
+            // not selection to be erased
+        }
+        else if (selectstart<selectend)
+        {
+            content[0].erase(selectstart, selectend-selectstart );
+        }
+        else if (selectstart>selectend)
+        {
+            content[0].erase(selectend, selectstart-selectend );
+        }
+        //keybclip->resetstate();
+        isselected = false;
+        selectend = selectstart;
+    }
 }
 
 
 
 void MultiLineRichTextBoxWidget::Logic( void )
 {
-       if (is_enabled && is_visible)
-       {
-              is_hovering = CursorOn( );
+    if (is_enabled && is_visible)
+    {
+        is_hovering = CursorOn( );
 
-              mousex=MouseManager::GetX();
-              mousey=MouseManager::GetY();
+        mousex=MouseManager::GetX();
+        mousey=MouseManager::GetY();
 
-              if(is_hovering)
-              {
-                     if (hoverfunction)
-                            hoverfunction( (char*) "test" );
-              }
+        if(is_hovering)
+        {
+            if (hoverfunction)
+                hoverfunction( (char*) "test" );
+        }
 
-              if ( is_hovering && ( MouseManager::GetX() || KeyManager::kbSCRATCH()) && !has_focus )
-              {
-                     Focus( this );
-              }
+        if ( is_hovering && ( MouseManager::GetX() || KeyManager::kbSCRATCH()) && !has_focus )
+        {
+            Focus( this );
+        }
 
-              if( (MouseManager::GetX() || KeyManager::kbSCRATCH()) && is_hovering )
-              {
+        if( (MouseManager::GetB() || KeyManager::kbSCRATCH()) && is_hovering )
+        {
 
-                     FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
+            FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
 
-                     unsigned int x_rel = mousex - xpos - 2;
-                     const char *str = content[0].c_str() + scrollX;
-                     unsigned int pos = scrollX;
+            unsigned int x_rel = mousex - xpos - 2;
+            const char *str = content[0].c_str() + scrollX;
+            unsigned int pos = scrollX;
 
-                     while(x_rel > 0 && *str)
-                     {
-                            unsigned int temp =  FontEngine::GetCharWidth( (char) *str++ );
-                            x_rel -= temp;
-                            ++pos;
-                     }
+            while(x_rel > 0 && *str)
+            {
+                unsigned int temp =  FontEngine::GetCharWidth( (char) *str++ );
+                x_rel -= temp;
+                ++pos;
+            }
 
-                     cursor_posX = pos;
+            cursor_posX = pos;
 
-              }
+        }
 
-              if(!has_focus)
-                     return;
-
-
-              char c;
-
-              if (iseditable)
-              {
-                     c = KeyManager::AsciiGet();
-
-                     if (c>=0x80)
-                            return;
-              }
-              else return;
-
-              if (key_hold_down)
-              {
-                     key_hold_down = KeyManager::IsAnyKeyPressed();
-              }
-
-              // This is the behavior assigned to SHIFT + arrow keys which control the selection
-
-              else if (KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbLEFT())
-              {
-                     if (isselected==false) selectstart=cursor_posX;
-                     isselected=true;
-
-                     if (cursor_posX > 0)
-                     {
-                            cursor_posX--;
-                     }
-                     else
-                     {
-                            cursor_posX=0;
-                     }
-
-                     selectend = cursor_posX;
-
-                     UpdateScroll();
-              }
-              else if (KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbRIGHT())
-              {
-                     if (isselected==false) selectstart=cursor_posX;
-                     isselected=true;
-
-                     if (cursor_posX < content[0].length())
-                     {
-                            cursor_posX++;
-                     }
-                     else
-                     {
-                            cursor_posX=content[0].length();
-                     }
-
-                     selectend = cursor_posX;
-
-                     UpdateScroll();
-              }
-              else if (KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbUP())
-              {
-                     if (isselected==false) selectstart=cursor_posX;
-                     isselected=true;
-
-                     if(cursor_posX > nbcharvisibleperline)
-                            cursor_posX -= nbcharvisibleperline;
-                     else
-                            cursor_posX = 0;
-
-                     selectend = cursor_posX;
-
-                     UpdateScroll();
-
-                     //if (firstlinevisible>0) firstlinevisible--;
-              }
-              else if (KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbDOWN())
-              {
-                     if (isselected==false) selectstart=cursor_posX;
-                     isselected=true;
-
-                     if(cursor_posX < content[0].length()-nbcharvisibleperline)
-                            cursor_posX += nbcharvisibleperline;
-                     else
-                            cursor_posX = content[0].length();
-
-                     selectend = cursor_posX;
-
-                     UpdateScroll();
-                     //if (firstlinevisible<nblinetotal) firstlinevisible++;
-              }
+        if(!has_focus)
+            return;
 
 
-              // This is the behavior assigned to CTRL + arrow keys and CTRL + X/V/C/DEL which control the scroll and copy/paste/cut/erase
+        char c;
 
-              else if (KeyManager::IsKeyPressEvent() && isselected && !KeyManager::kbSHIFT() && KeyManager::kbCTRL() && KeyManager::kbC())                      // CTRL + C to copy the selection to the KeyboardTask
-              {
-                     CopySelection();
-              }
-              else if (KeyManager::IsKeyPressEvent() && isselected && !KeyManager::kbSHIFT() && KeyManager::kbCTRL() && KeyManager::kbX())                      // CTRL + X to cut the selection to the KeyboardTask
-              {
-                     CutSelection();
-              }
-              else if (KeyManager::IsKeyPressEvent() && isselected && !KeyManager::kbSHIFT() && KeyManager::kbCTRL() && KeyManager::kbDEL())                      // CTRL + DEL to erase the selection
-              {
-                     EraseSelection();
-              }
-              else if (KeyManager::IsKeyPressEvent() && !KeyManager::kbSHIFT && KeyManager::kbCTRL && KeyManager::kbV)                      // CTRL + V to paste the selection coming from the KeyboardTask
-              {
-                     PasteSelection();
-              }
-              else if (!KeyManager::kbSHIFT() && KeyManager::kbCTRL() && MouseManager::kbLEFT())
-              {
-                     cursor_posX = 0;
-                     isselected = false;
-                     UpdateScroll();
-              }
-              else if (!KeyManager::kbSHIFT() && KeyManager::kbCTRL() && MouseManager::kbRIGHT())
-              {
-                     cursor_posX = content[0].length();
-                     isselected = false;
-                     UpdateScroll();
-              }
-              else if (!KeyManager::kbSHIFT() && KeyManager::kbCTRL() && MouseManager::kbUP())
-              {
-                     if(cursor_posX > nbcharvisibleperline)
-                            cursor_posX -= nbcharvisibleperline;
-                     else
-                            cursor_posX = 0;
+        if (iseditable)
+        {
+            c = KeyManager::AsciiGet();
 
-                     if (currentlinecursor<=firstlinevisible) firstlinevisible=currentlinecursor;
+            if (c>=0x80)
+                return;
+        }
+        else return;
 
-                     isselected = false;
-                     UpdateScroll();
-              }
-              else if (!KeyManager::kbSHIFT() && KeyManager::kbCTRL() && MouseManager::kbDOWN())
-              {
-                     if(cursor_posX < content[0].length()-nbcharvisibleperline)
-                            cursor_posX += nbcharvisibleperline;
-                     else
-                            cursor_posX = content[0].length();
+        if (key_hold_down)
+        {
+            key_hold_down = KeyManager::IsAnyKeyPressed();
+        }
 
-                     if (currentlinecursor>firstlinevisible+nblinevisible) firstlinevisible=currentlinecursor;
+        // This is the behavior assigned to SHIFT + arrow keys which control the selection
 
-                     isselected = false;
-                     UpdateScroll();
-              }
+        else if (KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbLEFT())
+        {
+            if (isselected==false) selectstart=cursor_posX;
+            isselected=true;
+
+            if (cursor_posX > 0)
+            {
+                cursor_posX--;
+            }
+            else
+            {
+                cursor_posX=0;
+            }
+
+            selectend = cursor_posX;
+
+            UpdateScroll();
+        }
+        else if (KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbRIGHT())
+        {
+            if (isselected==false) selectstart=cursor_posX;
+            isselected=true;
+
+            if (cursor_posX < content[0].length())
+            {
+                cursor_posX++;
+            }
+            else
+            {
+                cursor_posX=content[0].length();
+            }
+
+            selectend = cursor_posX;
+
+            UpdateScroll();
+        }
+        else if (KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbUP())
+        {
+            if (isselected==false) selectstart=cursor_posX;
+            isselected=true;
+
+            if(cursor_posX > nbcharvisibleperline)
+                cursor_posX -= nbcharvisibleperline;
+            else
+                cursor_posX = 0;
+
+            selectend = cursor_posX;
+
+            UpdateScroll();
+
+            //if (firstlinevisible>0) firstlinevisible--;
+        }
+        else if (KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbDOWN())
+        {
+            if (isselected==false) selectstart=cursor_posX;
+            isselected=true;
+
+            if(cursor_posX < content[0].length()-nbcharvisibleperline)
+                cursor_posX += nbcharvisibleperline;
+            else
+                cursor_posX = content[0].length();
+
+            selectend = cursor_posX;
+
+            UpdateScroll();
+            //if (firstlinevisible<nblinetotal) firstlinevisible++;
+        }
 
 
-              // This is the behavior assigned to arrow keys which control the movement of the cursor
+        // This is the behavior assigned to CTRL + arrow keys and CTRL + X/V/C/DEL which control the scroll and copy/paste/cut/erase
 
-              else if (!KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbLEFT())
-              {
-                     if(cursor_posX > 0)
-                            --cursor_posX;
-                     isselected = false;
-                     UpdateScroll();
-              }
-              else if (!KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbRIGHT())
-              {
-                     if(cursor_posX < content[0].length())
-                            ++cursor_posX;
-                     isselected = false;
-                     UpdateScroll();
-              }
-              else if (!KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbDOWN())
-              {
-                     if(cursor_posX < content[0].length()-nbcharvisibleperline)
-                            cursor_posX += nbcharvisibleperline;
-                     else
-                            cursor_posX = content[0].length();
+        else if (KeyManager::IsKeyPressEvent() && isselected && !KeyManager::kbSHIFT() && KeyManager::kbCTRL() && KeyManager::kbC())                      // CTRL + C to copy the selection to the KeyboardTask
+        {
+            CopySelection();
+        }
+        else if (KeyManager::IsKeyPressEvent() && isselected && !KeyManager::kbSHIFT() && KeyManager::kbCTRL() && KeyManager::kbX())                      // CTRL + X to cut the selection to the KeyboardTask
+        {
+            CutSelection();
+        }
+        else if (KeyManager::IsKeyPressEvent() && isselected && !KeyManager::kbSHIFT() && KeyManager::kbCTRL() && KeyManager::kbDEL())                      // CTRL + DEL to erase the selection
+        {
+            EraseSelection();
+        }
+        else if (KeyManager::IsKeyPressEvent() && !KeyManager::kbSHIFT && KeyManager::kbCTRL && KeyManager::kbV)                      // CTRL + V to paste the selection coming from the KeyboardTask
+        {
+            PasteSelection();
+        }
+        else if (!KeyManager::kbSHIFT() && KeyManager::kbCTRL() && MouseManager::kbLEFT())
+        {
+            cursor_posX = 0;
+            isselected = false;
+            UpdateScroll();
+        }
+        else if (!KeyManager::kbSHIFT() && KeyManager::kbCTRL() && MouseManager::kbRIGHT())
+        {
+            cursor_posX = content[0].length();
+            isselected = false;
+            UpdateScroll();
+        }
+        else if (!KeyManager::kbSHIFT() && KeyManager::kbCTRL() && MouseManager::kbUP())
+        {
+            if(cursor_posX > nbcharvisibleperline)
+                cursor_posX -= nbcharvisibleperline;
+            else
+                cursor_posX = 0;
 
-                     if (currentlinecursor>firstlinevisible+nblinevisible) firstlinevisible=currentlinecursor;
+            if (currentlinecursor<=firstlinevisible) firstlinevisible=currentlinecursor;
 
-                     isselected = false;
-                     UpdateScroll();
-              }
-              else if (!KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbUP())
-              {
-                     if(cursor_posX > nbcharvisibleperline)
-                            cursor_posX -= nbcharvisibleperline;
-                     else
-                            cursor_posX = 0;
+            isselected = false;
+            UpdateScroll();
+        }
+        else if (!KeyManager::kbSHIFT() && KeyManager::kbCTRL() && MouseManager::kbDOWN())
+        {
+            if(cursor_posX < content[0].length()-nbcharvisibleperline)
+                cursor_posX += nbcharvisibleperline;
+            else
+                cursor_posX = content[0].length();
 
-                     if (currentlinecursor<=firstlinevisible) firstlinevisible=currentlinecursor;
+            if (currentlinecursor>firstlinevisible+nblinevisible) firstlinevisible=currentlinecursor;
 
-                     isselected = false;
-                     UpdateScroll();
-              }
+            isselected = false;
+            UpdateScroll();
+        }
 
-              static char old_char = 0;
 
-              if (iseditable)
-              {
+        // This is the behavior assigned to arrow keys which control the movement of the cursor
 
-                     if(c != old_char && c != 0)
-                     {
-                            if(c == '\b')
-                            {
-                                   if(cursor_posX > 0)
-                                   {
-                                          content[0].erase(content[0].begin() + (cursor_posX - 1));
-                                          --cursor_posX;
+        else if (!KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbLEFT())
+        {
+            if(cursor_posX > 0)
+                --cursor_posX;
+            isselected = false;
+            UpdateScroll();
+        }
+        else if (!KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbRIGHT())
+        {
+            if(cursor_posX < content[0].length())
+                ++cursor_posX;
+            isselected = false;
+            UpdateScroll();
+        }
+        else if (!KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbDOWN())
+        {
+            if(cursor_posX < content[0].length()-nbcharvisibleperline)
+                cursor_posX += nbcharvisibleperline;
+            else
+                cursor_posX = content[0].length();
 
-                                          UpdateScroll();
-                                   }
-                            }
-                            else
-                            {
-                                   content[0].insert(content[0].begin() + cursor_posX, c);
-                                   ++cursor_posX;
+            if (currentlinecursor>firstlinevisible+nblinevisible) firstlinevisible=currentlinecursor;
 
-                                   UpdateScroll();
-                            }
-                     }
+            isselected = false;
+            UpdateScroll();
+        }
+        else if (!KeyManager::kbSHIFT() && !KeyManager::kbCTRL() && MouseManager::kbUP())
+        {
+            if(cursor_posX > nbcharvisibleperline)
+                cursor_posX -= nbcharvisibleperline;
+            else
+                cursor_posX = 0;
 
-                     old_char = c;
+            if (currentlinecursor<=firstlinevisible) firstlinevisible=currentlinecursor;
 
-                     if(!KeyManager::IsAnyKeyPressed())
-                     {
-                            old_char = 0;
-                     }
+            isselected = false;
+            UpdateScroll();
+        }
 
-              }
-              for (auto& c : children ) c->Logic( );
+        static char old_char = 0;
 
-       }
+        if (iseditable)
+        {
+
+            if(c != old_char && c != 0)
+            {
+                if(c == '\b')
+                {
+                    if(cursor_posX > 0)
+                    {
+                        content[0].erase(content[0].begin() + (cursor_posX - 1));
+                        --cursor_posX;
+
+                        UpdateScroll();
+                    }
+                }
+                else
+                {
+                    content[0].insert(content[0].begin() + cursor_posX, c);
+                    ++cursor_posX;
+
+                    UpdateScroll();
+                }
+            }
+
+            old_char = c;
+
+            if(!KeyManager::IsAnyKeyPressed())
+            {
+                old_char = 0;
+            }
+
+        }
+        for (auto& c : children ) c->Logic( );
+
+    }
 }
 
 
 void MultiLineRichTextBoxWidget::SetStyle( char mode, unsigned short *R, unsigned short *G, unsigned short *B, unsigned short *A )
 {
-       switch(mode)
-       {
-       case '0':    // This is choosen as the default write mode
+    switch(mode)
+    {
+    case '0':    // This is choosen as the default write mode
 
-              FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
-              *R = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).R;
-              *G = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).G;
-              *B = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).B;
-              *A = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).A;
-              break;
+        FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
+        *R = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).R;
+        *G = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).G;
+        *B = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).B;
+        *A = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).A;
+        break;
 
-       case '1':    //This is the title level 1
-              FontEngine::SetCurrentFont( FontEngine::VGA_FONT );
-              FontEngine::SetCurrentModifierTypo( FontEngine::Bold );
-              FontEngine::SetCurrentModifierUnder( FontEngine::UnderSimple );
-              FontEngine::SetCurrentModifierStrike( FontEngine::NoStrike );
-              *R = 255;
-              *G = 0;
-              *B = 0;
-              *A = 255;
-              break;
+    case '1':    //This is the title level 1
+        FontEngine::SetCurrentFont( FontEngine::VGA_FONT );
+        FontEngine::SetCurrentModifierTypo( FontEngine::Bold );
+        FontEngine::SetCurrentModifierUnder( FontEngine::UnderSimple );
+        FontEngine::SetCurrentModifierStrike( FontEngine::NoStrike );
+        *R = 255;
+        *G = 0;
+        *B = 0;
+        *A = 255;
+        break;
 
-       case '2':
-              FontEngine::SetCurrentFont( FontEngine::VGA_FONT );
-              FontEngine::SetCurrentModifierTypo( FontEngine::Normal );
-              FontEngine::SetCurrentModifierUnder( FontEngine::UnderSimple );
-              FontEngine::SetCurrentModifierStrike( FontEngine::NoStrike );
-              *R = 0;
-              *G = 255;
-              *B = 0;
-              *A = 255;
-              break;
+    case '2':
+        FontEngine::SetCurrentFont( FontEngine::VGA_FONT );
+        FontEngine::SetCurrentModifierTypo( FontEngine::Normal );
+        FontEngine::SetCurrentModifierUnder( FontEngine::UnderSimple );
+        FontEngine::SetCurrentModifierStrike( FontEngine::NoStrike );
+        *R = 0;
+        *G = 255;
+        *B = 0;
+        *A = 255;
+        break;
 
-       case '3':
-              FontEngine::SetCurrentFont( FontEngine::VGA_FONT );
-              FontEngine::SetCurrentModifierTypo( FontEngine::Normal );
-              FontEngine::SetCurrentModifierUnder( FontEngine::UnderSimple );
-              FontEngine::SetCurrentModifierStrike( FontEngine::NoStrike );
-              *R = 0;
-              *G = 0;
-              *B = 255;
-              *A = 255;
-              break;
+    case '3':
+        FontEngine::SetCurrentFont( FontEngine::VGA_FONT );
+        FontEngine::SetCurrentModifierTypo( FontEngine::Normal );
+        FontEngine::SetCurrentModifierUnder( FontEngine::UnderSimple );
+        FontEngine::SetCurrentModifierStrike( FontEngine::NoStrike );
+        *R = 0;
+        *G = 0;
+        *B = 255;
+        *A = 255;
+        break;
 
-       case '4':
-              FontEngine::SetCurrentFont( FontEngine::THIN_FONT );
-              FontEngine::SetCurrentModifierTypo( FontEngine::Italic );
-              FontEngine::SetCurrentModifierUnder( FontEngine::NoUnder );
-              FontEngine::SetCurrentModifierStrike( FontEngine::NoStrike );
-              *R = 64;
-              *G = 64;
-              *B = 64;
-              *A = 255;
-              break;
+    case '4':
+        FontEngine::SetCurrentFont( FontEngine::THIN_FONT );
+        FontEngine::SetCurrentModifierTypo( FontEngine::Italic );
+        FontEngine::SetCurrentModifierUnder( FontEngine::NoUnder );
+        FontEngine::SetCurrentModifierStrike( FontEngine::NoStrike );
+        *R = 64;
+        *G = 64;
+        *B = 64;
+        *A = 255;
+        break;
 
-       case '5':
+    case '5':
 
-              break;
+        break;
 
-       case '6':
+    case '6':
 
-              break;
+        break;
 
-       case '7':
+    case '7':
 
-              break;
+        break;
 
-       case '8':
+    case '8':
 
-              break;
+        break;
 
-       case '9':
+    case '9':
 
-              break;
+        break;
 
-       default:
-              FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
-              *R = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).R;
-              *G = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).G;
-              *B = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).B;
-              *A = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).A;
-              break;
-       }
+    default:
+        FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
+        *R = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).R;
+        *G = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).G;
+        *B = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).B;
+        *A = ColorEngine::GetColor( ColorEngine::Widget_Text_Enable ).A;
+        break;
+    }
 }
 
 
 void MultiLineRichTextBoxWidget::Render( void )
 {
-       FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
-       nblinevisible = (height-5) /  (FontEngine::GetCharHeight( 'O' )+ FontEngine::GetCurrentVSpacing());
+    FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
+    nblinevisible = (height-5) /  (FontEngine::GetCharHeight( 'O' )+ FontEngine::GetCurrentVSpacing());
 
-       bool escalator = false;
+    bool escalator = false;
 
-       if (nblinetotal>nblinevisible)
-       {
-              escalator = true;
-              nbcharvisibleperline = (width - 25) / (FontEngine::GetCharWidth( 'O' )+ FontEngine::GetCurrentHSpacing()) -1 ;
-       }
-       else
-       {
-              escalator = false;
-              nbcharvisibleperline = (width - 10) / (FontEngine::GetCharWidth( 'O' )+ FontEngine::GetCurrentHSpacing()) - 1 ;
-       }
+    if (nblinetotal>nblinevisible)
+    {
+        escalator = true;
+        nbcharvisibleperline = (width - 25) / (FontEngine::GetCharWidth( 'O' )+ FontEngine::GetCurrentHSpacing()) -1 ;
+    }
+    else
+    {
+        escalator = false;
+        nbcharvisibleperline = (width - 10) / (FontEngine::GetCharWidth( 'O' )+ FontEngine::GetCurrentHSpacing()) - 1 ;
+    }
 
-       unsigned int currentnblinetotal = 0;
-
-
-       if (is_visible)
-       {
-              if (is_enabled)
-              {
-                     ScreenRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Filling_Enable) );
-
-                     if (!is_hovering)
-                     {
-                            ScreenRenderer::DrawRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
-
-                            if (escalator==true)
-                            {
-                                   ScreenRenderer::DrawRoundedRectangle(xpos+width-12, ypos+4, xpos+width-4, ypos+height-4, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
-                                   unsigned int y = ((height-7-7)*firstlinevisible / nblinetotal);
-                                   ScreenRenderer::DrawFilledCircle( xpos+width-8, ypos+7+y, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
-                            }
-
-                     }
-                     else
-                     {
-                            ScreenRenderer::DrawRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Cursoron) );
-
-                            if (escalator==true)
-                            {
-                                   ScreenRenderer::DrawRoundedRectangle(xpos+width-12, ypos+4, xpos+width-4, ypos+height-4, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Cursoron) );
-                                   unsigned int y = ((height-7-7)*firstlinevisible / nblinetotal);
-                                   ScreenRenderer::DrawFilledCircle( xpos+width-8, ypos+7+y, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Cursoron) );
-                            }
-
-                     }
-
-                     unsigned short R,G,B,A;
-
-                     const char *str = content[0].c_str() + scrollX;
-                     const char *cursor = content[0].c_str() + cursor_posX;
-                     unsigned int x1 = xpos + 2;
-
-                     //fonts->setcurrentfont( fonts->widget_text_enable.name );
-                     //fonts->setmodifiertypo( fonts->widget_text_enable.typo );
-                     //fonts->setmodifierunder( fonts->widget_text_enable.under );
-                     //fonts->setmodifierstrike( fonts->widget_text_enable.strike );
-
-                     SetStyle( '0', &R, &G, &B, &A );
-
-                     char* tpstr = (char*) str;
-                     int sh = FontEngine::GetStringHeight( tpstr );
-                     int sp = FontEngine::GetCurrentVSpacing();
-
-                     unsigned int currentpositioniinstring = 0;
-                     bool selected = false;
-
-                     unsigned int selend=selectend;
-                     unsigned int selsta=selectstart;
-
-                     if (selend<selectstart)
-                     {
-                            selend = selectstart;
-                            selsta = selectend;
-                     }
-
-                     currentline = 0;
-                     //while(*str && x1 - xpos + fonts->getcharwidth( (char) *str) < width)
-                     while (*str)
-                     {
-
-                            if (isselected && (currentpositioniinstring>=selsta) && (currentpositioniinstring<selend))
-                                   selected = true;
-                            else
-                                   selected = false;
-
-                            // TO BE TESTED
-                            if (str == cursor)
-                            {
-                                   currentlinecursor = currentline;
-                            }
-                            // END TO BE TESTED
-
-                            if(has_focus && (str == cursor) &&  (currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
-                            {
-                                   ScreenRenderer::DrawLine(  x1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
-                                   ScreenRenderer::DrawLine(  x1+1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1+1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
-                                   x1+=2;
-                            }
+    unsigned int currentnblinetotal = 0;
 
 
-                            if ((str[0]=='#') && (str[1]=='0')) // This corresponds to the normal style
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                                   currentpositioniinstring++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='1'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                                   currentpositioniinstring++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='2'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                                   currentpositioniinstring++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='3'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                                   currentpositioniinstring++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='4'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                                   currentpositioniinstring++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='5'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                                   currentpositioniinstring++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='6'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                                   currentpositioniinstring++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='7'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                                   currentpositioniinstring++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='8'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                                   currentpositioniinstring++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='9'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                                   currentpositioniinstring++;
-                            }
-                            else if (*str == '\n' )
-                            {
-                                   // if the current char is "RETURN" we go to the next line
-                                   x1 = xpos + 2;
-                                   currentline++;
-                            }
-                            else if (*str == '\t')
-                            {
-                                   // if the current char is a "TAB", we replace it with 5 SPACES
-                                   for(unsigned int u=0; u<5; u++)
-                                   {
-                                          if ((currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
-                                          {
-                                                 FontEngine::DrawCharLeft( ' ', x1, ypos + 2 + (currentline-firstlinevisible) * (sh+sp), R, G, B, A  );
-                                          }
-                                          x1 += FontEngine::GetCharWidth( ' ' ) + FontEngine::GetCurrentHSpacing();
-                                   }
-                            }
-                            else
-                            {
-                                   if ((currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
-                                   {
-                                          if (!selected)
-                                          {
-                                                 FontEngine::DrawCharLeft( *str, x1, ypos + 2 + (currentline-firstlinevisible) * (sh+sp),R, G, B, A );
-                                          }
-                                          else
-                                          {
-                                                 ScreenRenderer::DrawFilledRectangle( x1, ypos+2+(currentline-firstlinevisible) * (sh+sp), x1+FontEngine::GetCharWidth( (char) *str ), ypos+2+(currentline-firstlinevisible) * (sh+sp) + sh, ColorEngine::GetColor(ColorEngine::Widget_Selection) );
-                                                 FontEngine::DrawCharLeft( *str, x1, ypos + 2 + (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Text_Selected) );
-                                          }
-                                   }
-                                   x1 += FontEngine::GetCharWidth( (char) *str ) + FontEngine::GetCurrentHSpacing();
-                            }
+    if (is_visible)
+    {
+        if (is_enabled)
+        {
+            ScreenRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Filling_Enable) );
 
-                            if ((escalator==false) && (x1-xpos > width-10))
-                            {
-                                   x1 = xpos + 2;
-                                   currentline++;
-                                   if (currentline>currentnblinetotal) currentnblinetotal=currentline;
-                            }
+            if (!is_hovering)
+            {
+                ScreenRenderer::DrawRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
 
-                            if ((escalator==true) && (x1-xpos > width-25))
-                            {
-                                   x1 = xpos + 2;
-                                   currentline++;
-                                   if (currentline>currentnblinetotal) currentnblinetotal=currentline;
-                            }
+                if (escalator==true)
+                {
+                    ScreenRenderer::DrawRoundedRectangle(xpos+width-12, ypos+4, xpos+width-4, ypos+height-4, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
+                    unsigned int y = ((height-7-7)*firstlinevisible / nblinetotal);
+                    ScreenRenderer::DrawFilledCircle( xpos+width-8, ypos+7+y, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
+                }
+
+            }
+            else
+            {
+                ScreenRenderer::DrawRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Cursoron) );
+
+                if (escalator==true)
+                {
+                    ScreenRenderer::DrawRoundedRectangle(xpos+width-12, ypos+4, xpos+width-4, ypos+height-4, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Cursoron) );
+                    unsigned int y = ((height-7-7)*firstlinevisible / nblinetotal);
+                    ScreenRenderer::DrawFilledCircle( xpos+width-8, ypos+7+y, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Cursoron) );
+                }
+
+            }
+
+            unsigned short R,G,B,A;
+
+            const char *str = content[0].c_str() + scrollX;
+            const char *cursor = content[0].c_str() + cursor_posX;
+            unsigned int x1 = xpos + 2;
+
+            //fonts->setcurrentfont( fonts->widget_text_enable.name );
+            //fonts->setmodifiertypo( fonts->widget_text_enable.typo );
+            //fonts->setmodifierunder( fonts->widget_text_enable.under );
+            //fonts->setmodifierstrike( fonts->widget_text_enable.strike );
+
+            SetStyle( '0', &R, &G, &B, &A );
+
+            char* tpstr = (char*) str;
+            int sh = FontEngine::GetStringHeight( tpstr );
+            int sp = FontEngine::GetCurrentVSpacing();
+
+            unsigned int currentpositioniinstring = 0;
+            bool selected = false;
+
+            unsigned int selend=selectend;
+            unsigned int selsta=selectstart;
+
+            if (selend<selectstart)
+            {
+                selend = selectstart;
+                selsta = selectend;
+            }
+
+            currentline = 0;
+            //while(*str && x1 - xpos + fonts->getcharwidth( (char) *str) < width)
+            while (*str)
+            {
+
+                if (isselected && (currentpositioniinstring>=selsta) && (currentpositioniinstring<selend))
+                    selected = true;
+                else
+                    selected = false;
+
+                // TO BE TESTED
+                if (str == cursor)
+                {
+                    currentlinecursor = currentline;
+                }
+                // END TO BE TESTED
+
+                if(has_focus && (str == cursor) &&  (currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
+                {
+                    ScreenRenderer::DrawLine(  x1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
+                    ScreenRenderer::DrawLine(  x1+1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1+1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
+                    x1+=2;
+                }
 
 
-                            ++str;
-                            currentpositioniinstring++;
-                     }
+                if ((str[0]=='#') && (str[1]=='0')) // This corresponds to the normal style
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                    currentpositioniinstring++;
+                }
+                else if ((str[0]=='#') && (str[1]=='1'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                    currentpositioniinstring++;
+                }
+                else if ((str[0]=='#') && (str[1]=='2'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                    currentpositioniinstring++;
+                }
+                else if ((str[0]=='#') && (str[1]=='3'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                    currentpositioniinstring++;
+                }
+                else if ((str[0]=='#') && (str[1]=='4'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                    currentpositioniinstring++;
+                }
+                else if ((str[0]=='#') && (str[1]=='5'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                    currentpositioniinstring++;
+                }
+                else if ((str[0]=='#') && (str[1]=='6'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                    currentpositioniinstring++;
+                }
+                else if ((str[0]=='#') && (str[1]=='7'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                    currentpositioniinstring++;
+                }
+                else if ((str[0]=='#') && (str[1]=='8'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                    currentpositioniinstring++;
+                }
+                else if ((str[0]=='#') && (str[1]=='9'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                    currentpositioniinstring++;
+                }
+                else if (*str == '\n' )
+                {
+                    // if the current char is "RETURN" we go to the next line
+                    x1 = xpos + 2;
+                    currentline++;
+                }
+                else if (*str == '\t')
+                {
+                    // if the current char is a "TAB", we replace it with 5 SPACES
+                    for(unsigned int u=0; u<5; u++)
+                    {
+                        if ((currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
+                        {
+                            FontEngine::DrawCharLeft( ' ', x1, ypos + 2 + (currentline-firstlinevisible) * (sh+sp), R, G, B, A  );
+                        }
+                        x1 += FontEngine::GetCharWidth( ' ' ) + FontEngine::GetCurrentHSpacing();
+                    }
+                }
+                else
+                {
+                    if ((currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
+                    {
+                        if (!selected)
+                        {
+                            FontEngine::DrawCharLeft( *str, x1, ypos + 2 + (currentline-firstlinevisible) * (sh+sp),R, G, B, A );
+                        }
+                        else
+                        {
+                            ScreenRenderer::DrawFilledRectangle( x1, ypos+2+(currentline-firstlinevisible) * (sh+sp), x1+FontEngine::GetCharWidth( (char) *str ), ypos+2+(currentline-firstlinevisible) * (sh+sp) + sh, ColorEngine::GetColor(ColorEngine::Widget_Selection) );
+                            FontEngine::DrawCharLeft( *str, x1, ypos + 2 + (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Text_Selected) );
+                        }
+                    }
+                    x1 += FontEngine::GetCharWidth( (char) *str ) + FontEngine::GetCurrentHSpacing();
+                }
 
-                     // TO BE TESTED
-                     if (str == cursor)
-                     {
-                            currentlinecursor = currentline;
-                     }
-                     // END TO BE TESTED
+                if ((escalator==false) && (x1-xpos > width-10))
+                {
+                    x1 = xpos + 2;
+                    currentline++;
+                    if (currentline>currentnblinetotal) currentnblinetotal=currentline;
+                }
 
-                     if(has_focus && (str == cursor) && (currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
-                     {
-                            ScreenRenderer::DrawLine(  x1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
-                            ScreenRenderer::DrawLine(  x1+1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1+1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
-                            x1+=2;
-                     }
-
-              }
-              else
-              {
-                     ScreenRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Filling_Disable) );
-
-                     ScreenRenderer::DrawRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
-
-                     if (escalator==true)
-                     {
-                            ScreenRenderer::DrawRoundedRectangle(xpos+width-12, ypos+4, xpos+width-4, ypos+height-4, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
-                            unsigned int y = ((height-7-7)*firstlinevisible / nblinetotal);
-                            ScreenRenderer::DrawFilledCircle( xpos+width-8, ypos+7+y, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
-                     }
-
-                     unsigned short R,G,B,A;
-
-                     const char *str = content[0].c_str() + scrollX;
-                     const char *cursor = content[0].c_str() + cursor_posX;
-                     unsigned int x1 = xpos + 2;
-
-                     //fonts->setcurrentfont( fonts->widget_text_enable.name );
-                     //fonts->setmodifiertypo( fonts->widget_text_enable.typo );
-                     //fonts->setmodifierunder( fonts->widget_text_enable.under );
-                     //fonts->setmodifierstrike( fonts->widget_text_enable.strike );
-
-                     SetStyle( '0', &R, &G, &B, &A );
-
-                     char* tpstr = (char*) str;
-                     int sh = FontEngine::GetStringHeight( tpstr );
-                     int sp = FontEngine::GetCurrentVSpacing();
-
-                     currentline = 0;
-                     //while(*str && x1 - xpos + fonts->getcharwidth( (char) *str) < width)
-                     while (*str)
-                     {
-
-                            // TO BE TESTED
-                            if (str == cursor)
-                            {
-                                   currentlinecursor = currentline;
-                            }
-                            // END TO BE TESTED
-
-                            if(has_focus && str == cursor &&  (currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
-                            {
-                                   ScreenRenderer::DrawLine(  x1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
-                                   ScreenRenderer::DrawLine(  x1+1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1+1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
-                                   x1+=2;
-                            }
-
-
-                            if ((str[0]=='#') && (str[1]=='0')) // This corresponds to the normal style
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='1'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='2'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='3'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='4'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='5'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='6'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='7'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='8'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                            }
-                            else if ((str[0]=='#') && (str[1]=='9'))
-                            {
-                                   SetStyle( str[1], &R, &G, &B, &A );
-                                   str++;
-                            }
-                            else if (*str == '\n' )
-                            {
-                                   // if the current char is "RETURN" we go to the next line
-                                   x1 = xpos + 2;
-                                   currentline++;
-                            }
-                            else if (*str == '\t')
-                            {
-                                   // if the current char is a "TAB", we replace it with 5 SPACES
-                                   for(unsigned int u=0; u<5; u++)
-                                   {
-                                          //fonts->drawcharleft( screen, ' ', x1, ypos + 2 + currentline * (sh+sp),colors->widget_text_enable.R, colors->widget_text_enable.G, colors->widget_text_enable.B, colors->widget_text_enable.A);
-
-                                          if ((currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
-                                          {
-                                                 FontEngine::DrawCharLeft( ' ', x1, ypos + 2 + (currentline-firstlinevisible) * (sh+sp), R, G, B, A );
-                                          }
-
-                                          x1 += FontEngine::GetCharWidth( ' ' ) + FontEngine::GetCurrentHSpacing();
-                                   }
-                            }
-                            else
-                            {
-                                   //fonts->drawcharleft( screen, *str, x1, ypos + 2+ currentline * (sh+sp), colors->widget_text_enable.R, colors->widget_text_enable.G, colors->widget_text_enable.B, colors->widget_text_enable.A);
-
-                                   if ((currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
-                                   {
-                                          FontEngine::DrawCharLeft( *str, x1, ypos + 2 + (currentline-firstlinevisible) * (sh+sp), R, G, B, A );
-                                   }
-
-                                   x1 += FontEngine::GetCharWidth( (char) *str ) + FontEngine::GetCurrentHSpacing();
-                            }
-
-                            if ((escalator==false) && (x1-xpos > width-10))
-                            {
-                                   x1 = xpos + 2;
-                                   currentline++;
-                                   if (currentline>currentnblinetotal) currentnblinetotal=currentline;
-                            }
-
-                            if ((escalator==true) && (x1-xpos > width-25))
-                            {
-                                   x1 = xpos + 2;
-                                   currentline++;
-                                   if (currentline>currentnblinetotal) currentnblinetotal=currentline;
-                            }
-
-                            ++str;
-                     }
-
-                     // TO BE TESTED
-                     if (str == cursor)
-                     {
-                            currentlinecursor = currentline;
-                     }
-                     // END TO BE TESTED
-
-                     if((str == cursor) && (currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
-                     {
-                            ScreenRenderer::DrawLine(  x1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
-                            ScreenRenderer::DrawLine(  x1+1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1+1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
-                            x1+=2;
-                     }
+                if ((escalator==true) && (x1-xpos > width-25))
+                {
+                    x1 = xpos + 2;
+                    currentline++;
+                    if (currentline>currentnblinetotal) currentnblinetotal=currentline;
+                }
 
 
-              }
-              for (auto& c : children )
-                     c->Render( );
-       }
+                ++str;
+                currentpositioniinstring++;
+            }
 
-       nblinetotal = currentnblinetotal;
+            // TO BE TESTED
+            if (str == cursor)
+            {
+                currentlinecursor = currentline;
+            }
+            // END TO BE TESTED
+
+            if(has_focus && (str == cursor) && (currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
+            {
+                ScreenRenderer::DrawLine(  x1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
+                ScreenRenderer::DrawLine(  x1+1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1+1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
+                x1+=2;
+            }
+
+        }
+        else
+        {
+            ScreenRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Filling_Disable) );
+
+            ScreenRenderer::DrawRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
+
+            if (escalator==true)
+            {
+                ScreenRenderer::DrawRoundedRectangle(xpos+width-12, ypos+4, xpos+width-4, ypos+height-4, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
+                unsigned int y = ((height-7-7)*firstlinevisible / nblinetotal);
+                ScreenRenderer::DrawFilledCircle( xpos+width-8, ypos+7+y, 3, ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
+            }
+
+            unsigned short R,G,B,A;
+
+            const char *str = content[0].c_str() + scrollX;
+            const char *cursor = content[0].c_str() + cursor_posX;
+            unsigned int x1 = xpos + 2;
+
+            //fonts->setcurrentfont( fonts->widget_text_enable.name );
+            //fonts->setmodifiertypo( fonts->widget_text_enable.typo );
+            //fonts->setmodifierunder( fonts->widget_text_enable.under );
+            //fonts->setmodifierstrike( fonts->widget_text_enable.strike );
+
+            SetStyle( '0', &R, &G, &B, &A );
+
+            char* tpstr = (char*) str;
+            int sh = FontEngine::GetStringHeight( tpstr );
+            int sp = FontEngine::GetCurrentVSpacing();
+
+            currentline = 0;
+            //while(*str && x1 - xpos + fonts->getcharwidth( (char) *str) < width)
+            while (*str)
+            {
+
+                // TO BE TESTED
+                if (str == cursor)
+                {
+                    currentlinecursor = currentline;
+                }
+                // END TO BE TESTED
+
+                if(has_focus && str == cursor &&  (currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
+                {
+                    ScreenRenderer::DrawLine(  x1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
+                    ScreenRenderer::DrawLine(  x1+1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1+1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
+                    x1+=2;
+                }
+
+
+                if ((str[0]=='#') && (str[1]=='0')) // This corresponds to the normal style
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                }
+                else if ((str[0]=='#') && (str[1]=='1'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                }
+                else if ((str[0]=='#') && (str[1]=='2'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                }
+                else if ((str[0]=='#') && (str[1]=='3'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                }
+                else if ((str[0]=='#') && (str[1]=='4'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                }
+                else if ((str[0]=='#') && (str[1]=='5'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                }
+                else if ((str[0]=='#') && (str[1]=='6'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                }
+                else if ((str[0]=='#') && (str[1]=='7'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                }
+                else if ((str[0]=='#') && (str[1]=='8'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                }
+                else if ((str[0]=='#') && (str[1]=='9'))
+                {
+                    SetStyle( str[1], &R, &G, &B, &A );
+                    str++;
+                }
+                else if (*str == '\n' )
+                {
+                    // if the current char is "RETURN" we go to the next line
+                    x1 = xpos + 2;
+                    currentline++;
+                }
+                else if (*str == '\t')
+                {
+                    // if the current char is a "TAB", we replace it with 5 SPACES
+                    for(unsigned int u=0; u<5; u++)
+                    {
+                        //fonts->drawcharleft( screen, ' ', x1, ypos + 2 + currentline * (sh+sp),colors->widget_text_enable.R, colors->widget_text_enable.G, colors->widget_text_enable.B, colors->widget_text_enable.A);
+
+                        if ((currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
+                        {
+                            FontEngine::DrawCharLeft( ' ', x1, ypos + 2 + (currentline-firstlinevisible) * (sh+sp), R, G, B, A );
+                        }
+
+                        x1 += FontEngine::GetCharWidth( ' ' ) + FontEngine::GetCurrentHSpacing();
+                    }
+                }
+                else
+                {
+                    //fonts->drawcharleft( screen, *str, x1, ypos + 2+ currentline * (sh+sp), colors->widget_text_enable.R, colors->widget_text_enable.G, colors->widget_text_enable.B, colors->widget_text_enable.A);
+
+                    if ((currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
+                    {
+                        FontEngine::DrawCharLeft( *str, x1, ypos + 2 + (currentline-firstlinevisible) * (sh+sp), R, G, B, A );
+                    }
+
+                    x1 += FontEngine::GetCharWidth( (char) *str ) + FontEngine::GetCurrentHSpacing();
+                }
+
+                if ((escalator==false) && (x1-xpos > width-10))
+                {
+                    x1 = xpos + 2;
+                    currentline++;
+                    if (currentline>currentnblinetotal) currentnblinetotal=currentline;
+                }
+
+                if ((escalator==true) && (x1-xpos > width-25))
+                {
+                    x1 = xpos + 2;
+                    currentline++;
+                    if (currentline>currentnblinetotal) currentnblinetotal=currentline;
+                }
+
+                ++str;
+            }
+
+            // TO BE TESTED
+            if (str == cursor)
+            {
+                currentlinecursor = currentline;
+            }
+            // END TO BE TESTED
+
+            if((str == cursor) && (currentline>=firstlinevisible) && (currentline<firstlinevisible+nblinevisible))
+            {
+                ScreenRenderer::DrawLine(  x1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
+                ScreenRenderer::DrawLine(  x1+1, ypos + 1+ (currentline-firstlinevisible) * (sh+sp), x1+1, ypos + sh + 1+ (currentline-firstlinevisible) * (sh+sp), ColorEngine::GetColor(ColorEngine::Widget_Border_Disable) );
+                x1+=2;
+            }
+
+
+        }
+        for (auto& c : children )
+            c->Render( );
+    }
+
+    nblinetotal = currentnblinetotal;
 }
 
 void MultiLineRichTextBoxWidget::UpdateScroll()
 {
-       /*
-              if(scrollX != 0 && cursor_posX <= scrollX)
-                     --scrollX;
+    /*
+           if(scrollX != 0 && cursor_posX <= scrollX)
+                  --scrollX;
 
-              if(cursor_posX <= scrollX)
-                     return;
+           if(cursor_posX <= scrollX)
+                  return;
 
-              nfontwidget->setcurrentfont( nfontwidget->widget_text_enable.name );
+           nfontwidget->setcurrentfont( nfontwidget->widget_text_enable.name );
 
-              const char *str = content[0].c_str() + scrollX;
-              unsigned int cur_x = 0;
-              unsigned int len = cursor_posX - scrollX;
+           const char *str = content[0].c_str() + scrollX;
+           unsigned int cur_x = 0;
+           unsigned int len = cursor_posX - scrollX;
 
-              while(len--)
-                     cur_x += nfontwidget->getcharwidth( *str++ ) + nfontwidget->gethspacing();
+           while(len--)
+                  cur_x += nfontwidget->getcharwidth( *str++ ) + nfontwidget->gethspacing();
 
-              if(cur_x >= width - 5)
-                     ++scrollX;
-       */
+           if(cur_x >= width - 5)
+                  ++scrollX;
+    */
 }

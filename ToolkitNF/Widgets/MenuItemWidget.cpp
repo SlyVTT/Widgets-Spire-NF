@@ -159,8 +159,11 @@ void MenuItemWidget::Render( void )
                 int sl =  FontEngine::GetStringWidth( drawablelabel );
                 int sh =  FontEngine::GetStringHeight( drawablelabel );
 
-                 FontEngine::DrawStringLeft( drawablelabel, xpos+2, ypos+(height-sh)/2, ColorEngine::GetColor(ColorEngine::Widget_Text_Enable) );
+                FontEngine::DrawStringLeft( drawablelabel, xpos+2, ypos+(height-sh)/2, ColorEngine::GetColor(ColorEngine::Widget_Text_Enable) );
 
+
+
+    //TODO : need to fix the width of the menu when there is a submenu
 
                 // create a mark to indicate that there is a submenu
                 if (parent)
@@ -176,7 +179,6 @@ void MenuItemWidget::Render( void )
                                 if (c->GetWidgetType() == "MenuPane")
                                 {
                                     FontEngine::DrawCharLeft(  (char) '\u0010',  xpos+sl+5, ypos+(height-sh)/2, ColorEngine::GetColor(ColorEngine::Widget_Border_Enable) );
-
                                 }
                             }
                         }

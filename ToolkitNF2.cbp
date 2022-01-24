@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ToolkitNF2" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ToolkitNF2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DFOR_PC" />
+					<Add directory="ToolkitNF/Garbage" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ToolkitNF2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="ToolkitNF/Garbage" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-I/usr/include" />
+			<Add option="-W" />
+			<Add option="-Wunused-variable" />
+			<Add option="-Wunused-parameter" />
+			<Add option="-ffunction-sections" />
+			<Add option="-fdata-sections" />
+			<Add option="-fno-exceptions" />
+			<Add option="-lstdc++" />
+			<Add option="-DFOR_PC" />
+			<Add directory="/usr/include" />
+		</Compiler>
+		<Linker>
+			<Add option="-L/usr/lib/x86_64-linux-gnu" />
+			<Add option="-lm" />
+			<Add option="-lc" />
+			<Add option="-lSDL" />
+			<Add option="-lSDLmain" />
+			<Add option="-lSDL_gfx" />
+			<Add option="-lSDL_image" />
+		</Linker>
+		<Unit filename="SimpleCodeEditor.cpp" />
+		<Unit filename="TodoList.txt" />
+		<Unit filename="ToolkitNF/Debugger/Debugger.cpp" />
+		<Unit filename="ToolkitNF/Debugger/Debugger.hpp" />
+		<Unit filename="ToolkitNF/Engines/ColorEngine.cpp" />
+		<Unit filename="ToolkitNF/Engines/ColorEngine.hpp" />
+		<Unit filename="ToolkitNF/Engines/FontEngine.cpp" />
+		<Unit filename="ToolkitNF/Engines/FontEngine.hpp" />
+		<Unit filename="ToolkitNF/Engines/ThemeEngine.cpp" />
+		<Unit filename="ToolkitNF/Engines/ThemeEngine.hpp" />
+		<Unit filename="ToolkitNF/GUIToolkitNF.hpp" />
+		<Unit filename="ToolkitNF/Garbage/GarbageCollector.cpp" />
+		<Unit filename="ToolkitNF/Garbage/GarbageCollector.hpp" />
+		<Unit filename="ToolkitNF/Globals/GUIToolkitNFGlobals.hpp" />
+		<Unit filename="ToolkitNF/Globals/GlobalFunctions.cpp" />
+		<Unit filename="ToolkitNF/Globals/GlobalFunctions.hpp" />
+		<Unit filename="ToolkitNF/Managers/CursorsDesigns.hpp" />
+		<Unit filename="ToolkitNF/Managers/KeyManager.cpp" />
+		<Unit filename="ToolkitNF/Managers/KeyManager.hpp" />
+		<Unit filename="ToolkitNF/Managers/MouseManager.cpp" />
+		<Unit filename="ToolkitNF/Managers/MouseManager.hpp" />
+		<Unit filename="ToolkitNF/Managers/TimeManager.cpp" />
+		<Unit filename="ToolkitNF/Managers/TimeManager.hpp" />
+		<Unit filename="ToolkitNF/Renderers/DepthBufferRenderer.cpp" />
+		<Unit filename="ToolkitNF/Renderers/DepthBufferRenderer.hpp" />
+		<Unit filename="ToolkitNF/Renderers/ScreenRenderer.cpp" />
+		<Unit filename="ToolkitNF/Renderers/ScreenRenderer.hpp" />
+		<Unit filename="ToolkitNF/Widgets/ButtonWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/ButtonWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/CheckBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/CheckBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/CommuterWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/CommuterWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/ContainerHWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/ContainerHWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/ContainerVWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/ContainerVWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/DesktopWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/DesktopWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/DialogBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/DialogBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/DropBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/DropBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/FileDialogBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/FileDialogBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/FrameWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/FrameWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/GraphicContextWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/GraphicContextWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/IconBarWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/IconBarWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/IconItemWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/IconItemWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/InputWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/InputWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/LabelWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/LabelWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/ListBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/ListBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuBarWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuBarWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuItemWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuItemWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuPaneWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MenuPaneWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MiniButtonWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MiniButtonWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MultiLineRichTextBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MultiLineRichTextBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/MultiLineTextBoxWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/MultiLineTextBoxWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/ProgressBarWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/ProgressBarWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/RadioControlWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/RadioControlWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/SliderWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/SliderWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/SpacerWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/SpacerWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/SplashScreenWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/SplashScreenWidget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/Widget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/Widget.hpp" />
+		<Unit filename="ToolkitNF/Widgets/WidgetApplication.cpp" />
+		<Unit filename="ToolkitNF/Widgets/WidgetApplication.hpp" />
+		<Unit filename="ToolkitNF/Widgets/WindowWidget.cpp" />
+		<Unit filename="ToolkitNF/Widgets/WindowWidget.hpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

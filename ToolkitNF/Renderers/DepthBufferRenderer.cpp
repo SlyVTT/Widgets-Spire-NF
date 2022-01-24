@@ -3,6 +3,11 @@
 
 
 #if RENDER_WITH_SDL == 1
+
+    #include <SDL/SDL.h>
+    #include <SDL/SDL_gfxPrimitives.h>
+
+
 uint32_t DepthBufferRenderer::_getpixel(SDL_Surface *surface, int x, int y)
 {
        int bpp = surface->format->BytesPerPixel;
@@ -90,13 +95,13 @@ void DepthBufferRenderer::WriteToBMP( std::string filename )
        int n;
        unsigned char red, green, blue;
 
-       extrabytes = 4 - ((SCREEN_WIDTH * 3) % 4);                 // How many bytes of padding to add to each
+       extrabytes = 4 - ((SCREEN_WIDTH_GUI * 3) % 4);                 // How many bytes of padding to add to each
        // horizontal line - the size of which must
        // be a multiple of 4 bytes.
        if (extrabytes == 4)
               extrabytes = 0;
 
-       paddedsize = ((SCREEN_WIDTH * 3) + extrabytes) * SCREEN_HEIGHT;
+       paddedsize = ((SCREEN_WIDTH_GUI * 3) + extrabytes) * SCREEN_HEIGHT_GUI;
 
 // Headers...
 // Note that the "BM" identifier in bytes 0 and 1 is NOT included in these "headers".
@@ -105,8 +110,8 @@ void DepthBufferRenderer::WriteToBMP( std::string filename )
        headers[1]  = 0;                    // bfReserved (both)
        headers[2]  = 54;                   // bfOffbits
        headers[3]  = 40;                   // biSize
-       headers[4]  = SCREEN_WIDTH;  // biWidth
-       headers[5]  = SCREEN_HEIGHT; // biHeight
+       headers[4]  = SCREEN_WIDTH_GUI;  // biWidth
+       headers[5]  = SCREEN_HEIGHT_GUI; // biHeight
 
 // Would have biPlanes and biBitCount in position 6, but they're shorts.
 // It's easier to write them out separately (see below) than pretend
@@ -155,9 +160,9 @@ void DepthBufferRenderer::WriteToBMP( std::string filename )
 // Headers done, now write the data...
 //
 
-       for (y = SCREEN_HEIGHT - 1; y >= 0; y--)     // BMP image format is written from bottom to top...
+       for (y = SCREEN_HEIGHT_GUI - 1; y >= 0; y--)     // BMP image format is written from bottom to top...
        {
-              for (x = 0; x < SCREEN_WIDTH ; x++)
+              for (x = 0; x < SCREEN_WIDTH_GUI ; x++)
               {
 
                      red = InternalGetPixelR( x, y );
@@ -195,7 +200,7 @@ void DepthBufferRenderer::InternalInitialize( void )
 {
 #if RENDER_WITH_SDL == 1
 
-       depthbuffer = SDL_CreateRGBSurface(0, 320, 240, 24, 0, 0, 0, 0);
+       depthbuffer = SDL_CreateRGBSurface(0, SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI, 24, 0, 0, 0, 0);
 
        if(depthbuffer == NULL)
        {
@@ -208,15 +213,15 @@ void DepthBufferRenderer::InternalInitialize( void )
 
 #else
 
-       depthbuffer = gui_gc_copy( gui_gc_global_GC() , SCREEN_WIDTH, SCREEN_HEIGHT );
+       depthbuffer = gui_gc_copy( gui_gc_global_GC() , SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI );
 
-       gui_gc_setRegion(depthbuffer, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+       gui_gc_setRegion(depthbuffer, 0, 0, SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI, 0, 0, SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI);
        gui_gc_begin(depthbuffer);
 
        gui_gc_setAlpha(depthbuffer, GC_A_OFF);
 
        gui_gc_setColorRGB(depthbuffer, 0, 0, 0);
-       gui_gc_fillRect(depthbuffer, 0, 0, 320, 240);
+       gui_gc_fillRect(depthbuffer, 0, 0, SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI);
 
 #endif
 }
@@ -264,7 +269,7 @@ void DepthBufferRenderer::InternalClearScreen( unsigned short R, unsigned short 
 #else
 
        gui_gc_setColorRGB(depthbuffer, R, G, B);
-       gui_gc_fillRect(depthbuffer, 0, 0, 320, 240);
+       gui_gc_fillRect(depthbuffer, 0, 0, SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI);
 
 #endif
 }
@@ -424,7 +429,7 @@ unsigned char DepthBufferRenderer::InternalGetPixelR( unsigned int x, unsigned i
 
 #else
 
-       if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH_GUI) && (y<=SCREEN_HEIGHT_GUI))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
               unsigned int res = *(unsigned int *) (off_buff[y] + 2*x);
@@ -447,7 +452,7 @@ unsigned char DepthBufferRenderer::InternalGetPixelG( unsigned int x, unsigned i
 
 #else
 
-       if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH_GUI) && (y<=SCREEN_HEIGHT_GUI))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
               unsigned int res = *(unsigned int *) (off_buff[y] + 2*x);
@@ -471,7 +476,7 @@ unsigned char DepthBufferRenderer::InternalGetPixelB( unsigned int x, unsigned i
 
 #else
 
-       if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH_GUI) && (y<=SCREEN_HEIGHT_GUI))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
               unsigned int res = *(unsigned int *) (off_buff[y] + 2*x);
@@ -492,7 +497,7 @@ unsigned int DepthBufferRenderer::InternalGetPixel( unsigned int x, unsigned int
 
 #else
 
-       if ((x<=SCREEN_WIDTH) && (y<=SCREEN_HEIGHT))
+       if ((x<=SCREEN_WIDTH_GUI) && (y<=SCREEN_HEIGHT_GUI))
        {
               char ** off_buff = ((((char *****)depthbuffer)[9])[0])[0x8];
               return *(unsigned int *) (off_buff[y] + 2*x);

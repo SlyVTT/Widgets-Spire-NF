@@ -52,8 +52,8 @@ DropBoxWidget::DropBoxWidget(std::string l, unsigned int x, unsigned int y, unsi
 
 DropBoxWidget::~DropBoxWidget( void )
 {
-    delete dropbutton;
-    delete listbox;
+    //delete dropbutton;
+    //delete listbox;
 }
 
 void DropBoxWidget::Drop( void )

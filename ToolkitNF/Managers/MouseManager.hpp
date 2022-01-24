@@ -2,6 +2,7 @@
 #define MOUSEMANAGER_H
 
 #include "../Globals/GlobalFunctions.hpp"
+#include "../Globals/GUIToolkitNFGlobals.hpp"
 
 #if RENDER_WITH_SDL == 1
     #include <SDL/SDL.h>
@@ -9,6 +10,9 @@
     #include <ngc.h>
 #endif
 
+#if TARGET_NSPIRE == 0
+    #include <SDL/SDL.h>        // used to get access to SDL_Event
+#endif // TARGET_NSPIRE
 
 
 
@@ -184,6 +188,12 @@ private:
     bool mousereleaseevent ;
 
     CursorType cursor;
+
+
+#if TARGET_NSPIRE == 0
+        SDL_Event event;
+        Uint8 *keys;
+#endif
 
 
 #if RENDER_WITH_SDL == 1

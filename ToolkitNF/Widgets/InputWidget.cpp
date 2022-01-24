@@ -89,7 +89,7 @@ void InputWidget::Logic( void )
 
         if (key_hold_down)
         {
-            key_hold_down = any_key_pressed();
+            key_hold_down = KeyManager::IsAnyKeyPressed();
         }
         else if (KeyManager::kbCTRL() && MouseManager::kbLEFT())
         {

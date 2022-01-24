@@ -1,0 +1,31 @@
+DEBUG = TRUE
+
+GXX = g++
+
+GCCFLAGS = -Wall -W -Wunused-variable -Wunused-parameter -ffunction-sections -fdata-sections  -fno-exceptions  -DFOR_PC -lstdc++ $(shell sdl-config --cflags)
+LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lm -lc $(shell sdl-config --libs) -lSDL_gfx -lSDL_image
+
+ifeq ($(DEBUG),FALSE)
+	GCCFLAGS += -Os 
+	EXE = Editor_PC_SDL
+else
+	GCCFLAGS += -O0 -g -D_GLIBCXX_DEBUG
+	EXE = Editor_PC_SDL.Debug
+endif
+
+OBJS += $(patsubst %.cpp, %.o, $(shell find . -name \*.cpp))
+DISTDIR = .
+
+all: clean $(EXE)
+
+$(EXE): $(EXE).elf
+
+$(EXE).elf: $(OBJS)
+	mkdir -p $(DISTDIR)
+	$(GXX) $^ -o $@ $(LDFLAGS)
+	
+%.o: %.cpp
+	$(GXX) $(GCCFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJS) $(DISTDIR)/$(EXE).exe

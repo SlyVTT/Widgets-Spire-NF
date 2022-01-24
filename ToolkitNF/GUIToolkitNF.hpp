@@ -36,6 +36,7 @@
 #include "Widgets/ContainerVWidget.hpp"
 #include "Widgets/SpacerWidget.hpp"
 #include "Widgets/SliderWidget.hpp"
+#include "Widgets/RadioControlWidget.hpp"
 
 #include "Widgets/FrameWidget.hpp"
 #include "Widgets/LabelWidget.hpp"
@@ -62,7 +63,7 @@
 #include "Widgets/MultiLineTextBoxWidget.hpp"
 #include "Widgets/MultiLineRichTextBoxWidget.hpp"
 
-
+#include "Widgets/GraphicContextWidget.hpp"
 
 
 

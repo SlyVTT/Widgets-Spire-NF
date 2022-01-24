@@ -13,6 +13,9 @@
 #include "../Engines/FontEngine.hpp"
 #include "../Renderers/ScreenRenderer.hpp"
 
+#include "../Garbage/GarbageCollector.hpp"
+
+
 
 unsigned int GlobalWidgetIDCounter;
 
@@ -283,6 +286,8 @@ Widget::Widget( )
     WidgetID = GlobalWidgetIDCounter;
     GlobalWidgetIDCounter++;
 
+    GarbageCollector::RegisterWidget( WidgetID, GetWidgetType().c_str(), this );
+
 #if DEBUG_MODE == 1
     Debugger::TimerLog( "Create Widget( ) : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
 #endif // DEBUG_MODE
@@ -303,6 +308,7 @@ Widget::Widget( std::string l, unsigned int x, unsigned int y, unsigned int w, u
     WidgetID = GlobalWidgetIDCounter;
     GlobalWidgetIDCounter++;
 
+    GarbageCollector::RegisterWidget( WidgetID, GetWidgetType().c_str(), this );
 
 #if DEBUG_MODE == 1
     Debugger::TimerLog( "Create Widget( ... ) : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
@@ -361,6 +367,7 @@ Widget::Widget( std::string l, unsigned int x, unsigned int y, unsigned int w, u
 Widget::~Widget()
 {
 
+/*
 #if DEBUG_MODE == 1
     Debugger::TimerLog( "Delete ~Widget() : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
 #endif // DEBUG_MODE
@@ -375,7 +382,6 @@ Widget::~Widget()
 #if DEBUG_MODE == 1
     Debugger::TimerLog( "\t\t Child : ID : %ld \t - Type : %s \t - Label :  %s \n", c->WidgetID, c->GetWidgetType().c_str(), c->GetLabel().c_str() );
 #endif // DEBUG_MODE
-
         delete c;
 
 #if DEBUG_MODE == 1
@@ -383,10 +389,25 @@ Widget::~Widget()
 #endif // DEBUG_MODE
     }
 
+  */
 
+    GarbageCollector::MarkWidgetForDeletion( WidgetID );
+
+    for(auto& c : children)
+    {
+        GarbageCollector::MarkWidgetForDeletion( c->WidgetID );
+    }
 
     children.clear();
 
+    for(auto& c : popupchildren)
+    {
+        GarbageCollector::MarkWidgetForDeletion( c->WidgetID );
+    }
+
+    popupchildren.clear();
+
+/*
 #if DEBUG_MODE == 1
     Debugger::TimerLog( "\t List of Children CLEARED for Widget() : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
 #endif // DEBUG_MODE
@@ -396,6 +417,7 @@ Widget::~Widget()
 #if DEBUG_MODE == 1
     Debugger::TimerLog( "\t Will start killing the popup children of Widget() : ID : %ld \t - Type : %s \t - Label :  %s \n", WidgetID, GetWidgetType().c_str(), GetLabel().c_str() );
 #endif // DEBUG_MODE
+*/
 
 /*
     for (auto& d : popupchildren )
@@ -509,17 +531,17 @@ void Widget::RenderDepth( void )
 
             //The number of units codes the BB component
             unsigned int B=0;
-            unsigned int u = WidgetID % 10;
+            unsigned int u = this->WidgetID % 10;
             B = u*25;
 
             //The number of tens codes the GG component
             unsigned int G=0;
-            unsigned int d=((WidgetID-u)/10) % 10;
+            unsigned int d=((this->WidgetID-u) / 10) % 10;
             G = d*25;
 
             //The number of hundreds codes the RR component
             unsigned int R=0;
-            unsigned int c=((WidgetID-u-10*d) / 100) % 10;
+            unsigned int c=((this->WidgetID-u-10*d) / 100) % 10;
             R = c*25;
 
 /*
@@ -527,11 +549,11 @@ void Widget::RenderDepth( void )
                     sprintf( tempID, "ID=%d / R=%d / G=%d / B=%d / c=%d / d=%d / u=%d", WidgetID, R, G, B, c, d, u );
                     FontEngine::SetCurrentFontSet( FontEngine::Widget_Text_Enable );
                     unsigned int length=FontEngine::GetStringWidth( tempID );
-                    ScreenRenderer::DrawFilledRectangle( 5, 5, 5+length, 5 +10, 0, 0, 0, 255 );
-                    FontEngine::DrawStringLeft( tempID, 5, 5, 0, 255, 0, 255 );
+                    ScreenRenderer::DrawFilledRectangle( xpos+30, ypos+5, xpos+30+length, xpos+5+10, 0, 0, 0, 255 );
+                    FontEngine::DrawStringLeft( tempID, xpos+30, ypos+5, 0, 0, 0, 0 );
 
-                    ScreenRenderer::FlipScreen();
-*/
+*/                  //ScreenRenderer::FlipScreen();
+
 
             //Draw the corresponding shape in the Depth Buffer Image
             DepthBufferRenderer::DrawFilledRoundedRectangle( xpos, ypos, xpos+width, ypos+height, 3, R, G, B, 255 );

@@ -6,6 +6,14 @@ WidgetApplication Class :
     - use the above <vector> collection of widgets at Close() to delete them all
     - [OK] debug the application at exit
 
+GraphicContextWidget Class :
+    - Check why images are not appearing
+    - Debug Class
+    - Allow useage without SDL by coding nGC compliant functions
+
+WindowWidget Class :
+    - [OK] track bug not allowing Windows maximization and minimization
+
 Menus in general :
     - MenuBarWidget / MenuPaneWidget / MenuItemWidget - check if in MenuPaneWidget we need the AddPopupChild at construction to work propertly
 
@@ -18,6 +26,15 @@ DepthBufferRenderer Class :
     - [OK ?] correct the buffer to correctly get the value of (R,G,B,A) components and then pick the right WidgetID for nGC version
     - [No Need] possibly convert it from uint16_t to uint24_t or uint32_t
 
+InputWidget Class :
+    - change MouseManager cursor when hovering the widget
+
+MultiLineRichTextBoxWidget Class :
+    - change MouseManager cursor when hovering the widget
+
+MultiLineTextBoxWidget Class :
+    - change MouseManager cursor when hovering the widget
+
 General :
     - check if memory is properly freed when using images
     - check if memory is properly freed when closing the application with WidgetApplication::Close()
@@ -25,6 +42,7 @@ General :
     - check if memory is properly freed while using ScreenRendered::Close()
     - check if memory is properly freed while using DepthBufferRenderer::Close()
     - check is themes are correctly supported while using the ThemeEngine methods
+    - Solve the double memory Free() issue when leaving the application
 
 Samples :
     - try to recompile the different sample applications for use with the GUI Toolkit NF version
@@ -33,11 +51,14 @@ Samples :
 TimeManager Class :
     - [OK] check if the methods are working properly
     - [OK] check if the TimeManager is correcly initialized using the InternalStartTicks() method obtained from Hoffa's nSDL code
-    - check if it is possible to use both fast timer, rather than just the first one
+    - check if it is possible to use both fast timers, rather than just the first one
     - create some start markers and stop markets for delta time calculation
     - [OK] create a method providing a timestamping string for debugging applications
 
 Evolutions :
-    - create a set of function to be able to use the GUI Toolkit NF on a PC with (SDL ?)
+    - [On Going] create a set of functions to be able to use the GUI Toolkit NF on a PC with (SDL ?)
     - create new widgets such as :
             # MultiPagePanes
+            # Modifier Keys Surveillance
+            # FPS counter
+

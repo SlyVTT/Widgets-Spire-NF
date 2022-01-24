@@ -24,16 +24,16 @@ FontEngine& FontEngine::Get( void )
 
 void FontEngine::InternalInitialize()
 {
-       LoadFontFromFile( "/documents/Widget/Fonts/THIN.WFE.tns" );
-       LoadFontFromFile( "/documents/Widget/Fonts/VGA.WFE.tns" );
-       LoadFontFromFile( "/documents/Widget/Fonts/SPACE.WFE.tns" );
-       LoadFontFromFile( "/documents/Widget/Fonts/TINY.WFE.tns" );
-       LoadFontFromFile( "/documents/Widget/Fonts/STANDARD.WFE.tns" );
-       LoadFontFromFile( "/documents/Widget/Fonts/FANTASY.WFE.tns" );
+       InternalLoadFontFromFile( "/documents/Widget/Fonts/THIN.WFE.tns" );
+       InternalLoadFontFromFile( "/documents/Widget/Fonts/VGA.WFE.tns" );
+       InternalLoadFontFromFile( "/documents/Widget/Fonts/SPACE.WFE.tns" );
+       InternalLoadFontFromFile( "/documents/Widget/Fonts/TINY.WFE.tns" );
+       InternalLoadFontFromFile( "/documents/Widget/Fonts/STANDARD.WFE.tns" );
+       InternalLoadFontFromFile( "/documents/Widget/Fonts/FANTASY.WFE.tns" );
        InternalSetDefaultFontPreset();
-       InternalSetCurrentFont( THIN_FONT );
+       InternalSetCurrentFont( FontEngine::THIN_FONT );
        vspacing = 3;
-       hspacing = -1;
+       hspacing = 1;
        currentmodifiertypo = Normal;  // set text as normal
        currentmodifierunder = NoUnder; // No underlining
        currentmodifierstrike = NoStrike; // No striking
@@ -42,9 +42,9 @@ void FontEngine::InternalInitialize()
 
 void FontEngine::InternalResetState( void )
 {
-       SetCurrentFont( THIN_FONT );
+       SetCurrentFont( FontEngine::THIN_FONT );
        vspacing = 3;
-       hspacing = -1;
+       hspacing = 1;
        currentmodifiertypo = Normal;  // set text as normal
        currentmodifierunder = NoUnder; // No underlining
        currentmodifierstrike = NoStrike; // No striking
@@ -103,6 +103,8 @@ FontEngine::FontData* FontEngine::InternalLoadFontFromFilePointer( std::string f
                             FontChar *tempChar = new FontChar;
                             tempChar->CharWidth = width;
                             tempChar->CharHeight = height;
+                            tempChar->FirstNonEmptyRow = 0;
+                            tempChar->LastNonEmptyRow = 7;
 
                             tempChar->CharData = (unsigned short *) malloc( height * sizeof( unsigned short ) );
 
@@ -181,6 +183,44 @@ FontEngine::FontData* FontEngine::InternalLoadFontFromFilePointer( std::string f
                                    tempChar->CharData[i] = nbvalue;
 
                             }
+
+                            unsigned short caract=0;
+                            for (int i = 0; i < height; i++)
+                            {
+                                 caract |= tempChar->CharData[i];
+                            }
+
+                            int tempmask = 1<<(width-1);
+                            for (int i = 0; i< width; i++)
+                            {
+                                int masquage = tempmask & caract;
+                                if (masquage==0)
+                                {
+                                    tempChar->FirstNonEmptyRow++;
+                                    tempmask = tempmask>>1;
+                                }
+                                else break;
+                            }
+
+                            tempmask = 1;
+                            for (int i = width-1; i>=0; i--)
+                            {
+                                int masquage = tempmask & caract;
+                                if (masquage==0)
+                                {
+                                    tempChar->LastNonEmptyRow--;
+                                    tempmask = tempmask<<1;
+                                }
+                                else break;
+                            }
+
+                            if (tempChar->FirstNonEmptyRow>tempChar->LastNonEmptyRow) // we are certainly facing a blank character like ' ' so we adjust the size to 3px
+                            {
+                                tempChar->FirstNonEmptyRow = 0;
+                                tempChar->LastNonEmptyRow = 1;
+                            }
+
+                            tempChar->CharWidth = tempChar->LastNonEmptyRow - tempChar->FirstNonEmptyRow + 1;
 
                             tempFont->Font.push_back( tempChar );
                      }
@@ -232,6 +272,8 @@ void FontEngine::InternalLoadFontFromFile( std::string filename )
                             FontChar *tempChar = new FontChar;
                             tempChar->CharWidth = width;
                             tempChar->CharHeight = height;
+                            tempChar->FirstNonEmptyRow = 0;
+                            tempChar->LastNonEmptyRow = width-1;
 
                             tempChar->CharData = (unsigned short *) malloc( height * sizeof( unsigned short ) );
 
@@ -311,6 +353,44 @@ void FontEngine::InternalLoadFontFromFile( std::string filename )
 
                             }
 
+                            unsigned short caract=0;
+                            for (int i = 0; i < height; i++)
+                            {
+                                 caract |= tempChar->CharData[i];
+                            }
+
+                            int tempmask = 1<<(width-1);
+                            for (int i = 0; i< width; i++)
+                            {
+                                int masquage = tempmask & caract;
+                                if (masquage==0)
+                                {
+                                    tempChar->FirstNonEmptyRow++;
+                                    tempmask = tempmask>>1;
+                                }
+                                else break;
+                            }
+
+                            tempmask = 1;
+                            for (int i = width-1; i>=0; i--)
+                            {
+                                int masquage = tempmask & caract;
+                                if (masquage==0)
+                                {
+                                    tempChar->LastNonEmptyRow--;
+                                    tempmask = tempmask<<1;
+                                }
+                                else break;
+                            }
+
+                            if (tempChar->FirstNonEmptyRow>tempChar->LastNonEmptyRow) // we are certainly facing a blank character like ' ' so we adjust the size to 3px
+                            {
+                                tempChar->FirstNonEmptyRow = 0;
+                                tempChar->LastNonEmptyRow = 1;
+                            }
+
+                            tempChar->CharWidth = tempChar->LastNonEmptyRow - tempChar->FirstNonEmptyRow + 1;
+
                             tempFont->Font.push_back( tempChar );
                      }
               }
@@ -319,7 +399,6 @@ void FontEngine::InternalLoadFontFromFile( std::string filename )
 
               FontCollection.push_back( tempFont );
        }
-
 }
 
 unsigned int FontEngine::InternalGetStringWidth( char *str )
@@ -336,7 +415,6 @@ unsigned int FontEngine::InternalGetStringWidth( char *str )
        return posx;
 }
 
-
 unsigned int FontEngine::InternalGetStringWidth( std::string str )
 {
        int length = str.size();
@@ -350,7 +428,6 @@ unsigned int FontEngine::InternalGetStringWidth( std::string str )
 
        return posx;
 }
-
 
 // this is for monoline text, does not take into consideration \n character yet
 unsigned int FontEngine::InternalGetStringHeight( char *str )
@@ -366,7 +443,6 @@ unsigned int FontEngine::InternalGetStringHeight( char *str )
        return posy;
 }
 
-
 // this is for monoline text, does not take into consideration \n character yet
 unsigned int FontEngine::InternalGetStringHeight( std::string str )
 {
@@ -381,7 +457,6 @@ unsigned int FontEngine::InternalGetStringHeight( std::string str )
        return posy;
 }
 
-
 unsigned int FontEngine::InternalGetCharWidth( char str )
 {
        return currentfont->Font[str]->CharWidth;
@@ -391,7 +466,6 @@ unsigned int FontEngine::InternalGetCharHeight( char str )
 {
        return currentfont->Font[str]->CharHeight;
 }
-
 
 unsigned int FontEngine::InternalAssertStringLength( char *str, unsigned int width )
 {
@@ -437,7 +511,6 @@ unsigned int FontEngine::InternalAssertStringLength( std::string str, unsigned i
        return 0;
 }
 
-
 unsigned int FontEngine::InternalAssertStringLength( std::string str, unsigned int width, FontEngine::FontName name, FontEngine::FontModifierTypo typo, FontEngine::FontModifierUnder under, FontEngine::FontModifierStrike strike )
 {
        InternalSetCurrentFont( name );
@@ -465,7 +538,6 @@ unsigned int FontEngine::InternalAssertStringLength( std::string str, unsigned i
        return 0;
 }
 
-
 std::string FontEngine::InternalReduceStringToVisible( std::string str, unsigned int width )
 {
        unsigned int maxlength = InternalAssertStringLength( str, width );
@@ -484,8 +556,6 @@ std::string FontEngine::InternalReduceStringToVisible( std::string str, unsigned
        }
        return resultstr;
 }
-
-
 
 std::string FontEngine::InternalReduceStringToVisible( std::string str, unsigned int width, FontEngine::FontName name, FontEngine::FontModifierTypo typo, FontEngine::FontModifierUnder under, FontEngine::FontModifierStrike strike )
 {
@@ -510,7 +580,6 @@ std::string FontEngine::InternalReduceStringToVisible( std::string str, unsigned
        }
        return resultstr;
 }
-
 
 FontEngine::FontSet FontEngine::InternalGetFontSet( FontEngine::FontEnum forwhat )
 {
@@ -580,7 +649,6 @@ void FontEngine::InternalSetCurrentFontSet( FontEngine::FontEnum forwhat )
               break;
        }
 }
-
 
 void FontEngine::InternalSetFontSet( FontEngine::FontEnum forwhat, FontEngine::FontSet fontset )
 {
@@ -681,12 +749,14 @@ void FontEngine::InternalDrawCharLeft( char str, unsigned int x, unsigned int y,
 
        for (int j=0; j<temp->CharHeight; j++)
        {
-              int mask = 1;
-              for (int i=0; i<temp->CharWidth; i++)
+              int mask = 256;
+              int offset = 0; // temp->CharWidth-temp->FirstNonEmptyRow+2;
+              //for (int i=0; i<temp->CharWidth; i++)
+              for( int i=temp->FirstNonEmptyRow;i<=temp->LastNonEmptyRow+1; i++)
               {
-                     if ((temp->CharData[j] & (mask << i)) != 0)
+                     if ((temp->CharData[j] & (mask >> i)) != 0)
                      {
-
+                       /*
                             if ((currentmodifiertypo & Normal) !=0 )
                             {
                                    // text is Normal
@@ -711,8 +781,35 @@ void FontEngine::InternalDrawCharLeft( char str, unsigned int x, unsigned int y,
                                    ScreenRenderer::DrawPixel( x+temp->CharWidth-i-1+shift, y+j, R, G, B, A);
                                    ScreenRenderer::DrawPixel( x+temp->CharWidth-i+shift, y+j, R, G, B, A);
                             }
+*/
+                            if ((currentmodifiertypo & Normal) !=0 )
+                            {
+                                   // text is Normal
+                                   ScreenRenderer::DrawPixel( x+1+offset, y+j, R, G, B, A);
+                            }
+                            if ((currentmodifiertypo & Italic) !=0 )
+                            {
+                                   // text is Italic but not Bold
+                                   int shift = (int) ((temp->CharHeight-1-j)/4);
+                                   ScreenRenderer::DrawPixel(  x+1+offset+shift, y+j, R, G, B, A);
+                            }
+                            if ((currentmodifiertypo & Bold) !=0 )
+                            {
+                                   // text is Bold but not Italic
+                                   ScreenRenderer::DrawPixel(  x+1+offset, y+j, R, G, B, A);
+                                   ScreenRenderer::DrawPixel(  x+1+offset+1, y+j, R, G, B, A);
+                            }
+                            if ((currentmodifiertypo & ItalicBold) !=0 )
+                            {
+                                   // text is Italic and Bold
+                                   int shift = (int) ((temp->CharHeight-1-j)/4);
+                                   ScreenRenderer::DrawPixel( x+1+offset+shift, y+j, R, G, B, A);
+                                   ScreenRenderer::DrawPixel( x+1+offset+1+shift, y+j, R, G, B, A);
+                            }
 
                      }
+
+                    offset++;
               }
        }
 
