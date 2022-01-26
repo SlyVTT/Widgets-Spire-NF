@@ -38,6 +38,12 @@ void InputWidget::SetContent(std::string str)
     scroll = 0;
 }
 
+void InputWidget::Flush( void )
+{
+    text = "";
+    cursor_pos = 0;
+    scroll = 0;
+}
 
 void InputWidget::Logic( void )
 {

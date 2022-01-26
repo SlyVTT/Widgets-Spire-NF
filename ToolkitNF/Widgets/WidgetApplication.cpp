@@ -111,17 +111,10 @@ void WidgetApplication::InternalPrepareForRun( void )
 
 void WidgetApplication::InternalClose()
 {
-
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t Entering WidgetAppplication::InternalClose() \n");
-       Debugger::TimerLog( "\t \t Start Killing All Widgets in the Desktop ... \n");
-#endif // DEBUG_MODE
-
        // for each desktopfeature class
        for (auto& c : desktops)
        {
               // if we have a wallpaper, we free the associated memory
-
 
 #if RENDER_WITH_SDL == 1
               if (c->background_image != nullptr)
@@ -137,7 +130,7 @@ void WidgetApplication::InternalClose()
               //for each widget in the rootwidget of the desktop feature class, we delete it to ask for the destructor
               for (auto& d : c->rootwidgets)
               {
-                     delete d;
+         //            delete d;
               }
 
               // then we clear the collection
@@ -147,77 +140,23 @@ void WidgetApplication::InternalClose()
               delete c;
        }
 
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t ... All Widgets in the Desktop Killed [OK] \n \n");
-#endif // DEBUG_MODE
-
-
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t Start Closing All Singletons ... \n");
-#endif // DEBUG_MODE
-
        // Now we clean all the Singleton by calling their Close() method (no destructor available)
        MouseManager::Close();
-
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t ... 1/8 Mouse Manager Killed [OK] \n");
-#endif // DEBUG_MODE
-
        KeyManager::Close();
 
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t ... 2/8 Keyboard Manager Killed [OK] \n");
-#endif // DEBUG_MODE
-
        ColorEngine::Close();
-
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t ... 3/8 Color Engine Killed [OK] \n");
-#endif // DEBUG_MODE
-
        FontEngine::Close();
-
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t ... 4/8 Font Engine Killed [OK] \n");
-#endif // DEBUG_MODE
-
        ThemeEngine::Close();
 
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t ... 5/8 Theme Engine Killed [OK] \n");
-#endif // DEBUG_MODE
-
        DepthBufferRenderer::Close();
-
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t ... 6/8 DepthBuffer Renderer Killed [OK] \n");
-#endif // DEBUG_MODE
-
-
        ScreenRenderer::Close();
-
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t ... 7/8 Screen Renderer Killed [OK] \n");
-#endif // DEBUG_MODE
-
-
        TimeManager::Close();
 
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t ... 8/8 Timer Manager Killed [OK] \n");
-#endif // DEBUG_MODE
+       GarbageCollector::Close();
 
 #if RENDER_WITH_SDL == 1
             SDL_Quit();
-            #if DEBUG_MODE == 1
-                   Debugger::TimerLog( "\t \t ... Extra : SDL_Library Killed [OK] \n");
-            #endif // DEBUG_MODE
 #endif
-
-#if DEBUG_MODE == 1
-       Debugger::TimerLog( "\t \t ... All Singletons Killed [OK] \n");
-#endif // DEBUG_MODE
-
 }
 
 
@@ -378,13 +317,13 @@ void WidgetApplication::InternalRender( void )
               if (c->IsVisible()) c->Render( );
 
        MouseManager::Render();
-
+/*
        char time_to_draw[50];
        int h,m,s;
        TimeManager::GetCurrentTime( &h, &m, &s );
        sprintf( time_to_draw, "%02d:%02d:%02d", h, m, s);
        FontEngine::DrawStringLeft( time_to_draw, 200, 18, {0,0,0,255} );
-
+*/
        ScreenRenderer::FlipScreen();
 }
 
@@ -418,13 +357,13 @@ void WidgetApplication::InternalLogic( void )
               AskForClose = true;
        };
 
-       if (KeyManager::kbCTRL()  && KeyManager::kbSHIFT() && KeyManager::kb7())
+       if (KeyManager::kbCTRL()  && KeyManager::kbSHIFT() && KeyManager::kb7_Press_Event())
        {
               InternalSetPreviousDesktop();
               TimeManager::Delay( 250 );
        };
 
-       if (KeyManager::kbCTRL()  && KeyManager::kbSHIFT() && KeyManager::kb9())
+       if (KeyManager::kbCTRL()  && KeyManager::kbSHIFT() && KeyManager::kb9_Press_Event())
        {
               InternalSetNextDesktop();
               TimeManager::Delay( 250 );

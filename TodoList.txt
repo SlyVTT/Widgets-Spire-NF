@@ -7,8 +7,8 @@ WidgetApplication Class :
     - [OK] debug the application at exit
 
 GraphicContextWidget Class :
-    - Check why images are not appearing
-    - Debug Class
+    - [OK] Check why images are not appearing
+    - [OK] Debug Class
     - Allow useage without SDL by coding nGC compliant functions
 
 WindowWidget Class :
@@ -23,7 +23,7 @@ ScreenRenderer Class :
 
 DepthBufferRenderer Class :
     - [OK] correct the buffer to correctly get the value of (R,G,B,A) components and then pick the right WidgetID for SDL version
-    - [OK ?] correct the buffer to correctly get the value of (R,G,B,A) components and then pick the right WidgetID for nGC version
+    - [OK] correct the buffer to correctly get the value of (R,G,B,A) components and then pick the right WidgetID for nGC version
     - [No Need] possibly convert it from uint16_t to uint24_t or uint32_t
 
 InputWidget Class :

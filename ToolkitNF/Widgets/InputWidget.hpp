@@ -17,6 +17,7 @@ public:
 
     virtual std::string GetContent();
     virtual void SetContent(std::string str);
+    virtual void Flush();
 
 private:
     void UpdateScroll();

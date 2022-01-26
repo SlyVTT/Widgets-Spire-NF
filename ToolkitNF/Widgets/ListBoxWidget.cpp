@@ -123,7 +123,7 @@ void ListBoxWidget::Logic( void )
               }
 
 
-              if (KeyManager::kbESC())
+              if (KeyManager::kbESC_Press_Event())
               {
                      if(parent)
                      {
@@ -143,7 +143,7 @@ void ListBoxWidget::Logic( void )
               }
 
 
-              if (KeyManager::kbRET() || KeyManager::kbENTER())
+              if (KeyManager::kbRET_Press_Event() || KeyManager::kbENTER_Press_Event())
               {
                      if(parent)
                      {
@@ -163,7 +163,7 @@ void ListBoxWidget::Logic( void )
               }
 
 
-              if (MouseManager::kbDOWN() && MouseManager::IsKeyArrowPressEvent())
+              if (MouseManager::kbDOWN_Press_Event())
               {
                      if ( selected < this->GetNbItem()-1)
                      {
@@ -184,7 +184,7 @@ void ListBoxWidget::Logic( void )
                      TimeManager::Delay( 150 );
               }
 
-              if (MouseManager::kbUP() && MouseManager::IsKeyArrowPressEvent())
+              if (MouseManager::kbUP_Press_Event())
               {
                      if (selected>0)
                      {

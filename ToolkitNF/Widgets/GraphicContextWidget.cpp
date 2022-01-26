@@ -51,6 +51,7 @@ GraphicContextWidget::~GraphicContextWidget()
 {
     surfacetobedrawn = nullptr;
     SDL_FreeSurface( transformedimage );
+    transformedimage = nullptr;
 }
 
 

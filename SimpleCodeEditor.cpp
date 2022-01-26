@@ -33,9 +33,9 @@ int main ( int argc, char **argv )
     MenuBarWidget *bardesk = new MenuBarWidget(  "Main Menu", 1,1,1,1, desktop );
     MenuItemWidget *mainmenufile = new MenuItemWidget(  "File", 1,1,1,1, bardesk );
     MenuPaneWidget *paneFile = new MenuPaneWidget(  "File", 1,1,1,1, mainmenufile );
-    MenuItemWidget *FileOpen = new MenuItemWidget(  "dddd ...", 1,1,1,1, paneFile );
-    MenuItemWidget *FileSave = new MenuItemWidget(  "didi", 1,1,1,1, paneFile );
-    MenuItemWidget *FileSaveAs = new MenuItemWidget(  "iiii ...", 1,1,1,1, paneFile );
+    MenuItemWidget *FileOpen = new MenuItemWidget(  "Open ...", 1,1,1,1, paneFile );
+    MenuItemWidget *FileSave = new MenuItemWidget(  "Save", 1,1,1,1, paneFile );
+    MenuItemWidget *FileSaveAs = new MenuItemWidget(  "Save As ...", 1,1,1,1, paneFile );
     SpacerWidget *spacer1 = new SpacerWidget(" ", 1,1,1,1, paneFile );
     MenuItemWidget *FileClose = new MenuItemWidget(  "Close", 1,1,1,1, paneFile );
 
@@ -310,6 +310,10 @@ int main ( int argc, char **argv )
     window7->Adjust();
 
 
+    FileDialogBoxWidget *filedialog = new FileDialogBoxWidget( "Open/Save", 100,40, 300, 190, desktop );
+    filedialog->SetDialogType( FileDialogBoxWidget::FileOpen );
+    filedialog->SetInvisible();
+
 
 
 
@@ -378,7 +382,25 @@ int main ( int argc, char **argv )
             }
         }
 
+        if (FileOpen->IsPressed())
+        {
+            filedialog->Reset();
+            filedialog->SetDialogType( FileDialogBoxWidget::FileOpen );
+            //filedialog->validated = false;
+            //filefiledialog->canceled = false;
+            filedialog->SetVisible();
+        }
 
+        if (filedialog->IsValidated())
+        {
+            filedialog->Reset();
+            input->Flush();
+            input->SetContent( filedialog->GetSelectedFullname().c_str());
+
+            //filedialog->validated = false;
+            //filedialog->canceled = false;
+            //filedialog->SetInvisible();
+        }
 /*
                 if (HelpKeyb->IsPressed())
                 {
@@ -405,6 +427,9 @@ int main ( int argc, char **argv )
                 }
 */
     }
+
+    SDL_FreeSurface( image );
+    SDL_FreeSurface( image5 );
 
 
 #if DEBUG_MODE == 1

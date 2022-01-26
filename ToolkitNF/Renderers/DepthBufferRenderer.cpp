@@ -239,8 +239,6 @@ void DepthBufferRenderer::InternalClose( void )
        gui_gc_finish( depthbuffer );
 
 #endif
-
-       printf("Exited cleanly\n");
 }
 
 

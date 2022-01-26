@@ -949,7 +949,7 @@
 	<bits/types/struct_itimerspec.h>
 	<bits/types/locale_t.h>
 
-1643034447 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/SimpleCodeEditor.cpp
+1643186930 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/SimpleCodeEditor.cpp
 	"ToolkitNF/GUIToolkitNF.hpp"
 
 1633291790 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/GUIToolkitNF.hpp
@@ -995,9 +995,9 @@
 	"Widgets/MultiLineRichTextBoxWidget.hpp"
 	"Widgets/GraphicContextWidget.hpp"
 
-1636618267 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Globals/GUIToolkitNFGlobals.hpp
+1643119163 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Globals/GUIToolkitNFGlobals.hpp
 
-1632203468 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Debugger/Debugger.hpp
+1643106281 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Debugger/Debugger.hpp
 	<string>
 	<stdarg.h>
 
@@ -1031,7 +1031,7 @@
 	<math.h>
 	<time.h>
 
-1643022008 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Engines/FontEngine.hpp
+1643121767 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Engines/FontEngine.hpp
 	<vector>
 	<string>
 	"ColorEngine.hpp"
@@ -1084,7 +1084,7 @@
 1632203468 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/CheckBoxWidget.hpp
 	"ButtonWidget.hpp"
 
-1632203468 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/InputWidget.hpp
+1643185282 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/InputWidget.hpp
 	"Widget.hpp"
 	<string>
 
@@ -1143,7 +1143,7 @@
 1632203468 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/DialogBoxWidget.hpp
 	"WindowWidget.hpp"
 
-1632203468 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/FileDialogBoxWidget.hpp
+1643186683 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/FileDialogBoxWidget.hpp
 	"DialogBoxWidget.hpp"
 	"ContainerHWidget.hpp"
 	"ContainerVWidget.hpp"
@@ -1180,7 +1180,7 @@
 	"Widget.hpp"
 	"SDL/SDL.h"
 
-1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Debugger/Debugger.cpp
+1643106682 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Debugger/Debugger.cpp
 	"Debugger.hpp"
 	<stdio.h>
 	"../Managers/TimeManager.hpp"
@@ -1188,7 +1188,7 @@
 1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Engines/ColorEngine.cpp
 	"ColorEngine.hpp"
 
-1643037550 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Engines/FontEngine.cpp
+1643121814 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Engines/FontEngine.cpp
 	"FontEngine.hpp"
 	"../Renderers/ScreenRenderer.hpp"
 	<vector>
@@ -1207,7 +1207,7 @@
 	"../Debugger/Debugger.hpp"
 	<sys/stat.h>
 
-1632339488 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Managers/KeyManager.cpp
+1643053933 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Managers/KeyManager.cpp
 	"KeyManager.hpp"
 	"../Globals/GUIToolkitNFGlobals.hpp"
 	<libndls.h>
@@ -1235,12 +1235,12 @@
 	<stdlib.h>
 	<time.h>
 
-1642879407 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Renderers/DepthBufferRenderer.cpp
+1643147249 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Renderers/DepthBufferRenderer.cpp
 	"DepthBufferRenderer.hpp"
 	<SDL/SDL.h>
 	<SDL/SDL_gfxPrimitives.h>
 
-1632558428 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Renderers/ScreenRenderer.cpp
+1643147257 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Renderers/ScreenRenderer.cpp
 	"ScreenRenderer.hpp"
 	"../Globals/GUIToolkitNFGlobals.hpp"
 	"../Debugger/Debugger.hpp"
@@ -1303,7 +1303,7 @@
 	"../Engines/ColorEngine.hpp"
 	"../Engines/FontEngine.hpp"
 
-1636476406 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/FileDialogBoxWidget.cpp
+1643186673 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/FileDialogBoxWidget.cpp
 	"FileDialogBoxWidget.hpp"
 	"../Managers/KeyManager.hpp"
 	"../Managers/MouseManager.hpp"
@@ -1322,7 +1322,7 @@
 	"../Engines/ColorEngine.hpp"
 	"../Engines/FontEngine.hpp"
 
-1633345513 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/GraphicContextWidget.cpp
+1643140232 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/GraphicContextWidget.cpp
 	"GraphicContextWidget.hpp"
 	"../Managers/KeyManager.hpp"
 	"../Managers/MouseManager.hpp"
@@ -1354,7 +1354,7 @@
 	"../Engines/FontEngine.hpp"
 	<SDL/SDL_image.h>
 
-1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/InputWidget.cpp
+1643185312 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/InputWidget.cpp
 	"InputWidget.hpp"
 	"../Managers/KeyManager.hpp"
 	"../Managers/MouseManager.hpp"
@@ -1370,7 +1370,7 @@
 	"../Engines/ColorEngine.hpp"
 	"../Engines/FontEngine.hpp"
 
-1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/ListBoxWidget.cpp
+1643214730 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/ListBoxWidget.cpp
 	"ListBoxWidget.hpp"
 	"DropBoxWidget.hpp"
 	"../Managers/KeyManager.hpp"
@@ -1417,7 +1417,7 @@
 	"../Engines/ColorEngine.hpp"
 	"../Engines/FontEngine.hpp"
 
-1632339707 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/MultiLineRichTextBoxWidget.cpp
+1643106758 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/MultiLineRichTextBoxWidget.cpp
 	"MultiLineRichTextBoxWidget.hpp"
 	"../Managers/KeyManager.hpp"
 	"../Managers/MouseManager.hpp"
@@ -1426,7 +1426,7 @@
 	"../Engines/FontEngine.hpp"
 	<fstream>
 
-1632339707 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/MultiLineTextBoxWidget.cpp
+1643056357 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/MultiLineTextBoxWidget.cpp
 	"MultiLineTextBoxWidget.hpp"
 	"../Managers/KeyManager.hpp"
 	"../Managers/MouseManager.hpp"
@@ -1462,7 +1462,7 @@
 1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/SpacerWidget.cpp
 	"SpacerWidget.hpp"
 
-1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/SplashScreenWidget.cpp
+1643146863 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/SplashScreenWidget.cpp
 	"SplashScreenWidget.hpp"
 	"../Managers/KeyManager.hpp"
 	"../Managers/MouseManager.hpp"
@@ -1475,7 +1475,7 @@
 	<SDL/SDL_image.h>
 	<SDL/SDL.h>
 
-1642880806 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/Widget.cpp
+1643146559 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/Widget.cpp
 	"Widget.hpp"
 	"../Globals/GlobalFunctions.hpp"
 	"../Globals/GUIToolkitNFGlobals.hpp"
@@ -1487,7 +1487,7 @@
 	"../Renderers/ScreenRenderer.hpp"
 	"../Garbage/GarbageCollector.hpp"
 
-1642772477 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/WidgetApplication.cpp
+1643223123 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/WidgetApplication.cpp
 	"WidgetApplication.hpp"
 	"../Globals/GlobalFunctions.hpp"
 	"../Globals/GUIToolkitNFGlobals.hpp"
@@ -1518,10 +1518,10 @@
 	"../Engines/ColorEngine.hpp"
 	"../Engines/FontEngine.hpp"
 
-1643017071 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Garbage/GarbageCollector.cpp
+1643145945 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Garbage/GarbageCollector.cpp
 	"GarbageCollector.hpp"
 
-1643016867 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Garbage/GarbageCollector.hpp
+1643145681 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Garbage/GarbageCollector.hpp
 	"../Widgets/Widget.hpp"
 	<list>
 	<string>

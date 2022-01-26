@@ -59,7 +59,10 @@ void FontEngine::InternalClose()
               for(auto& d : c->Font)
               {
                      free( d->CharData );
+                     d->CharData = nullptr;
+                     delete d;
               }
+              c->Font.clear();
               delete c;
        }
 
@@ -113,7 +116,7 @@ FontEngine::FontData* FontEngine::InternalLoadFontFromFilePointer( std::string f
                                    // we read the hexadecimal value in the file
                                    fscanf( pFile, "%s", valstr );
 
-                                   // we check how many characters has the Hexa value (F->1; FF->2, FFF->3, FFFF->4) (max is 4 bytes)
+                                   //we check how many characters has the Hexa value (F->1; FF->2, FFF->3, FFFF->4) (max is 4 bytes)
                                    int length = strlen( valstr );
                                    int nbvalue=0;
                                    char digit;

@@ -260,14 +260,14 @@ void FileDialogBoxWidget::Logic( void )
               }
 
 
-                     if (ontitle && KeyManager::kbSCRATCH() && !startmove)
+                     if (ontitle && (KeyManager::kbSCRATCH() || MouseManager::GetB()) && !startmove)
                      {
                             movemode = true;
                             startmove = true;
                             clickX = MouseManager::GetX();
                             clickY = MouseManager::GetY();
                      }
-                     else if (ontitle && KeyManager::kbSCRATCH() && startmove)
+                     else if (ontitle && (KeyManager::kbSCRATCH() || MouseManager::GetB()) && startmove)
                      {
                             movemode = true;
                      }
@@ -374,6 +374,21 @@ void FileDialogBoxWidget::Logic( void )
        }
 }
 
+bool FileDialogBoxWidget::IsCancelled( void )
+{
+    return canceled;
+}
+
+bool FileDialogBoxWidget::IsValidated( void )
+{
+    return validated;
+}
+
+void FileDialogBoxWidget::Reset( void )
+{
+    canceled = false;
+    validated = false;
+}
 
 void FileDialogBoxWidget::Render( void )
 {

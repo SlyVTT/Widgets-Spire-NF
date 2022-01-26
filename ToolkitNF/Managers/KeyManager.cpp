@@ -566,17 +566,17 @@ void KeyManager::InternalLogic( void )
     // TRY TO MAP SDL_KeyCode to TI NSPIRE Keys for compatibility
 
     m_kbRET_Previous =  m_kbRET;
-    m_kbRET = keys[ SDLK_KP_EQUALS ];
+    m_kbRET = keys[ SDLK_RETURN ];
     m_kbRET_Press_Event = (!m_kbRET_Previous && m_kbRET) ? true : false;
     m_kbRET_Release_Event = (m_kbRET_Previous && !m_kbRET) ? true : false;
 
     m_kbENTER_Previous =  m_kbENTER;
-    m_kbENTER = keys[ SDLK_RETURN ];
+    m_kbENTER = keys[ SDLK_KP_ENTER ];
     m_kbENTER_Press_Event = (!m_kbENTER_Previous && m_kbENTER) ? true : false;
     m_kbENTER_Release_Event = (m_kbENTER_Previous && !m_kbENTER) ? true : false;
 
     m_kbMINUSPAR_Previous =  m_kbMINUSPAR;
-    m_kbMINUSPAR = keys[ SDLK_KP_MINUS ];
+    m_kbMINUSPAR = keys[ SDLK_MINUS ];
     m_kbMINUSPAR_Press_Event = (!m_kbMINUSPAR_Previous && m_kbMINUSPAR) ? true : false;
     m_kbMINUSPAR_Release_Event = (m_kbMINUSPAR_Previous && !m_kbMINUSPAR) ? true : false;
 
@@ -791,7 +791,7 @@ void KeyManager::InternalLogic( void )
     m_kbA_Release_Event = (m_kbA_Previous && !m_kbA) ? true : false;
 
     m_kbEQUAL_Previous =  m_kbEQUAL;
-    m_kbEQUAL = keys[ SDLK_KP_EQUALS ];
+    m_kbEQUAL = keys[ SDLK_KP_EQUALS ] || keys[ SDLK_EQUALS ];
     m_kbEQUAL_Press_Event = (!m_kbEQUAL_Previous && m_kbEQUAL) ? true : false;
     m_kbEQUAL_Release_Event = (m_kbEQUAL_Previous && !m_kbEQUAL) ? true : false;
 
@@ -846,7 +846,7 @@ void KeyManager::InternalLogic( void )
     m_kbFRAC_Release_Event = (m_kbFRAC_Previous && !m_kbFRAC) ? true : false;
 
     m_kbDEL_Previous =  m_kbDEL;
-    m_kbDEL = keys[ SDLK_DELETE ];
+    m_kbDEL = keys[ SDLK_DELETE ] || keys[ SDLK_BACKSPACE ];
     m_kbDEL_Press_Event = (!m_kbDEL_Previous && m_kbDEL) ? true : false;
     m_kbDEL_Release_Event = (m_kbDEL_Previous && !m_kbDEL) ? true : false;
 
@@ -876,7 +876,7 @@ void KeyManager::InternalLogic( void )
     m_kb2_Release_Event = (m_kb2_Previous && !m_kb2) ? true : false;
 
     m_kbMENU_Previous =  m_kbMENU;
-    m_kbMENU = keys[ SDLK_F8 ];
+    m_kbMENU = keys[ SDLK_MENU ];
     m_kbMENU_Press_Event = (!m_kbMENU_Previous && m_kbMENU) ? true : false;
     m_kbMENU_Release_Event = (m_kbMENU_Previous && !m_kbMENU) ? true : false;
 

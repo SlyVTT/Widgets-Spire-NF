@@ -14,6 +14,9 @@ MultiLineTextBoxWidget::MultiLineTextBoxWidget()
     widgettype =  "MultiLineTextBox";
     content.push_back("");
     cursor_posX = 0;
+    isselected=false;
+    selectstart=0;
+    selectend=0;
 }
 
 
@@ -22,6 +25,9 @@ MultiLineTextBoxWidget::MultiLineTextBoxWidget( std::string l, unsigned int x, u
     widgettype =  "MultiLineTextBox";
     content.push_back("");
     cursor_posX = 0;
+    isselected=false;
+    selectstart=0;
+    selectend=0;
 }
 
 
@@ -337,7 +343,7 @@ void MultiLineTextBoxWidget::Logic( void )
         {
             EraseSelection();
         }
-        else if (KeyManager::IsKeyPressEvent() && !KeyManager::kbSHIFT && KeyManager::kbCTRL && KeyManager::kbV)                      // CTRL + V to paste the selection coming from the KeyboardTask
+        else if (KeyManager::IsKeyPressEvent() && !KeyManager::kbSHIFT() && KeyManager::kbCTRL() && KeyManager::kbV())                      // CTRL + V to paste the selection coming from the KeyboardTask
         {
             PasteSelection();
         }

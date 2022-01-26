@@ -235,15 +235,13 @@ void ScreenRenderer::InternalClose( void )
 #if RENDER_WITH_SDL == 1
 
        SDL_FreeSurface( screen );
-       //SDL_Quit();
+       //SDL_Quit();        //SDL_Quit(); is now in WidgetApplication::InternalClose() to be sure that it will be shutdown properly at the end of the program
 
 #else
 
        gui_gc_finish( screen );
 
 #endif
-
-       printf("Exited cleanly\n");
 }
 
 

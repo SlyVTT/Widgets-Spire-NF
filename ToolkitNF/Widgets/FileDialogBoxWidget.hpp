@@ -39,9 +39,10 @@ public:
     virtual FileDialogBoxWidget::FileDialogType GetDialogType( void );
 
 
+    virtual bool IsValidated( void );
+    virtual bool IsCancelled( void );
+    virtual void Reset( void );
 
-    bool validated = false;
-    bool canceled = false;
 
     virtual std::string GetSelectedFilename( void );
     virtual std::string GetSelectedPath( void );
@@ -52,6 +53,9 @@ protected:
     std::string pathtoexplore;
     std::string fileselected;
     std::string fullname;
+
+    bool validated = false;
+    bool canceled = false;
 
     ContainerVWidget *vertical_layout;
     LabelWidget *header_text;

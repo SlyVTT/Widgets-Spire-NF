@@ -2,49 +2,57 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="ToolkitNF/Managers/KeyManager.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/GraphicContextWidget.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-5" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="219" topLine="830" />
+			<Cursor1 position="3918" topLine="144" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/MenuBarWidget.cpp" open="0" top="0" tabpos="28" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/MultiLineRichTextBoxWidget.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5327" topLine="0" />
+			<Cursor1 position="5387" topLine="235" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Managers/TimeManager.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Engines/FontEngine.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2036" topLine="29" />
+			<Cursor1 position="17666" topLine="307" />
+		</Cursor>
+		<Folding>
+			<Collapse line="283" />
+			<Collapse line="293" />
+			<Collapse line="495" />
+			<Collapse line="517" />
+			<Collapse line="544" />
+			<Collapse line="563" />
+			<Collapse line="587" />
+			<Collapse line="615" />
+			<Collapse line="656" />
+			<Collapse line="682" />
+			<Collapse line="687" />
+			<Collapse line="693" />
+			<Collapse line="698" />
+			<Collapse line="703" />
+			<Collapse line="708" />
+			<Collapse line="713" />
+		</Folding>
+	</File>
+	<File name="ToolkitNF/Widgets/InputWidget.hpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="455" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/Widget.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/DesktopWidget.hpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="12352" topLine="524" />
+			<Cursor1 position="9052" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Managers/KeyManager.hpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/DesktopWidget.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="140" topLine="0" />
+			<Cursor1 position="587" topLine="6" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/IconItemWidget.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Engines/FontEngine.hpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3654" topLine="165" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/DropBoxWidget.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1424" topLine="16" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/DesktopWidget.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2368" topLine="72" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/WidgetApplication.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1319" topLine="64" />
+			<Cursor1 position="236" topLine="4" />
 		</Cursor>
 	</File>
 	<File name="ToolkitNF/Widgets/SpacerWidget.hpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -52,34 +60,79 @@
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/SpacerWidget.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/ContainerVWidget.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="4502" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/MultiLineRichTextBoxWidget.hpp" open="0" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/InputWidget.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="822" topLine="48" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/ProgressBarWidget.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Debugger/Debugger.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="2545" topLine="116" />
 		</Cursor>
 	</File>
-	<File name="SimpleCodeEditor.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="ToolkitNF/Widgets/FileDialogBoxWidget.hpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="18158" topLine="278" />
+			<Cursor1 position="1254" topLine="30" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/MultiLineTextBoxWidget.cpp" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Renderers/DepthBufferRenderer.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="7987" topLine="0" />
+			<Cursor1 position="3353" topLine="29" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/Widget.hpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="237" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Managers/TimeManager.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2036" topLine="29" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Globals/GUIToolkitNFGlobals.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1189" topLine="11" />
 		</Cursor>
 	</File>
 	<File name="ToolkitNF/Widgets/WindowWidget.hpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/Widget.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8922" topLine="388" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/ProgressBarWidget.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6184" topLine="123" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Debugger/Debugger.hpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1967" topLine="45" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/SplashScreenWidget.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1010" topLine="85" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Globals/GlobalFunctions.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="36" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/MultiLineRichTextBoxWidget.hpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="422" topLine="3" />
 		</Cursor>
 	</File>
 	<File name="ToolkitNF/Widgets/MenuPaneWidget.hpp" open="0" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -92,153 +145,9 @@
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Renderers/DepthBufferRenderer.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3353" topLine="29" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/GUIToolkitNF.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1704" topLine="22" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/RadioControlWidget.hpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/GraphicContextWidget.hpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="106" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Engines/FontEngine.hpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="516" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/MenuPaneWidget.cpp" open="0" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5232" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/IconItemWidget.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/WindowWidget.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="10759" topLine="360" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/ProgressBarWidget.hpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Renderers/ScreenRenderer.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="11052" topLine="327" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/SplashScreenWidget.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5908" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/FileDialogBoxWidget.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="298" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/RadioControlWidget.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/SplashScreenWidget.hpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Managers/TimeManager.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1446" topLine="66" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/MultiLineTextBoxWidget.hpp" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/ListBoxWidget.cpp" open="0" top="0" tabpos="30" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Engines/FontEngine.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="15374" topLine="167" />
-		</Cursor>
-		<Folding>
-			<Collapse line="54" />
-			<Collapse line="69" />
-		</Folding>
-	</File>
-	<File name="ToolkitNF/Globals/GUIToolkitNFGlobals.hpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="635" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Debugger/Debugger.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="84" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/SliderWidget.hpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Managers/MouseManager.hpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1431" topLine="19" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/MiniButtonWidget.cpp" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/ContainerVWidget.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4502" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/SliderWidget.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="ToolkitNF/Managers/MouseManager.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="16162" topLine="597" />
-		</Cursor>
-	</File>
-	<File name="TodoList.txt" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="659" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/MiniButtonWidget.hpp" open="0" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ToolkitNF/Widgets/InputWidget.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1966" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="ToolkitNF/Renderers/ScreenRenderer.hpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -246,17 +155,52 @@
 			<Cursor1 position="249" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Garbage/GarbageCollector.hpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="SimpleCodeEditor.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1462" topLine="21" />
+			<Cursor1 position="21502" topLine="372" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/MultiLineRichTextBoxWidget.cpp" open="0" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/SplashScreenWidget.hpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5828" topLine="0" />
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/IconItemWidget.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="315" topLine="211" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Renderers/ScreenRenderer.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="16793" topLine="553" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/GUIToolkitNF.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1704" topLine="22" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/WidgetApplication.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3561" topLine="211" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Managers/TimeManager.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1446" topLine="66" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/MenuPaneWidget.cpp" open="0" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5232" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="ToolkitNF/Widgets/MenuItemWidget.hpp" open="0" top="0" tabpos="25" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/IconItemWidget.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
@@ -266,14 +210,19 @@
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Globals/GlobalFunctions.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/MultiLineTextBoxWidget.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="36" />
+			<Cursor1 position="5372" topLine="248" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Renderers/DepthBufferRenderer.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/GraphicContextWidget.hpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="486" topLine="8" />
+			<Cursor1 position="106" topLine="16" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/MultiLineTextBoxWidget.hpp" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="ToolkitNF/Widgets/MenuItemWidget.cpp" open="0" top="0" tabpos="26" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -281,29 +230,123 @@
 			<Cursor1 position="5616" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/DesktopWidget.hpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Garbage/GarbageCollector.hpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="9052" topLine="155" />
+			<Cursor1 position="140" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/WidgetApplication.hpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/WindowWidget.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2360" topLine="39" />
+			<Cursor1 position="10759" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/Widget.hpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/SliderWidget.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="237" topLine="2" />
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/MiniButtonWidget.cpp" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/FileDialogBoxWidget.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12478" topLine="333" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/DropBoxWidget.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1424" topLine="16" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Managers/KeyManager.hpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="27319" topLine="555" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/ProgressBarWidget.hpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/MenuBarWidget.cpp" open="0" top="0" tabpos="28" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5327" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Managers/KeyManager.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="995" topLine="24" />
+		</Cursor>
+		<Folding>
+			<Collapse line="78" />
+			<Collapse line="91" />
+			<Collapse line="107" />
+			<Collapse line="111" />
+			<Collapse line="120" />
+			<Collapse line="170" />
+			<Collapse line="229" />
+			<Collapse line="285" />
+			<Collapse line="341" />
+			<Collapse line="394" />
+			<Collapse line="450" />
+			<Collapse line="500" />
+		</Folding>
+	</File>
+	<File name="ToolkitNF/Renderers/DepthBufferRenderer.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7129" topLine="218" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Managers/MouseManager.hpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1431" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/SpacerWidget.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/RadioControlWidget.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/MiniButtonWidget.hpp" open="0" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="TodoList.txt" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="700" topLine="29" />
 		</Cursor>
 	</File>
 	<File name="ToolkitNF/Garbage/GarbageCollector.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1312" topLine="40" />
+			<Cursor1 position="1603" topLine="46" />
 		</Cursor>
 	</File>
-	<File name="ToolkitNF/Widgets/GraphicContextWidget.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ToolkitNF/Widgets/WidgetApplication.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1839" topLine="252" />
+			<Cursor1 position="2561" topLine="46" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/SliderWidget.hpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/RadioControlWidget.hpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ToolkitNF/Widgets/ListBoxWidget.cpp" open="0" top="0" tabpos="30" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -19,7 +19,7 @@ void GarbageCollector::InternalInitialize( void )
 void GarbageCollector::InternalRegisterWidget( uint32_t identifier, std::string type, Widget* pointer )
 {
 
-    WidgetItem *temp = new WidgetItem;
+    WidgetItem *temp = new WidgetItem();
 
     temp->ID = identifier;
     temp->WidgetType = type;
@@ -44,10 +44,11 @@ void GarbageCollector::InternalMarkWidgetForDeletion( uint32_t identifier )
 }
 
 
-bool _mustBeDeleted( GarbageCollector::WidgetItem* item )
+bool _mustBeDeleted( WidgetItem* item )
 {
     return (item->Status == GarbageCollector::ToBeDeleted);
 }
+
 
 void GarbageCollector::InternalTrashGarbage( void )
 {
@@ -56,10 +57,13 @@ void GarbageCollector::InternalTrashGarbage( void )
         if (c->Status == GarbageCollector::ToBeDeleted )
         {
             delete( c->PointerToWidget );
+            c->PointerToWidget = nullptr;
+            delete( c );
         }
     }
-    WidgetBucket.remove_if( _mustBeDeleted );
+    //WidgetBucket.remove_if( _mustBeDeleted );
 }
+
 
 void GarbageCollector::InternalClose( void )
 {
@@ -67,6 +71,9 @@ void GarbageCollector::InternalClose( void )
     {
         c->Status = GarbageCollector::ToBeDeleted;
         delete( c->PointerToWidget );
+        c->PointerToWidget = nullptr;
+        delete( c );
     }
-    WidgetBucket.remove_if( _mustBeDeleted );
+    //WidgetBucket.remove_if( _mustBeDeleted );
+    WidgetBucket.clear();
 }

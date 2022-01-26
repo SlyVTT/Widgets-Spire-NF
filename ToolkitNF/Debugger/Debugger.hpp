@@ -51,9 +51,11 @@ private:
        void InternalOpenMaintain( void );
        void InternalCloseMaintain( void );
 
+       void InternalLog( const char* stringtolog );
        void InternalLog( const std::string& stringtolog );
        void InternalLog( int value );
 
+       void InternalTimerLog( const char* stringtolog );
        void InternalTimerLog( const std::string& stringtolog );
        void InternalTimerLog( int value );
 

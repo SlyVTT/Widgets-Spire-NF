@@ -391,6 +391,7 @@ Widget::~Widget()
 
   */
 
+/*
     GarbageCollector::MarkWidgetForDeletion( WidgetID );
 
     for(auto& c : children)
@@ -406,6 +407,7 @@ Widget::~Widget()
     }
 
     popupchildren.clear();
+*/
 
 /*
 #if DEBUG_MODE == 1

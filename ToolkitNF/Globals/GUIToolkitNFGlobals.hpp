@@ -37,7 +37,7 @@
 
 
 //DEBUG_MODE to be set to 1 for enabling debugger and to 0 otherwise
-#define DEBUG_MODE  1
+#define DEBUG_MODE  0
 
 
 //Screen resolution may change between PC and NSpire
