@@ -42,8 +42,15 @@ MenuPaneWidget::MenuPaneWidget(std::string l, unsigned int x, unsigned int y, un
         {
             unsigned int currentwidgetwidth;
 
-            if (c->GetWidgetType()=="MenuItem")
-                currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth();
+
+/*                if (c->GetWidgetType()=="MenuItem")
+                    currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth();
+*/
+
+            if ((c->GetWidgetType()=="MenuItem") && (c->GetChildrenNumber()==0))
+                currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth() + 3;
+            else if ((c->GetWidgetType()=="MenuItem") && (c->GetChildrenNumber()!=0))
+                currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth() + 15;
             else
                 currentwidgetwidth =10;
 
@@ -160,10 +167,16 @@ void MenuPaneWidget::Adjust( void )
             {
                 unsigned int currentwidgetwidth;
 
-                if (c->GetWidgetType()=="MenuItem")
+/*                if (c->GetWidgetType()=="MenuItem")
                     currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth();
-                else
-                    currentwidgetwidth =10;
+*/
+
+            if ((c->GetWidgetType()=="MenuItem") && (c->GetChildrenNumber()==0))
+                currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth() + 3;
+            else if ((c->GetWidgetType()=="MenuItem") && (c->GetChildrenNumber()!=0))
+                currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth() + 15;
+            else
+                currentwidgetwidth =10;
 
                 if ( currentwidgetwidth > tempw) tempw = currentwidgetwidth;
                 //tempw = 50;
@@ -254,10 +267,16 @@ void MenuPaneWidget::Render( void )
     {
         unsigned int currentwidgetwidth;
 
-        if (c->GetWidgetType()=="MenuItem")
-            currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth();
-        else
-            currentwidgetwidth =10;
+/*                if (c->GetWidgetType()=="MenuItem")
+                    currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth();
+*/
+
+            if ((c->GetWidgetType()=="MenuItem") && (c->GetChildrenNumber()==0))
+                currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth() + 3;
+            else if ((c->GetWidgetType()=="MenuItem") && (c->GetChildrenNumber()!=0))
+                currentwidgetwidth = dynamic_cast<MenuItemWidget*>(c)->GetFullTextWidth() + 15;
+            else
+                currentwidgetwidth =10;
 
         if ( currentwidgetwidth > tempw) tempw = currentwidgetwidth;
         //tempw = 50;

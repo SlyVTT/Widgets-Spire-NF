@@ -70,6 +70,7 @@ public:
     virtual std::string GetLabel();
     virtual bool GetContainerStatus();
     virtual Widget* GetParent();
+    virtual int GetChildrenNumber();
     virtual bool IsEnabled();
     virtual bool IsVisible();
     virtual std::string GetWidgetType();

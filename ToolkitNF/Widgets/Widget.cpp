@@ -19,6 +19,10 @@
 
 unsigned int GlobalWidgetIDCounter;
 
+int Widget::GetChildrenNumber()
+{
+    return children.size();
+}
 
 
 Widget* Widget::GetClosestMainParent()
