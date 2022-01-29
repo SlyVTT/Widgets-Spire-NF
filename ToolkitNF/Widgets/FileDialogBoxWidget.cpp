@@ -143,6 +143,10 @@ int FileDialogBoxWidget::ListDir( std::string path)
               }
        }
        closedir(dir);
+
+       filelist->SortListItemsAZ();
+       folderlist->SortListItemsAZ();
+
        return 0;
 }
 

@@ -9,6 +9,16 @@
 class ListBoxWidget : public Widget
 {
 public:
+
+    struct {
+        bool operator()(std::string a, std::string b) const { return a <= b; }
+    } SmallerOperator;
+
+    struct {
+        bool operator()(std::string a, std::string b) const { return a >= b; }
+    } GreaterOperator;
+
+
     ListBoxWidget();
     ListBoxWidget( std::string l, unsigned int x, unsigned int y, unsigned int w, unsigned int h, Widget *p );
     virtual ~ListBoxWidget();
@@ -24,6 +34,9 @@ public:
     virtual std::string GetItem( int itemnumber );
     virtual int GetSelected( void );
     virtual std::string GetSelectedItem( void );
+
+    virtual void SortListItemsAZ( void );
+    virtual void SortListItemsZA( void );
 
     bool validated = false;
     bool escaped = false;

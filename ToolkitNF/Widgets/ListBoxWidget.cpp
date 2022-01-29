@@ -1,6 +1,8 @@
 #include "ListBoxWidget.hpp"
 #include "DropBoxWidget.hpp"
 
+#include <algorithm>
+
 #include "../Managers/KeyManager.hpp"
 #include "../Managers/MouseManager.hpp"
 #include "../Managers/TimeManager.hpp"
@@ -64,6 +66,16 @@ std::string ListBoxWidget::GetSelectedItem( void )
 bool ListBoxWidget::IsPressed( void )
 {
        return is_pressed;
+}
+
+void ListBoxWidget::SortListItemsAZ( void )
+{
+    std::sort( listitems.begin(), listitems.end(), SmallerOperator );
+}
+
+void ListBoxWidget::SortListItemsZA( void )
+{
+    std::sort( listitems.begin(), listitems.end(), GreaterOperator );
 }
 
 void ListBoxWidget::Logic( void )

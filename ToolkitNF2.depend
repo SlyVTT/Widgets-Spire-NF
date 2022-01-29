@@ -549,7 +549,7 @@
 	<sys/stat.h>
 	<string>
 
-1608116695 /usr/include/stdlib.h
+1632793089 /usr/include/stdlib.h
 	<bits/libc-header-start.h>
 	<stddef.h>
 	<bits/waitflags.h>
@@ -561,20 +561,22 @@
 	<bits/stdlib-bsearch.h>
 	<bits/stdlib-float.h>
 	<bits/stdlib.h>
+	<bits/floatn.h>
 	<bits/stdlib-ldbl.h>
 
-1608116695 /usr/include/alloca.h
+1632793089 /usr/include/alloca.h
 	<features.h>
 	<stddef.h>
 
-1608116695 /usr/include/features.h
+1632793089 /usr/include/features.h
+	<features-time64.h>
 	<stdc-predef.h>
 	<sys/cdefs.h>
 	<gnu/stubs.h>
 
-1608116695 /usr/include/stdc-predef.h
+1632793089 /usr/include/stdc-predef.h
 
-1568752452 /usr/include/SDL/SDL.h
+1613634777 /usr/include/SDL/SDL.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_audio.h"
@@ -593,14 +595,14 @@
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_main.h
+1613634777 /usr/include/SDL/SDL_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_stdinc.h
+1613634777 /usr/include/SDL/SDL_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -626,13 +628,13 @@
 	<stdlib.h>
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_config.h
+1613634777 /usr/include/SDL/SDL_config.h
 	"SDL_platform.h"
 	<stdarg.h>
 
-1568752452 /usr/include/SDL/SDL_platform.h
+1613634777 /usr/include/SDL/SDL_platform.h
 
-1608116695 /usr/include/stdio.h
+1632793089 /usr/include/stdio.h
 	<bits/libc-header-start.h>
 	<stddef.h>
 	<stdarg.h>
@@ -645,40 +647,41 @@
 	<bits/types/cookie_io_functions_t.h>
 	<stdarg.h>
 	<bits/stdio_lim.h>
-	<bits/sys_errlist.h>
+	<bits/floatn.h>
 	<bits/getopt_posix.h>
 	<bits/stdio.h>
 	<bits/stdio2.h>
+	<bits/floatn.h>
 	<bits/stdio-ldbl.h>
 
-1608116695 /usr/include/malloc.h
+1632793089 /usr/include/malloc.h
 	<features.h>
 	<stddef.h>
 	<stdio.h>
 
-1608116695 /usr/include/memory.h
+1632793089 /usr/include/memory.h
 	<features.h>
 	<string.h>
 
-1608116695 /usr/include/string.h
+1632793089 /usr/include/string.h
 	<bits/libc-header-start.h>
 	<stddef.h>
 	<bits/types/locale_t.h>
 	<strings.h>
 	<bits/string_fortified.h>
 
-1608116695 /usr/include/strings.h
+1632793089 /usr/include/strings.h
 	<features.h>
 	<stddef.h>
 	<bits/types/locale_t.h>
 	<bits/strings_fortified.h>
 
-1608116695 /usr/include/inttypes.h
+1632793089 /usr/include/inttypes.h
 	<features.h>
 	<stdint.h>
 	<stddef.h>
 
-1608116695 /usr/include/stdint.h
+1632793089 /usr/include/stdint.h
 	<bits/libc-header-start.h>
 	<bits/types.h>
 	<bits/wchar.h>
@@ -686,21 +689,21 @@
 	<bits/stdint-intn.h>
 	<bits/stdint-uintn.h>
 
-1608116695 /usr/include/ctype.h
+1632793089 /usr/include/ctype.h
 	<features.h>
 	<bits/types.h>
 	<bits/endian.h>
 	<bits/types/locale_t.h>
 
-1608116695 /usr/include/iconv.h
+1632793089 /usr/include/iconv.h
 	<features.h>
 	<stddef.h>
 
-1568752452 /usr/include/SDL/begin_code.h
+1613634777 /usr/include/SDL/begin_code.h
 
-1568752452 /usr/include/SDL/close_code.h
+1613634777 /usr/include/SDL/close_code.h
 
-1568752452 /usr/include/SDL/SDL_audio.h
+1613634777 /usr/include/SDL/SDL_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -710,30 +713,30 @@
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_error.h
+1613634777 /usr/include/SDL/SDL_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_endian.h
+1613634777 /usr/include/SDL/SDL_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1608116695 /usr/include/endian.h
+1632793089 /usr/include/endian.h
 	<features.h>
 	<bits/endian.h>
 	<bits/byteswap.h>
 	<bits/uintn-identity.h>
 
-1568752452 /usr/include/SDL/SDL_mutex.h
+1613634777 /usr/include/SDL/SDL_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_thread.h
+1613634777 /usr/include/SDL/SDL_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_mutex.h"
@@ -741,24 +744,24 @@
 	<process.h>
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_rwops.h
+1613634777 /usr/include/SDL/SDL_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_cdrom.h
+1613634777 /usr/include/SDL/SDL_cdrom.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_cpuinfo.h
+1613634777 /usr/include/SDL/SDL_cpuinfo.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_events.h
+1613634777 /usr/include/SDL/SDL_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_active.h"
@@ -769,63 +772,63 @@
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_active.h
+1613634777 /usr/include/SDL/SDL_active.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_keyboard.h
+1613634777 /usr/include/SDL/SDL_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keysym.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_keysym.h
+1613634777 /usr/include/SDL/SDL_keysym.h
 
-1568752452 /usr/include/SDL/SDL_mouse.h
+1613634777 /usr/include/SDL/SDL_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_video.h
+1613634777 /usr/include/SDL/SDL_video.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_joystick.h
+1613634777 /usr/include/SDL/SDL_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_quit.h
+1613634777 /usr/include/SDL/SDL_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1568752452 /usr/include/SDL/SDL_loadso.h
-	"SDL_stdinc.h"
-	"SDL_error.h"
-	"begin_code.h"
-	"close_code.h"
-
-1568752452 /usr/include/SDL/SDL_timer.h
+1613634777 /usr/include/SDL/SDL_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1568752452 /usr/include/SDL/SDL_version.h
+1613634777 /usr/include/SDL/SDL_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1613634777 /usr/include/SDL/SDL_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1608116695 /usr/include/unistd.h
+1632793089 /usr/include/unistd.h
 	<features.h>
 	<bits/posix_opt.h>
 	<bits/environments.h>
@@ -836,12 +839,12 @@
 	<bits/unistd.h>
 	<bits/unistd_ext.h>
 
-1608116695 /usr/include/errno.h
+1632793089 /usr/include/errno.h
 	<features.h>
 	<bits/errno.h>
 	<bits/types/error_t.h>
 
-1608116695 /usr/include/math.h
+1632793089 /usr/include/math.h
 	<bits/libc-header-start.h>
 	<bits/types.h>
 	<bits/math-vector.h>
@@ -894,19 +897,18 @@
 	<bits/mathcalls-narrow.h>
 	<bits/mathcalls-narrow.h>
 	<bits/iscanonical.h>
-	<bits/mathinline.h>
 
-1568828545 /usr/include/SDL/SDL_image.h
+1638531087 /usr/include/SDL/SDL_image.h
 	"SDL.h"
 	"SDL_version.h"
 	"begin_code.h"
 	"close_code.h"
 
-1540425391 /usr/include/SDL/SDL_gfxPrimitives.h
+1642665621 /usr/include/SDL/SDL_gfxPrimitives.h
 	<math.h>
 	"SDL.h"
 
-1608116695 /usr/include/dirent.h
+1632793089 /usr/include/dirent.h
 	<features.h>
 	<bits/types.h>
 	<bits/dirent.h>
@@ -915,7 +917,7 @@
 	<stddef.h>
 	<bits/dirent_ext.h>
 
-1540425391 /usr/include/SDL/SDL_rotozoom.h
+1642665621 /usr/include/SDL/SDL_rotozoom.h
 	<math.h>
 	"SDL.h"
 
@@ -936,7 +938,7 @@
 	<SDL/SDL_image.h>
 	<SDL/SDL.h>
 
-1608116695 /usr/include/time.h
+1632793089 /usr/include/time.h
 	<features.h>
 	<stddef.h>
 	<bits/time.h>
@@ -949,7 +951,7 @@
 	<bits/types/struct_itimerspec.h>
 	<bits/types/locale_t.h>
 
-1643186930 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/SimpleCodeEditor.cpp
+1643224474 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/SimpleCodeEditor.cpp
 	"ToolkitNF/GUIToolkitNF.hpp"
 
 1633291790 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/GUIToolkitNF.hpp
@@ -1120,7 +1122,7 @@
 	"ListBoxWidget.hpp"
 	"MiniButtonWidget.hpp"
 
-1632203468 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/ListBoxWidget.hpp
+1643225476 /home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/ListBoxWidget.hpp
 	"Widget.hpp"
 	<vector>
 	<string>
@@ -1370,9 +1372,10 @@
 	"../Engines/ColorEngine.hpp"
 	"../Engines/FontEngine.hpp"
 
-1643214730 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/ListBoxWidget.cpp
+1643225386 source:/home/sylvain/Programmes/Nspire/ToolkitNF2/ToolkitNF/Widgets/ListBoxWidget.cpp
 	"ListBoxWidget.hpp"
 	"DropBoxWidget.hpp"
+	<algorithm>
 	"../Managers/KeyManager.hpp"
 	"../Managers/MouseManager.hpp"
 	"../Managers/TimeManager.hpp"
@@ -1525,4 +1528,586 @@
 	"../Widgets/Widget.hpp"
 	<list>
 	<string>
+
+1643106682 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Debugger/Debugger.cpp
+	"Debugger.hpp"
+	<stdio.h>
+	"../Managers/TimeManager.hpp"
+
+1643106281 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Debugger/Debugger.hpp
+	<string>
+	<stdarg.h>
+
+1636619684 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Managers/TimeManager.hpp
+	<os.h>
+	<stdint.h>
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<unistd.h>
+	<errno.h>
+	<math.h>
+	<time.h>
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Engines/ColorEngine.cpp
+	"ColorEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Engines/ColorEngine.hpp
+	<vector>
+	<string>
+
+1643121814 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Engines/FontEngine.cpp
+	"FontEngine.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	<vector>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<SDL/SDL.h>
+	<SDL/SDL_gfxPrimitives.h>
+
+1643121767 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Engines/FontEngine.hpp
+	<vector>
+	<string>
+	"ColorEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Renderers/ScreenRenderer.hpp
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	<string>
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	<SDL/SDL_gfxPrimitives.h>
+	<ngc.h>
+	"../Globals/GlobalFunctions.hpp"
+	"../Engines/ColorEngine.hpp"
+
+1643119163 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Globals/GUIToolkitNFGlobals.hpp
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Globals/GlobalFunctions.hpp
+	<string>
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	<SDL/SDL.h>
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Engines/ThemeEngine.cpp
+	"ThemeEngine.hpp"
+	<stdio.h>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Engines/ThemeEngine.hpp
+	"ColorEngine.hpp"
+	"FontEngine.hpp"
+
+1643145945 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Garbage/GarbageCollector.cpp
+	"GarbageCollector.hpp"
+
+1643145681 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Garbage/GarbageCollector.hpp
+	"../Widgets/Widget.hpp"
+	<list>
+	<string>
+
+1643404566 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/Widget.hpp
+	<list>
+	<string>
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Globals/GlobalFunctions.cpp
+	"GlobalFunctions.hpp"
+	"../Debugger/Debugger.hpp"
+	<sys/stat.h>
+
+1643053933 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Managers/KeyManager.cpp
+	"KeyManager.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	<libndls.h>
+	<stdlib.h>
+	<SDL/SDL.h>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Managers/KeyManager.hpp
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	<string>
+	<SDL/SDL.h>
+
+1642879665 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Managers/MouseManager.cpp
+	"MouseManager.hpp"
+	"CursorsDesigns.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	"../Globals/GlobalFunctions.hpp"
+	<libndls.h>
+	<stdlib.h>
+	<SDL/SDL.h>
+	"../Renderers/ScreenRenderer.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Managers/MouseManager.hpp
+	"../Globals/GlobalFunctions.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	<SDL/SDL.h>
+	<ngc.h>
+	<SDL/SDL.h>
+
+1642968433 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Managers/CursorsDesigns.hpp
+
+1636619668 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Managers/TimeManager.cpp
+	"TimeManager.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	"../Globals/GlobalFunctions.hpp"
+	<SDL/SDL_timer.h>
+	<libndls.h>
+	<stdlib.h>
+	<time.h>
+
+1643147249 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Renderers/DepthBufferRenderer.cpp
+	"DepthBufferRenderer.hpp"
+	<SDL/SDL.h>
+	<SDL/SDL_gfxPrimitives.h>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Renderers/DepthBufferRenderer.hpp
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	<string>
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	<SDL/SDL_gfxPrimitives.h>
+	<ngc.h>
+	"../Globals/GlobalFunctions.hpp"
+
+1643147257 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Renderers/ScreenRenderer.cpp
+	"ScreenRenderer.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	"../Debugger/Debugger.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/ButtonWidget.cpp
+	"ButtonWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/ButtonWidget.hpp
+	"Widget.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/CheckBoxWidget.cpp
+	"CheckBoxWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/CheckBoxWidget.hpp
+	"ButtonWidget.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/CommuterWidget.cpp
+	"CommuterWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/CommuterWidget.hpp
+	"ButtonWidget.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/ContainerHWidget.cpp
+	"ContainerHWidget.hpp"
+	<iterator>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/ContainerHWidget.hpp
+	"Widget.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/ContainerVWidget.cpp
+	"ContainerVWidget.hpp"
+	<iterator>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/ContainerVWidget.hpp
+	"Widget.hpp"
+
+1642955616 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/DesktopWidget.cpp
+	"DesktopWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Renderers/DepthBufferRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+	<vector>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/DesktopWidget.hpp
+	"Widget.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/DialogBoxWidget.cpp
+	"DialogBoxWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/DialogBoxWidget.hpp
+	"WindowWidget.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/WindowWidget.hpp
+	"Widget.hpp"
+
+1642704406 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/DropBoxWidget.cpp
+	"DropBoxWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/DropBoxWidget.hpp
+	"Widget.hpp"
+	"ListBoxWidget.hpp"
+	"MiniButtonWidget.hpp"
+
+1643225476 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/ListBoxWidget.hpp
+	"Widget.hpp"
+	<vector>
+	<string>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MiniButtonWidget.hpp
+	"ButtonWidget.hpp"
+
+1643225575 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/FileDialogBoxWidget.cpp
+	"FileDialogBoxWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+	<stdio.h>
+	<dirent.h>
+	<string>
+
+1643186683 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/FileDialogBoxWidget.hpp
+	"DialogBoxWidget.hpp"
+	"ContainerHWidget.hpp"
+	"ContainerVWidget.hpp"
+	"ButtonWidget.hpp"
+	"InputWidget.hpp"
+	"ListBoxWidget.hpp"
+	"SpacerWidget.hpp"
+	"LabelWidget.hpp"
+
+1643185282 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/InputWidget.hpp
+	"Widget.hpp"
+	<string>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/SpacerWidget.hpp
+	"Widget.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/LabelWidget.hpp
+	"Widget.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/FrameWidget.cpp
+	"FrameWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/FrameWidget.hpp
+	"Widget.hpp"
+
+1643140232 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/GraphicContextWidget.cpp
+	"GraphicContextWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Managers/TimeManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+	"../Debugger/Debugger.hpp"
+	<SDL/SDL_rotozoom.h>
+	<SDL/SDL_image.h>
+	<SDL/SDL.h>
+
+1633291843 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/GraphicContextWidget.hpp
+	"Widget.hpp"
+	"SDL/SDL.h"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/IconBarWidget.cpp
+	"IconBarWidget.hpp"
+	"WindowWidget.hpp"
+	"DesktopWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/IconBarWidget.hpp
+	"ContainerHWidget.hpp"
+
+1632225421 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/IconItemWidget.cpp
+	"IconItemWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+	<SDL/SDL_image.h>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/IconItemWidget.hpp
+	"ButtonWidget.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	"../Globals/GlobalFunctions.hpp"
+
+1643185312 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/InputWidget.cpp
+	"InputWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/LabelWidget.cpp
+	"LabelWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1643225386 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/ListBoxWidget.cpp
+	"ListBoxWidget.hpp"
+	"DropBoxWidget.hpp"
+	<algorithm>
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Managers/TimeManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MenuBarWidget.cpp
+	"MenuBarWidget.hpp"
+	"MenuItemWidget.hpp"
+	"WindowWidget.hpp"
+	"DesktopWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MenuBarWidget.hpp
+	"ContainerHWidget.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MenuItemWidget.hpp
+	"MiniButtonWidget.hpp"
+
+1632557275 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MenuItemWidget.cpp
+	"MenuItemWidget.hpp"
+	"MenuPaneWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MenuPaneWidget.hpp
+	"ContainerVWidget.hpp"
+
+1643404778 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MenuPaneWidget.cpp
+	"MenuPaneWidget.hpp"
+	"MenuItemWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MiniButtonWidget.cpp
+	"MiniButtonWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1643106758 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MultiLineRichTextBoxWidget.cpp
+	"MultiLineRichTextBoxWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+	<fstream>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MultiLineRichTextBoxWidget.hpp
+	"Widget.hpp"
+	<string>
+	<vector>
+
+1643056357 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MultiLineTextBoxWidget.cpp
+	"MultiLineTextBoxWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+	<fstream>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/MultiLineTextBoxWidget.hpp
+	"Widget.hpp"
+	<string>
+	<vector>
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/ProgressBarWidget.cpp
+	"ProgressBarWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/ProgressBarWidget.hpp
+	"Widget.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/RadioControlWidget.cpp
+	"RadioControlWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/RadioControlWidget.hpp
+	"ButtonWidget.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/SliderWidget.cpp
+	"SliderWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/SliderWidget.hpp
+	"Widget.hpp"
+
+1632203468 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/SpacerWidget.cpp
+	"SpacerWidget.hpp"
+
+1643146863 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/SplashScreenWidget.cpp
+	"SplashScreenWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Managers/TimeManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+	"../Debugger/Debugger.hpp"
+	<SDL/SDL_rotozoom.h>
+	<SDL/SDL_image.h>
+	<SDL/SDL.h>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/SplashScreenWidget.hpp
+	"Widget.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	"../Globals/GlobalFunctions.hpp"
+
+1643404616 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/Widget.cpp
+	"Widget.hpp"
+	"../Globals/GlobalFunctions.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	"../Debugger/Debugger.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/DepthBufferRenderer.hpp"
+	"../Engines/FontEngine.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Garbage/GarbageCollector.hpp"
+
+1643223123 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/WidgetApplication.cpp
+	"WidgetApplication.hpp"
+	"../Globals/GlobalFunctions.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	"../Debugger/Debugger.hpp"
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Managers/TimeManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Renderers/DepthBufferRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+	"../Engines/ThemeEngine.hpp"
+	"../Garbage/GarbageCollector.hpp"
+	"Widget.hpp"
+	"DesktopWidget.hpp"
+	<libndls.h>
+	<stdlib.h>
+	<sys/stat.h>
+	<string>
+
+1632203468 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/WidgetApplication.hpp
+	"Widget.hpp"
+	"../Globals/GlobalFunctions.hpp"
+	"../Globals/GUIToolkitNFGlobals.hpp"
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	<vector>
+
+1642956428 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/Widgets/WindowWidget.cpp
+	"WindowWidget.hpp"
+	"../Managers/KeyManager.hpp"
+	"../Managers/MouseManager.hpp"
+	"../Renderers/ScreenRenderer.hpp"
+	"../Engines/ColorEngine.hpp"
+	"../Engines/FontEngine.hpp"
+
+1643403885 source:/home/sylvain/Programmes/Nspire/ToolkitNFTuto/Tuto001 - Hello World.cpp
+	"ToolkitNF/GUIToolkitNF.hpp"
+
+1633291790 /home/sylvain/Programmes/Nspire/ToolkitNFTuto/ToolkitNF/GUIToolkitNF.hpp
+	"Globals/GUIToolkitNFGlobals.hpp"
+	<libndls.h>
+	<stdlib.h>
+	"Debugger/Debugger.hpp"
+	"Managers/KeyManager.hpp"
+	"Managers/MouseManager.hpp"
+	"Managers/TimeManager.hpp"
+	"Engines/FontEngine.hpp"
+	"Engines/ColorEngine.hpp"
+	"Engines/ThemeEngine.hpp"
+	"Renderers/ScreenRenderer.hpp"
+	"Renderers/DepthBufferRenderer.hpp"
+	"Widgets/Widget.hpp"
+	"Widgets/WidgetApplication.hpp"
+	"Widgets/DesktopWidget.hpp"
+	"Widgets/ButtonWidget.hpp"
+	"Widgets/CheckBoxWidget.hpp"
+	"Widgets/InputWidget.hpp"
+	"Widgets/ContainerHWidget.hpp"
+	"Widgets/ContainerVWidget.hpp"
+	"Widgets/SpacerWidget.hpp"
+	"Widgets/SliderWidget.hpp"
+	"Widgets/RadioControlWidget.hpp"
+	"Widgets/FrameWidget.hpp"
+	"Widgets/LabelWidget.hpp"
+	"Widgets/CommuterWidget.hpp"
+	"Widgets/ProgressBarWidget.hpp"
+	"Widgets/DropBoxWidget.hpp"
+	"Widgets/ListBoxWidget.hpp"
+	"Widgets/MenuBarWidget.hpp"
+	"Widgets/MenuItemWidget.hpp"
+	"Widgets/MenuPaneWidget.hpp"
+	"Widgets/WindowWidget.hpp"
+	"Widgets/DialogBoxWidget.hpp"
+	"Widgets/FileDialogBoxWidget.hpp"
+	"Widgets/IconBarWidget.hpp"
+	"Widgets/IconItemWidget.hpp"
+	"Widgets/SplashScreenWidget.hpp"
+	"Widgets/MultiLineTextBoxWidget.hpp"
+	"Widgets/MultiLineRichTextBoxWidget.hpp"
+	"Widgets/GraphicContextWidget.hpp"
+
+1632793089 /usr/include/features-time64.h
+	<bits/wordsize.h>
+	<bits/timesize.h>
 

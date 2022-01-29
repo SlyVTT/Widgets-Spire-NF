@@ -2,20 +2,22 @@ WidgetApplication Class :
     - [OK] in the Logic() method, update the key shortcuts for Desktop selection
     - [OK] in the LogicWithForcedRender() method, update the key shortcuts for Desktop selection
     - [OK] debug the WidgetApplication::Close() call and track what creates a crash of the calculator when closure is asked
-    - create a <vector> collection of widgets to register all the Widgets at creation and track their existence all along the runtime
-    - use the above <vector> collection of widgets at Close() to delete them all
+    - [OK] create a <vector> collection of widgets to register all the Widgets at creation and track their existence all along the runtime
+    - [OK] use the above <vector> collection of widgets at Close() to delete them all
     - [OK] debug the application at exit
 
 GraphicContextWidget Class :
     - [OK] Check why images are not appearing
     - [OK] Debug Class
     - Allow useage without SDL by coding nGC compliant functions
+    - Create methods to get positions of mouse Clicks in the Context (with scale and slide consideration)
 
 WindowWidget Class :
     - [OK] track bug not allowing Windows maximization and minimization
 
 Menus in general :
     - MenuBarWidget / MenuPaneWidget / MenuItemWidget - check if in MenuPaneWidget we need the AddPopupChild at construction to work propertly
+    - Improve Menus and SubMenus behaviour
 
 ScreenRenderer Class :
     - improve the visuals of the DrawFilledRoundedRectangle method
@@ -48,6 +50,10 @@ Samples :
     - try to recompile the different sample applications for use with the GUI Toolkit NF version
     - check if the Link SDL example is still compatible with the GUI Toolkit NF (Screen handler share may not be possible anymore)
 
+DesktopWidget :
+    - Is it still possible to have one wallpaper per desktop or not ?
+    - If not, can it be fixed ?
+
 TimeManager Class :
     - [OK] check if the methods are working properly
     - [OK] check if the TimeManager is correcly initialized using the InternalStartTicks() method obtained from Hoffa's nSDL code
@@ -59,6 +65,14 @@ Evolutions :
     - [On Going] create a set of functions to be able to use the GUI Toolkit NF on a PC with (SDL ?)
     - create new widgets such as :
             # MultiPagePanes
+            # StatusBar
             # Modifier Keys Surveillance
+            # Mouse Surveillance (button and position)
             # FPS counter
+            # Digital Clock Widget
+            # Classical Clock Widget
+            # Battery Level ?
+            # TreeView ?
+            # TableView (CellSheet) ?
+
 
