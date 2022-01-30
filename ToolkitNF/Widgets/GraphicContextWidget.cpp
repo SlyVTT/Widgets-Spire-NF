@@ -150,6 +150,30 @@ void GraphicContextWidget::Adjust( void )
 }
 
 
+int GraphicContextWidget::GetXMouseInContext( void )
+{
+    if (!is_hovering) return -1;
+    if (surfacetobedrawn==nullptr) return -1;
+
+    int xmouse = ((posviewX+MouseManager::GetX()-xpos-shiftposX)/zoomx);
+
+    if (xmouse<0 || xmouse>surfacetobedrawn->w) return -1;
+    else return xmouse;
+}
+
+
+int GraphicContextWidget::GetYMouseInContext( void )
+{
+    if (!is_hovering) return -1;
+    if (surfacetobedrawn==nullptr) return -1;
+
+    int ymouse = ((posviewY+MouseManager::GetY()-ypos-shiftposY)/zoomy);
+
+    if (ymouse<0 || ymouse>surfacetobedrawn->h) return -1;
+    else return ymouse;
+}
+
+
 void GraphicContextWidget::Update( void )
 {
     shiftposX = shiftposY = 0;

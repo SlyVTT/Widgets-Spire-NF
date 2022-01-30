@@ -15,6 +15,9 @@ public:
     virtual void Logic(  ) override;
     virtual void Render(  ) override;
 
+    virtual int GetXMouseInContext( void );
+    virtual int GetYMouseInContext( void );
+
     SDL_Surface *CreateEmptyImage( unsigned int width, unsigned int height );
     SDL_Surface *CreateEmptyImageColor( unsigned int width, unsigned int height, unsigned short R, unsigned short G, unsigned short B, unsigned short A  );
 
