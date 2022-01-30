@@ -75,7 +75,7 @@ public:
        static bool kbMULTIPLY( void ) { return Get().m_kbMULTIPLY; };
        static bool kbPOWER( void ) { return Get().m_kbPOWER; };
        static bool kbVAR( void ) { return Get().m_kbVAR; };
-       static bool kbMINUS( void ) { return Get().m_kbMINUSPAR; };
+       static bool kbMINUS( void ) { return Get().m_kbMINUS; };
        static bool kbPARCLOSE( void ) { return Get().m_kbPARCLOSE; };
        static bool kbDOT( void ) { return Get().m_kbDOT; };
        static bool kbPAROPEN( void ) { return Get().m_kbPAROPEN; };
