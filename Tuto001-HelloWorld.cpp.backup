@@ -1,0 +1,41 @@
+#include "ToolkitNF/GUIToolkitNF.hpp"
+
+int main( void )
+{
+    WidgetApplication::Initialize();
+    DesktopWidget *MyDesktop = new DesktopWidget( "Main Desktop", 0,0, SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI, nullptr );
+
+    WindowWidget *MyWindow = new WindowWidget( "I am the Main Window", 40, 240, 200, 100, MyDesktop );
+    ContainerVWidget *VerticalContainer = new ContainerVWidget( " ", 1,1,1,1, MyWindow );
+    LabelWidget *MyLabel = new LabelWidget( "Hello World !!!", 1,1,1,1, VerticalContainer );
+    MyLabel->SetAlignment( LabelWidget::Centered );
+    ButtonWidget *MyButton = new ButtonWidget( "Quit !!!", 1,1,1,1, VerticalContainer );
+    MyWindow->Adjust();
+
+
+    MyDesktop->Adjust();
+
+    WidgetApplication::AddChild( MyDesktop );
+    WidgetApplication::PrepareForRun();
+
+    char XTexte[25];
+    char YTexte[25];
+
+    while (!WidgetApplication::AskForClosure() && !MyButton->IsPressed() && !Exit->IsPressed())
+    {
+        WidgetApplication::Run( WidgetApplication::ForcedRender );
+
+        sprintf( XTexte, "%d", GcTest->GetXMouseInContext() );
+        sprintf( YTexte, "%d", GcTest->GetYMouseInContext() );
+
+        XMouseLabel->SetLabel( XTexte );
+        YMouseLabel->SetLabel( YTexte );
+
+    }
+
+    SDL_FreeSurface( myImageTest );
+
+    WidgetApplication::Close();
+
+    return 0;
+}

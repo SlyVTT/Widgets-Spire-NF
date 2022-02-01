@@ -1,0 +1,64 @@
+//Starting back from previous program, just removed the explanations to make it more readable ;-)
+//For your memory, just run once to see the current layout
+
+// We will improve the layout, especially when the window is maximized !!!
+// and we will use the constraints in the containers widgets
+
+#include "ToolkitNF/GUIToolkitNF.hpp"
+
+int main( void )
+{
+    WidgetApplication::Initialize();
+    DesktopWidget *MyDesktop = new DesktopWidget( "Main Desktop", 0,0, SCREEN_WIDTH_GUI, SCREEN_HEIGHT_GUI, nullptr );
+
+    WindowWidget *MyWindow = new WindowWidget( "I am the Main Window", 40, 40, 200, 100, MyDesktop );
+
+    ContainerVWidget *VerticalContainer = new ContainerVWidget( " ", 1,1,1,1, MyWindow );
+
+    LabelWidget *MyLabel = new LabelWidget( "Hello World !!!", 1,1,1,1, VerticalContainer );
+    MyLabel->SetAlignment( LabelWidget::Centered );
+    VerticalContainer->AddConstraint( 100, "%" );  // the top part (the label) will occupy the remaining part of the window
+
+    // First, we will add a horizointal container to decrease the width of the button
+    // and add Spacers at its left and its right
+
+    ContainerHWidget *HorizontalContainer = new ContainerHWidget( " ", 1,1,1,1, VerticalContainer );
+    VerticalContainer->AddConstraint( 20, "px" );   // the bottom part (ie. the button will be 20pixel high
+
+    // If we run right now, no change will be visible : so let see
+    // Run as expected, the button still occupies the whole width of the window
+    // We will then add a Spacer on each side
+
+    SpacerWidget *LeftSpacer = new SpacerWidget( " ", 1,1,1,1, HorizontalContainer );
+    HorizontalContainer->AddConstraint( 50, "%" );  // We say this first widget will be 50% of the remaining width when all other width accurate
+    //positioning will be done
+
+    ButtonWidget *MyButton = new ButtonWidget( "Quit !!!", 1,1,1,1, HorizontalContainer );
+    HorizontalContainer->AddConstraint( 50, "px" ); //the ButtonWidget will be exactly 50pixel wide !!
+
+    SpacerWidget *RightSpacer = new SpacerWidget( " ", 1,1,1,1, HorizontalContainer );
+    HorizontalContainer->AddConstraint( 50, "%" );
+
+    // It works !! But the button is not beautiful with its height !!!
+    // So let's do the same job with VerticalContainer !!!
+
+    MyWindow->Adjust();
+
+    MyDesktop->Adjust();
+
+    WidgetApplication::AddChild( MyDesktop );
+    WidgetApplication::PrepareForRun();
+
+    while (!WidgetApplication::AskForClosure() && !MyButton->IsPressed())
+    {
+        WidgetApplication::Run( WidgetApplication::ForcedRender );
+    }
+
+    WidgetApplication::Close();
+
+    return 0;
+
+    // Very Good !!! Bye, see you next time ;-)
+
+
+}

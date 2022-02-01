@@ -33,7 +33,8 @@ public:
         Cursor_Hourglass = 3,
         Cursor_Leftrightresize = 4,
         Cursor_Topbottomresize = 5,
-        Cursor_Handfinger = 6
+        Cursor_Handfinger = 6,
+        Cursor_WriteText = 7
     };
 
 	static MouseManager& Get( void );
@@ -205,6 +206,7 @@ private:
     SDL_Surface *cursor_topbottom;
     SDL_Surface *cursor_leftright;
     SDL_Surface *cursor_handfinger;
+    SDL_Surface *cursor_writetext;
 
 #else
 
@@ -215,6 +217,7 @@ private:
     spritegc *cursor_topbottom;
     spritegc *cursor_leftright;
     spritegc *cursor_handfinger;
+    spritegc *cursor_writetext;
 
 #endif
 

@@ -9,8 +9,8 @@ WidgetApplication Class :
 GraphicContextWidget Class :
     - [OK] Check why images are not appearing
     - [OK] Debug Class
-    - Allow useage without SDL by coding nGC compliant functions
-    - Create methods to get positions of mouse Clicks in the Context (with scale and slide consideration)
+    - Allow usage without SDL by coding nGC compliant functions
+    - [OK] Create methods to get positions of mouse Clicks in the Context (with scale and slide consideration)
 
 WindowWidget Class :
     - [OK] track bug not allowing Windows maximization and minimization
@@ -29,22 +29,22 @@ DepthBufferRenderer Class :
     - [No Need] possibly convert it from uint16_t to uint24_t or uint32_t
 
 InputWidget Class :
-    - change MouseManager cursor when hovering the widget
+    - [OK] change MouseManager cursor when hovering the widget
 
 MultiLineRichTextBoxWidget Class :
-    - change MouseManager cursor when hovering the widget
+    - [OK] change MouseManager cursor when hovering the widget
 
 MultiLineTextBoxWidget Class :
-    - change MouseManager cursor when hovering the widget
+    - [OK] change MouseManager cursor when hovering the widget
 
 General :
-    - check if memory is properly freed when using images
-    - check if memory is properly freed when closing the application with WidgetApplication::Close()
-    - check if memory is properly freed while using FontEngine::Close()
-    - check if memory is properly freed while using ScreenRendered::Close()
-    - check if memory is properly freed while using DepthBufferRenderer::Close()
-    - check is themes are correctly supported while using the ThemeEngine methods
-    - Solve the double memory Free() issue when leaving the application
+    - [OK] check if memory is properly freed when using images
+    - [OK] check if memory is properly freed when closing the application with WidgetApplication::Close()
+    - [OK] check if memory is properly freed while using FontEngine::Close()
+    - [OK] check if memory is properly freed while using ScreenRendered::Close()
+    - [OK] check if memory is properly freed while using DepthBufferRenderer::Close()
+    - [OK] check is themes are correctly supported while using the ThemeEngine methods
+    - [OK] Solve the double memory Free() issue when leaving the application
 
 Samples :
     - try to recompile the different sample applications for use with the GUI Toolkit NF version
@@ -56,10 +56,10 @@ DesktopWidget :
 
 TimeManager Class :
     - [OK] check if the methods are working properly
-    - [OK] check if the TimeManager is correcly initialized using the InternalStartTicks() method obtained from Hoffa's nSDL code
+    - [OK] check if the TimeManager is correctly initialized using the InternalStartTicks() method obtained from Hoffa's nSDL code
     - check if it is possible to use both fast timers, rather than just the first one
     - create some start markers and stop markets for delta time calculation
-    - [OK] create a method providing a timestamping string for debugging applications
+    - [OK] create a method providing a time-stamping string for debugging applications
 
 Evolutions :
     - [On Going] create a set of functions to be able to use the GUI Toolkit NF on a PC with (SDL ?)

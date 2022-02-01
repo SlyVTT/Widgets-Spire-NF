@@ -229,10 +229,11 @@ void MenuPaneWidget::Logic( void )
         KeyManager::Logic();
 
         is_hovering = CursorOn(  );
+        bool mouseclick = (MouseManager::GetB() || KeyManager::kbSCRATCH() );
 
-        bool clickoutof = (MouseManager::GetB() || KeyManager::kbSCRATCH() ) && !is_hovering;
+        bool clickoutof = mouseclick && !is_hovering;
 
-        if (clickoutof && is_dropped && !has_child_menu_open && MouseManager::IsMouseEvent &&  (KeyManager::kbSCRATCH() || MouseManager::GetB()))
+        if (clickoutof && is_dropped && !has_child_menu_open && MouseManager::IsMouseEvent &&  mouseclick)
         {
             this->Undrop();
             if (parent)

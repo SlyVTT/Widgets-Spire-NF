@@ -211,6 +211,8 @@ void MultiLineRichTextBoxWidget::Logic( void )
 
         if(is_hovering)
         {
+            MouseManager::SetCursorType( MouseManager::Cursor_WriteText );
+
             if (hoverfunction)
                 hoverfunction( (char*) "test" );
         }

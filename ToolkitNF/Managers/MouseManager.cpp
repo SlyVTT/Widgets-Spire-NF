@@ -183,6 +183,8 @@ void MouseManager::InternalInitialize( void )
        cursor_handfinger = nSDL_LoadImage(image_HandFinger);
        SDL_SetColorKey(cursor_handfinger, SDL_SRCCOLORKEY, transparency);
 
+       cursor_writetext = nSDL_LoadImage(image_WriteText);
+       SDL_SetColorKey(cursor_writetext, SDL_SRCCOLORKEY, transparency);
 #else
 
        cursor_pointer = (spritegc*) malloc(sizeof(spritegc));
@@ -227,6 +229,12 @@ void MouseManager::InternalInitialize( void )
        cursor_handfinger->height = 20;
        cursor_handfinger->data = image_HandFinger+4;
 
+       cursor_writetext = (spritegc*) malloc(sizeof(spritegc));
+       cursor_writetext->transparency = 0xf800;
+       cursor_writetext->width = 20;
+       cursor_writetext->height = 20;
+       cursor_writetext->data = image_HandFinger+4;
+
 #endif
 
 
@@ -255,6 +263,7 @@ void MouseManager::InternalClose( void )
        SDL_FreeSurface( cursor_topbottom );
        SDL_FreeSurface( cursor_leftright );
        SDL_FreeSurface( cursor_handfinger );
+       SDL_FreeSurface( cursor_writetext );
 
 #else
 
@@ -265,6 +274,7 @@ void MouseManager::InternalClose( void )
        free( cursor_topbottom );
        free( cursor_leftright );
        free( cursor_handfinger );
+       free( cursor_writetext );
 
 #endif
 
@@ -638,7 +648,12 @@ void MouseManager::InternalRender()
               ScreenRenderer::DrawSprite(cursor_handfinger, src_rect, screen_pos);
        }
 
-
+       if (cursor == Cursor_WriteText)
+       {
+              screen_pos.x = InternalGetX() -4;
+              screen_pos.y = InternalGetY() -10;
+              ScreenRenderer::DrawSprite(cursor_writetext, src_rect, screen_pos);
+       }
 }
 
 
